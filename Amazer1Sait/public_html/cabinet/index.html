@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazer Games — Личный кабинет</title>
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        
+        /* Черный глубокий фон лаунчера */
+        body { background: #0a0a0c; color: #fff; padding: 20px; line-height: 1.6; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
+        
+        /* Карточки входа и профиля строго в стиле сайта */
+        .auth-container, .profile-container { 
+            background: #111114; 
+            border: 1px solid rgba(255, 255, 255, 0.02); 
+            padding: 40px; 
+            border-radius: 6px; 
+            width: 100%; 
+            max-width: 420px; 
+            text-align: center; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); 
+            display: none; 
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        h3 { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 0.5px; }
+        
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; font-size: 0.75rem; color: #888991; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; letter-spacing: 1px; }
+        .form-group input { width: 100%; padding: 13px; background: #07070a; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 4px; color: #fff; font-size: 0.95rem; outline: none; font-weight: 600; }
+        .form-group input:focus { border-color: rgba(255, 255, 255, 0.2); }
+        
+        /* Белые премиум-кнопки */
+        .btn-submit { width: 100%; padding: 13px; background: #fff; color: #000; border: none; font-weight: 700; border-radius: 4px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.85rem; margin-top: 10px; transition: 0.2s; }
+        .btn-submit:hover { background: #e6e6e6; }
+        
+        .toggle-link { display: block; margin-top: 15px; font-size: 0.85rem; color: #888991; cursor: pointer; text-decoration: underline; }
+        .toggle-link:hover { color: #fff; }
+
+        /* Элементы личного профиля */
+        .user-avatar { width: 90px; height: 90px; border-radius: 50%; background: #1a1a1f; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #888991; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .profile-info-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.95rem; }
+        .profile-info-row span { color: #888991; }
+        
+        .btn-logout { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #ff4a4a; margin-top: 25px; }
+        .btn-logout:hover { background: rgba(255,74,74,0.05); border-color: #ff4a4a; }
+    </style>
+</head>
+<body>
+
+    <!-- ФОРМА ВХОДА / РЕГИСТРАЦИИ -->
+    <div id="authBlock" class="auth-container">
+        <h3 id="authTitle">Вход в аккаунт</h3>
+        <div class="form-group">
+            <label>Ваш никнейм в Roblox</label>
+            <input type="text" id="authLogin" placeholder="Имя персонажа">
+        </div>
+        <div class="form-group">
+            <label>Пароль от кабинета</label>
+            <input type="password" id="authPassword" placeholder="••••••••">
+        </div>
+        <button class="btn-submit" id="btnMainAction" onclick="handleAuth()">Войти</button>
+        <span class="toggle-link" id="btnToggleMode" onclick="toggleMode()">У меня еще нет аккаунта</span>
+    </div>
+
+    <!-- ЛИЧНЫЙ ПРОФИЛЬ ИГРОКА -->
+    <div id="profileBlock" class="profile-container">
+        <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+        <h3 id="profileUsername">Игрок</h3>
+        
+        <div class="profile-info-row">
+            <span>Статус на проекте</span>
+            <strong id="profileRole" style="color: #fff;">Игрок</strong>
+        </div>
+        <div class="profile-info-row">
+            <span>Локальный баланс</span>
+            <strong><span id="profileBalance">0</span> ₽</strong>
+        </div>
+        
+        <button class="btn-submit btn-logout" onclick="logout()">Выйти из профиля</button>
+    </div>
+
+    <script>
+        let isLoginMode = true;
+
+        // Автоматическая проверка авторизации при открытии кабинета
+        window.onload = function() {
+            const currentSession = localStorage.getItem('amazer_current_user');
+            if (currentSession) {
+                // Если сессия активна, сразу подгружаем данные аккаунта из локального хранилища
+                const userData = JSON.parse(localStorage.getItem('user_' + currentSession));
+                if (userData) {
+                    showProfile(userData);
+                    return;
+                }
+            }
+            document.getElementById('authBlock').style.display = 'block';
+        };
+
+        function toggleMode() {
+            isLoginMode = !isLoginMode;
+            document.getElementById('authTitle').innerText = isLoginMode ? 'Вход в аккаунт' : 'Регистрация';
+            document.getElementById('btnMainAction').innerText = isLoginMode ? 'Войти' : 'Создать аккаунт';
+            document.getElementById('btnToggleMode').innerText = isLoginMode ? 'У меня еще нет аккаунта' : 'У меня уже есть аккаунт';
+        }
+
+        // Логика локальной регистрации и авторизации
+        function handleAuth() {
+            const username = document.getElementById('authLogin').value.trim();
+            const password = document.getElementById('authPassword').value.trim();
+
+            if (!username || !password) {
+                alert('Пожалуйста, заполните все поля!');
+                return;
+            }
+
+            if (isLoginMode) {
+                // ЛОГИКА ВХОДА
+                const storedUser = localStorage.getItem('user_' + username.toLowerCase());
+                if (!storedUser) {
+                    alert('Пользователь с таким никнеймом не найден на этом ПК!');
+                    return;
+                }
+
+                const userData = JSON.parse(storedUser);
+                if (userData.password !== password) {
+                    alert('Неверный пароль! Попробуйте снова.');
+                    return;
+                }
+
+                // Активируем текущую сессию
+                localStorage.setItem('amazer_current_user', username.toLowerCase());
+                showProfile(userData);
+
+            } else {
+                // ЛОГИКА РЕГИСТРАЦИИ
+                const checkUser = localStorage.getItem('user_' + username.toLowerCase());
+                if (checkUser) {
+                    alert('Этот никнейм уже занят кем-то другим на этом ПК!');
+                    return;
+                }
+
+                // Создаем структуру игрока для сохранения
+                const newUserData = {
+                    username: username,
+                    password: password,
+                    balance: 0,
+                    role: 'Игрок'
+                };
+
+                // Сохраняем в локальную память браузера браузера
+                localStorage.setItem('user_' + username.toLowerCase(), JSON.stringify(newUserData));
+                alert('Аккаунт успешно создан! Теперь войдите, используя свои данные.');
+                toggleMode();
+            }
+        }
+
+        function showProfile(user) {
+            document.getElementById('authBlock').style.display = 'none';
+            document.getElementById('profileBlock').style.display = 'block';
+            document.getElementById('profileUsername').innerText = user.username;
+            document.getElementById('profileBalance').innerText = user.balance;
+            document.getElementById('profileRole').innerText = user.role;
+        }
+
+        function logout() {
+            localStorage.removeItem('amazer_current_user');
+            document.getElementById('profileBlock').style.display = 'none';
+            document.getElementById('authBlock').style.display = 'block';
+        }
+
+        // Блокировка вызова кода
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+    </script>
+</body>
+</html>

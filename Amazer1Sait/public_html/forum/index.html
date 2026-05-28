@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cloudflare.com">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
+        body { background: #0a0a0c; color: #fff; padding: 20px; line-height: 1.6; }
+        
+        .forum-container { max-width: 1000px; margin: 40px auto 0 auto; }
+        .section-label { color: #3e3f44; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; text-align: left; margin-bottom: 8px; display: block; }
+        .forum-title { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; text-align: left; margin-bottom: 45px; letter-spacing: 0.5px; }
+        
+        .forum-category { font-size: 0.8rem; text-transform: uppercase; color: #888991; font-weight: 800; letter-spacing: 2px; margin: 30px 0 15px 0; text-align: left; }
+        .forum-row { display: flex; justify-content: space-between; align-items: center; background: #111114; border: 1px solid rgba(255,255,255,0.01); padding: 22px; border-radius: 6px; margin-bottom: 12px; cursor: pointer; transition: 0.2s; }
+        .forum-row:hover { border-color: rgba(255, 255, 255, 0.06); transform: translateX(4px); }
+        
+        .forum-info { display: flex; align-items: center; gap: 22px; text-align: left; }
+        .forum-info i { font-size: 1.8rem; color: #fff; }
+        .forum-info h4 { font-size: 1.1rem; text-transform: uppercase; margin-bottom: 4px; font-weight: 800; letter-spacing: 0.5px; }
+        .forum-info p { color: #888991; font-size: 0.85rem; line-height: 1.4; }
+        
+        .forum-stats { color: #4e4f54; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; text-align: right; letter-spacing: 1px; }
+        .forum-stats span { color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="forum-container">
+        <span class="section-label">// обсуждения проекта</span>
+        <h2 class="forum-title">Форум Amazer</h2>
+        
+        <div class="forum-category">// общая навигация</div>
+        
+        <div class="forum-row" onclick="alert('Раздел на доработке')">
+            <div class="forum-info">
+                <i class="fa-solid fa-bullhorn"></i>
+                <div>
+                    <h4>Новости и объявления</h4>
+                    <p>Важная информация от руководства, патчноуты глобальных обновлений мода и изменения в правилах.</p>
+                </div>
+            </div>
+            <div class="forum-stats">Темы: <span>12</span></div>
+        </div>
+
+        <div class="forum-row" onclick="alert('Раздел на доработке')">
+            <div class="forum-info">
+                <i class="fa-solid fa-gavel"></i>
+                <div>
+                    <h4>Жалобы и обжалования</h4>
+                    <p>Подача заявлений на нарушителей RP режима или требования обжалования выданных банов/мутов.</p>
+                </div>
+            </div>
+            <div class="forum-stats">Темы: <span>342</span></div>
+        </div>
+
+        <div class="forum-row" onclick="alert('Раздел на доработке')">
+            <div class="forum-info">
+                <i class="fa-solid fa-id-card"></i>
+                <div>
+                    <h4>Заявления на посты лидеров / хелперов</h4>
+                    <p>Официальные открытые наборы в команду агентов поддержки сервера и на лидерство во фракциях.</p>
+                </div>
+            </div>
+            <div class="forum-stats">Темы: <span>89</span></div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        document.addEventListener('selectstart', function(e) { e.preventDefault(); });
+    </script>
+</body>
+</html>
