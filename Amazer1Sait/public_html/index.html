@@ -3,87 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazer RP — Neon Cyber Core</title>
+    <title>Amazer RP — Obsidian Gold Edition</title>
     <!-- Подключение необходимых библиотек и шрифтов -->
     <link rel="stylesheet" href="https://cloudflare.com">
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        /* Базовые сбросы и неоновый темный фон */
+        /* Базовые сбросы и премиальный темный фон */
         * { 
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
-            font-family: 'Rajdhani', sans-serif; 
+            font-family: 'Space Grotesk', sans-serif; 
         }
         body { 
-            background: #050508; 
-            color: #e2e8f0; 
+            background: #060609; 
+            color: #f8f9fa; 
             overflow-x: hidden; 
             min-height: 100vh; 
         }
         
-        /* Цифровая сетка киберпространства */
-        .cyber-matrix {
+        /* Сетка обсидианового измерения с золотым свечением */
+        .ambient-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                linear-gradient(rgba(0, 240, 255, 0.015) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 240, 255, 0.015) 1px, transparent 1px);
-            background-size: 30px 30px;
+            background: radial-gradient(circle at 50% -20%, rgba(255, 183, 3, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 10% 80%, rgba(255, 255, 255, 0.01) 0%, transparent 40%);
             z-index: -2; pointer-events: none;
         }
-        .neon-glow-point {
-            position: fixed; top: -20%; left: 50%; width: 60vw; height: 60vw;
-            background: radial-gradient(circle, rgba(57, 255, 20, 0.05) 0%, transparent 60%);
-            z-index: -1; pointer-events: none; transform: translateX(-50%);
+        .gold-flare {
+            position: fixed; top: 25%; right: -10%; width: 45vw; height: 45vw;
+            background: radial-gradient(circle, rgba(255, 183, 3, 0.04) 0%, transparent 70%);
+            z-index: -1; pointer-events: none; filter: blur(30px);
         }
 
-        /* Навигационная панель */
+        /* Навигационная панель с эффектом жидкого стекла */
         header {
             position: fixed; top: 0; left: 0; width: 100%;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 50px; z-index: 90;
-            background: rgba(5, 5, 8, 0.85);
-            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            border-bottom: 2px solid #39ff14;
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.15);
+            padding: 22px 60px; z-index: 90;
+            background: rgba(6, 6, 9, 0.75);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(255, 183, 3, 0.08);
         }
         .brand { 
-            font-family: 'Orbitron', sans-serif; font-size: 1.4rem; font-weight: 900; 
-            letter-spacing: 2px; cursor: pointer; color: #fff; text-transform: uppercase;
+            font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700; 
+            letter-spacing: 3px; cursor: pointer; color: #fff; text-transform: uppercase;
         }
         .brand span { 
-            color: #00f0ff; text-shadow: 0 0 10px rgba(0, 240, 255, 0.6); 
+            color: #ffb703; text-shadow: 0 0 15px rgba(255, 183, 3, 0.6); 
+            font-family: 'Cinzel', serif;
         }
         
-        .main-nav { display: flex; gap: 40px; }
+        .main-nav { display: flex; gap: 45px; }
         .nav-item { 
-            color: #707080; text-decoration: none; font-size: 0.95rem; 
-            font-weight: 700; text-transform: uppercase; letter-spacing: 2px; 
-            transition: 0.3s ease; cursor: pointer; position: relative;
+            color: #8d8d99; text-decoration: none; font-size: 0.85rem; 
+            font-weight: 600; text-transform: uppercase; letter-spacing: 2.5px; 
+            transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1); cursor: pointer; position: relative;
         }
-        .nav-item:hover { color: #39ff14; text-shadow: 0 0 8px rgba(57, 255, 20, 0.5); }
-        .nav-item.active { color: #39ff14; text-shadow: 0 0 8px rgba(57, 255, 20, 0.5); }
+        .nav-item::before {
+            content: ''; position: absolute; bottom: -8px; left: 50%; width: 0; height: 2px;
+            background: #ffb703; transition: 0.3s ease; box-shadow: 0 0 10px #ffb703; transform: translateX(-50%);
+        }
+        .nav-item:hover { color: #fff; }
+        .nav-item:hover::before, .nav-item.active::before { width: 100%; }
+        .nav-item.active { color: #ffb703; }
         
         .cabinet-btn { 
-            padding: 10px 28px; background: transparent; color: #00f0ff;
-            border: 1px solid #00f0ff; border-radius: 0px; font-size: 0.95rem; 
+            padding: 12px 34px; background: transparent; color: #ffb703;
+            border: 1px solid rgba(255, 183, 3, 0.3); border-radius: 4px; font-size: 0.85rem; 
             font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; 
-            letter-spacing: 1.5px; box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
-            clip-path: polygon(0 0, 100% 0, 100% 75%, 85% 100%, 0 100%);
+            letter-spacing: 1.5px; box-shadow: inset 0 0 0 rgba(255, 183, 3, 0);
         }
         .cabinet-btn:hover { 
-            background: #00f0ff; color: #050508;
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+            background: #ffb703; color: #060609;
+            box-shadow: 0 0 25px rgba(255, 183, 3, 0.4); border-color: #ffb703;
         }
         /* Основные контейнеры страниц */
         .page-content-wrapper {
-            padding-top: 100px;
+            padding-top: 110px;
             min-height: 100vh;
         }
         .page-section { 
             max-width: 1200px; 
             margin: 0 auto; 
-            padding: 60px 20px; 
+            padding: 50px 20px; 
         }
         
         /* Главный экран проекта (Hero) */
@@ -97,178 +99,189 @@
             position: relative; 
         }
         .big-logo-bg {
-            font-family: 'Orbitron', sans-serif; font-size: 20rem; font-weight: 900; color: rgba(0, 240, 255, 0.003);
+            font-family: 'Cinzel', serif; font-size: 24rem; font-weight: 700; color: rgba(255, 183, 3, 0.005);
             position: absolute; z-index: -1; user-select: none;
-            background: linear-gradient(180deg, rgba(0, 240, 255, 0.02) 0%, transparent 100%);
+            background: linear-gradient(180deg, rgba(255, 183, 3, 0.02) 0%, transparent 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: cyberFloat 5s ease-in-out infinite alternate;
+            animation: luxuryFloat 8s ease-in-out infinite alternate;
         }
-        @keyframes cyberFloat { from { transform: translateY(0); } to { transform: translateY(-15px); } }
+        @keyframes luxuryFloat { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-15px) rotate(1deg); } }
 
-        .hero-title { font-family: 'Orbitron', sans-serif; font-size: 5.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: -2px; line-height: 1; margin-bottom: 15px; }
-        .hero-title span { color: #39ff14; text-shadow: 0 0 15px rgba(57, 255, 20, 0.4); }
-        .hero-subtitle { color: #4a4a5a; font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 45px; }
+        .hero-title { font-family: 'Cinzel', serif; font-size: 5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; line-height: 1; margin-bottom: 20px; }
+        .hero-title span { color: #ffb703; text-shadow: 0 0 20px rgba(255, 183, 3, 0.3); }
+        .hero-subtitle { color: #5a5a66; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 6px; margin-bottom: 50px; }
 
-        /* Кнопки переходов (Социальные сети) */
+        /* Социальные кнопки */
         .social-links { display: flex; gap: 20px; margin-bottom: 30px; }
         .soc-btn { 
-            padding: 14px 32px; background: rgba(0, 0, 0, 0.5); 
+            padding: 15px 35px; background: rgba(13, 13, 18, 0.4); 
             border: 1px solid rgba(255, 255, 255, 0.03); color: #a0a0ab; 
-            font-size: 0.85rem; font-weight: 700; border-radius: 0px; cursor: pointer; 
-            transition: 0.3s; text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
-            backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+            font-size: 0.85rem; font-weight: 600; border-radius: 4px; cursor: pointer; 
+            transition: 0.4s; text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
-        .soc-btn i { margin-right: 10px; color: #00f0ff; transition: 0.3s; }
-        .soc-btn:hover { border-color: #00f0ff; color: #fff; background: rgba(0, 240, 255, 0.02); box-shadow: 0 0 15px rgba(0, 240, 255, 0.2); }
-        .soc-btn:hover i { text-shadow: 0 0 8px #00f0ff; }
+        .soc-btn i { margin-right: 12px; color: #ffb703; transition: 0.3s; }
+        .soc-btn:hover { border-color: #ffb703; color: #fff; background: rgba(255, 183, 3, 0.02); box-shadow: 0 5px 25px rgba(255, 183, 3, 0.1); }
 
-        /* Заголовки блоков */
-        .section-label { color: #3a3a45; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; text-align: left; margin-bottom: 10px; display: block; }
-        .section-heading { font-family: 'Orbitron', sans-serif; font-size: 2.4rem; font-weight: 900; text-transform: uppercase; text-align: left; margin-bottom: 45px; letter-spacing: 1px; color: #fff; }
+        /* Заголовки разделов */
+        .section-label { color: #44444d; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; text-align: left; margin-bottom: 12px; display: block; }
+        .section-heading { font-family: 'Cinzel', serif; font-size: 2.5rem; font-weight: 700; text-transform: uppercase; text-align: left; margin-bottom: 45px; letter-spacing: 1px; color: #fff; border-left: 3px solid #ffb703; padding-left: 20px; }
         
-        /* Карточка Высшего Начальства */
+        /* Карточка Руководителя */
         .boss-card {
-            background: #09090f; border: 1px solid rgba(255, 255, 255, 0.02); border-radius: 0px;
-            border-left: 4px solid #39ff14; padding: 45px; display: flex; gap: 45px; align-items: center; text-align: left; margin-bottom: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            background: linear-gradient(135deg, rgba(13, 13, 18, 0.6) 0%, rgba(6, 6, 9, 0.8) 100%);
+            border: 1px solid rgba(255, 183, 3, 0.05); border-radius: 6px;
+            padding: 50px; display: flex; gap: 50px; align-items: center; text-align: left; margin-bottom: 40px;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
         }
-        .boss-avatar { width: 150px; height: 150px; border-radius: 0px; object-fit: cover; background: #14141c; border: 1px solid rgba(255,255,255,0.05); }
+        .boss-avatar { width: 150px; height: 150px; border-radius: 4px; object-fit: cover; background: #060609; border: 1px solid rgba(255,183,3,0.1); }
         .boss-info { flex: 1; }
-        .boss-tag { color: #00f0ff; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; display: block; }
-        .boss-name { font-family: 'Orbitron', sans-serif; font-size: 2.3rem; font-weight: 900; margin-bottom: 15px; letter-spacing: 0.5px; }
-        .boss-stat { display: inline-flex; align-items: center; background: rgba(57, 255, 20, 0.03); border: 1px solid rgba(57, 255, 20, 0.15); padding: 7px 16px; font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #39ff14; border-radius: 0px; margin-bottom: 20px; }
-        .boss-stat i { color: #fff; margin-right: 8px; }
-        .boss-quotes p { color: #8a8a95; font-style: italic; font-size: 0.95rem; margin-bottom: 6px; }
+        .boss-tag { color: #ffb703; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; display: block; }
+        .boss-name { font-family: 'Cinzel', serif; font-size: 2.4rem; font-weight: 700; margin-bottom: 15px; }
+        .boss-stat { display: inline-flex; align-items: center; background: rgba(255, 183, 3, 0.05); border: 1px solid rgba(255, 183, 3, 0.15); padding: 8px 18px; font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #ffb703; border-radius: 4px; margin-bottom: 25px; }
+        .boss-stat i { margin-right: 10px; }
+        .boss-quotes p { color: #8d8d99; font-style: italic; font-size: 0.95rem; margin-bottom: 8px; line-height: 1.6; }
         
-        .more-btn { margin-top: 20px; padding: 11px 26px; background: transparent; border: 1px solid rgba(0, 240, 255, 0.3); color: #00f0ff; font-size: 0.85rem; font-weight: 700; border-radius: 0px; cursor: pointer; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px; }
-        .more-btn:hover { background: rgba(0, 240, 255, 0.05); border-color: #00f0ff; box-shadow: 0 0 10px rgba(0, 240, 255, 0.2); }
+        .more-btn { margin-top: 20px; padding: 13px 32px; background: transparent; border: 1px solid rgba(255, 183, 3, 0.3); color: #ffb703; font-size: 0.8rem; font-weight: 700; border-radius: 4px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 2px; }
+        .more-btn:hover { background: #ffb703; color: #060609; box-shadow: 0 0 20px rgba(255, 183, 3, 0.2); }
 
-        /* Выпадающая панель аналитики */
+        /* Всплывающая аналитика */
         .analytics-wrapper { 
-            display: none; background: #07070c; border: 1px solid rgba(255, 255, 255, 0.02); 
-            border-top: 2px solid #00f0ff; border-radius: 0px; padding: 40px; margin-bottom: 60px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            display: none; background: rgba(9, 9, 14, 0.95); border: 1px solid rgba(255, 183, 3, 0.08); 
+            border-radius: 6px; padding: 45px; margin-bottom: 50px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+            animation: obsidianSlide 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
-        /* Заголовки панелей данных */
-        .db-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #14141c; padding-bottom: 15px; }
-        .db-header h2 { font-family: 'Orbitron', sans-serif; font-size: 1.1rem; color: #4a4a5a; text-transform: uppercase; letter-spacing: 2px; font-weight: 900; }
-        .db-header .date { color: #444450; font-size: 0.85rem; font-weight: 700; }
+        @keyframes obsidianSlide { from { opacity: 0; transform: translateY(-15px); } to { opacity: 1; transform: translateY(0); } }
+        /* Заголовок мониторинга данных */
+        .db-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 35px; border-bottom: 1px solid rgba(255,255,255,0.03); padding-bottom: 20px; }
+        .db-header h2 { font-size: 1.1rem; color: #5a5a66; text-transform: uppercase; letter-spacing: 2.5px; font-weight: 700; }
+        .db-header .date { color: #44444d; font-size: 0.85rem; font-weight: 600; }
 
-        /* Таблицы и сетки распределения данных */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .stat-card { background: #040407; border: 1px solid rgba(255,255,255,0.01); padding: 25px; border-radius: 0px; text-align: left; }
-        .stat-card h3 { font-family: 'Orbitron', sans-serif; font-size: 2.2rem; font-weight: 900; letter-spacing: -1px; margin-bottom: 2px; color: #fff; }
-        .stat-card p { font-size: 0.8rem; color: #4a4a5a; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
-        .stat-card .sub { font-size: 0.75rem; color: #444; margin-top: 5px; font-weight: 600; }
+        /* Сетки аналитики и стили графиков */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .stat-card { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.02); padding: 30px; border-radius: 4px; text-align: left; }
+        .stat-card h3 { font-size: 2.6rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 5px; color: #fff; }
+        .stat-card p { font-size: 0.8rem; color: #5a5a66; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+        .stat-card .sub { font-size: 0.75rem; color: #44444d; margin-top: 8px; font-weight: 600; }
 
-        .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .chart-card { background: #040407; border: 1px solid rgba(255,255,255,0.01); padding: 30px; border-radius: 0px; text-align: left; }
-        .chart-title { font-size: 0.85rem; color: #4a4a5a; text-transform: uppercase; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 25px; }
+        .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .chart-card { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.01); padding: 35px; border-radius: 4px; text-align: left; }
+        .chart-title { font-size: 0.85rem; color: #5a5a66; text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 30px; }
         
-        /* Визуализация графиков */
-        .bar-chart { display: flex; justify-content: space-between; align-items: flex-end; height: 140px; padding-top: 20px; position: relative; }
+        .bar-chart { display: flex; justify-content: space-between; align-items: flex-end; height: 140px; position: relative; }
         .bar-group { display: flex; flex-direction: column; align-items: center; flex: 1; }
-        .bar { width: 12px; background: #14141c; border-radius: 0px; transition: 0.3s; position: relative; }
-        .bar.active { background: #39ff14; box-shadow: 0 0 15px rgba(57, 255, 20, 0.4); }
-        .bar-label { font-size: 0.65rem; color: #333; text-transform: uppercase; margin-top: 10px; font-weight: 700; }
+        .bar { width: 10px; background: rgba(255,255,255,0.03); border-radius: 1px; transition: 0.5s ease; position: relative; }
+        .bar.active { background: #ffb703; box-shadow: 0 0 15px rgba(255, 183, 3, 0.4); }
+        .bar-label { font-size: 0.65rem; color: #3a3a45; text-transform: uppercase; margin-top: 12px; font-weight: 700; }
         
         .circle-progress-box { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 140px; }
-        .circle-visual { width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#00f0ff 237deg, #14141c 0); display: flex; align-items: center; justify-content: center; position: relative; box-shadow: 0 0 15px rgba(0, 240, 255, 0.2); }
-        .circle-visual::after { content: ''; position: absolute; width: 78px; height: 78px; background: #040407; border-radius: 50%; }
-        .circle-text { z-index: 2; font-size: 1.3rem; font-weight: 900; text-align: center; color: #fff; }
-        .circle-text span { display: block; font-size: 0.65rem; color: #4a4a5a; font-weight: 700; margin-top: 2px; }
+        .circle-visual { width: 110px; height: 110px; border-radius: 50%; background: conic-gradient(#ffb703 237deg, rgba(255,255,255,0.03) 0); display: flex; align-items: center; justify-content: center; position: relative; }
+        .circle-visual::after { content: ''; position: absolute; width: 90px; height: 90px; background: #09090e; border-radius: 50%; }
+        .circle-text { z-index: 2; font-size: 1.3rem; font-weight: 700; text-align: center; color: #fff; }
+        .circle-text span { display: block; font-size: 0.7rem; color: #5a5a66; font-weight: 600; margin-top: 2px; }
 
-        .time-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; padding: 6px 0; border-bottom: 1px solid #14141c; color: #888; }
-        .time-row span { font-weight: 700; color: #fff; }
+        .time-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.02); color: #8d8d99; }
+        .time-row span { font-weight: 600; color: #fff; }
 
-        /* Хронологические цепочки (Timeline) */
-        .timeline { background: #040407; border: 1px solid rgba(255,255,255,0.01); padding: 30px; border-radius: 0px; text-align: left; }
-        .timeline-item { position: relative; padding-left: 30px; margin-bottom: 25px; }
-        .timeline-item::before { content: ''; position: absolute; left: 4px; top: 6px; width: 8px; height: 8px; background: #222; border-radius: 50%; }
-        .timeline-item.active::before { background: #39ff14; box-shadow: 0 0 8px #39ff14; }
-        .timeline-item::after { content: ''; position: absolute; left: 7px; top: 20px; height: calc(100% + 10px); border-left: 1px dashed #14141c; }
+        /* Хронология (Timeline) */
+        .timeline { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.02); padding: 35px; border-radius: 4px; text-align: left; }
+        .timeline-item { position: relative; padding-left: 35px; margin-bottom: 30px; }
+        .timeline-item::before { content: ''; position: absolute; left: 4px; top: 6px; width: 8px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 50%; }
+        .timeline-item.active::before { background: #ffb703; box-shadow: 0 0 10px #ffb703; }
+        .timeline-item::after { content: ''; position: absolute; left: 7px; top: 22px; height: calc(100% + 10px); border-left: 1px dashed rgba(255,255,255,0.03); }
         .timeline-item:last-child::after { display: none; }
-        .timeline-date { font-size: 0.75rem; color: #4a4a5a; font-weight: 700; text-transform: uppercase; margin-bottom: 3px; }
-        .timeline-text { font-size: 0.9rem; color: #a0a0ab; }
-        .timeline-item.forecast .timeline-text { color: #444450; font-style: italic; }
+        .timeline-date { font-size: 0.75rem; color: #5a5a66; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
+        .timeline-text { font-size: 0.95rem; color: #8d8d99; }
+        .timeline-item.forecast .timeline-text { color: #44444d; font-style: italic; }
 
-        /* Сетка команды администрации */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
-        .admin-card { background: #09090f; border: 1px solid rgba(255, 255, 255, 0.02); border-radius: 0px; padding: 30px 25px; display: flex; gap: 22px; align-items: flex-start; text-align: left; transition: 0.2s; border-right: 2px solid transparent; }
-        .admin-card:hover { border-color: rgba(0, 240, 255, 0.1); border-right-color: #00f0ff; }
-        .admin-avatar { width: 70px; height: 70px; border-radius: 0px; object-fit: cover; background: #14141c; border: 1px solid rgba(255,255,255,0.04); }
+        /* Сетка команды менеджмента (Без Фреша) */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
+        .admin-card { background: rgba(13, 13, 18, 0.4); border: 1px solid rgba(255, 255, 255, 0.02); border-radius: 4px; padding: 35px 30px; display: flex; gap: 25px; align-items: flex-start; text-align: left; transition: 0.3s ease; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); }
+        .admin-card:hover { border-color: rgba(255, 183, 3, 0.2); transform: translateY(-3px); }
+        .admin-avatar { width: 75px; height: 75px; border-radius: 2px; object-fit: cover; background: #060609; border: 1px solid rgba(255,255,255,0.03); }
         .admin-details { flex: 1; }
-        .admin-role { color: #00f0ff; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 4px; }
-        .admin-name { font-family: 'Orbitron', sans-serif; font-size: 1.15rem; font-weight: 900; margin-bottom: 6px; color: #fff; }
-        .admin-desc { color: #8a8a95; font-size: 0.85rem; line-height: 1.4; margin-bottom: 8px; }
-        .admin-subtext { color: #4a4a5a; font-size: 0.8rem; font-style: italic; line-height: 1.4; }
+        .admin-role { color: #ffb703; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 6px; }
+        .admin-name { font-family: 'Cinzel', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+        .admin-desc { color: #8d8d99; font-size: 0.9rem; line-height: 1.5; margin-bottom: 8px; }
+        .admin-subtext { color: #44444d; font-size: 0.8rem; font-style: italic; line-height: 1.4; }
+
+        /* Полноэкранный оверлей для iframe-модулей сайта */
+        .module-window { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #060609; z-index: 100; padding: 30px; opacity: 0; transition: opacity 0.4s ease; overflow-y: auto; }
+        .module-window.active { opacity: 1; }
+        .top-bar { display: flex; align-items: center; padding: 15px 30px; border-bottom: 1px solid rgba(255, 255, 255, 0.03); max-width: 1200px; margin: 0 auto 30px auto; }
+        
+        /* Кнопка «Вернуться назад на сайт» */
+        .btn-back { padding: 12px 28px; background: transparent; border: 1px solid rgba(255, 183, 3, 0.3); color: #ffb703; border-radius: 4px; cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; transition: 0.3s; }
+        .btn-back:hover { background: #ffb703; color: #060609; box-shadow: 0 0 15px rgba(255, 183, 3, 0.3); }
     </style>
 </head>
 <body>
-    <div class="cyber-matrix"></div>
-    <div class="neon-glow-point"></div>
-    <!-- Навигация с прямыми ссылками на внешние страницы -->
+    <div class="ambient-bg"></div>
+    <div class="gold-flare"></div>
+    <!-- Панель управления и навигация -->
     <header>
         <div class="brand" onclick="location.reload()">Amazer<span>games</span></div>
         <div class="main-nav">
             <span class="nav-item active" onclick="location.reload()">Главная</span>
-            <a href="donate/index.html" class="nav-item">Донат</a>
-            <a href="forum/index.html" class="nav-item">Форум</a>
-            <a href="rules_html/index.html" class="nav-item">Правила</a>
+            <span class="nav-item" onclick="loadModule('donate/index.html')">Донат</span>
+            <span class="nav-item" onclick="loadModule('forum/index.html')">Форум</span>
+            <span class="nav-item" onclick="loadModule('rules_html/index.html')">Правила</span>
         </div>
-        <button class="cabinet-btn" onclick="window.location.href='cabinet/index.html'">Кабинет</button>
+        <button class="cabinet-btn" onclick="loadModule('cabinet/index.html')">Кабинет</button>
     </header>
 
     <div class="page-content-wrapper" id="mainPage">
-        <!-- Главный экран проекта (Hero) -->
+        <!-- Главный приветственный экран (Hero) -->
         <section class="page-section hero-screen">
-            <div class="big-logo-bg">CORE</div>
+            <div class="big-logo-bg">AMAZER</div>
             <h1 class="hero-title">Amazer <span>RP</span></h1>
-            <p class="hero-subtitle">Официальный портал управления игровыми мирами</p>
+            <p class="hero-subtitle">Официальное руководство и мониторинг экосистемы</p>
             
             <div class="social-links">
-                <a href="rules_html/index.html" class="soc-btn"><i class="fa-solid fa-file-lines"></i> Правила</a>
+                <a onclick="loadModule('rules_html/index.html')" class="soc-btn"><i class="fa-solid fa-file-lines"></i> Правила</a>
                 <a href="https://discord.gg" target="_blank" class="soc-btn"><i class="fa-brands fa-discord"></i> Discord</a>
                 <a href="https://roblox.com" target="_blank" class="soc-btn"><i class="fa-solid fa-cube"></i> Roblox</a>
             </div>
         </section>
 
-        <!-- Раздел Высшего Руководства -->
+        <!-- Раздел Высшего Командования -->
         <section class="page-section">
-            <span class="section-label">// root access</span>
+            <span class="section-label">// высший состав</span>
             <h2 class="section-heading">Начальник</h2>
 
             <div class="boss-card">
                 <img src="images/jengass.jpg" class="boss-avatar" alt="Jengas" onerror="this.src='https://postimg.cc'">
                 <div class="boss-info">
-                    <span class="boss-tag">// Главный архитектор системы</span>
+                    <span class="boss-tag">// Главный основатель</span>
                     <h3 class="boss-name">Jengas</h3>
                     <div class="boss-stat"><i class="fa-solid fa-trophy"></i> Заработал более 2 робуксов</div>
                     <div class="boss-quotes">
                         <p>«Как стать успешным как я? Зарабатывай деньги»</p>
                         <p>«Как заработать денег? Работай»</p>
                     </div>
-                    <button class="more-btn" onclick="toggleAnalytics()">Показать телеметрию заработка</button>
+                    <button class="more-btn" onclick="toggleAnalytics()">Аналитика заработка</button>
                 </div>
             </div>
 
-            <!-- Внутренний блок аналитики данных -->
+            <!-- Внутренний интерактивный блок аналитики -->
             <div id="analyticsSection" class="analytics-wrapper">
                 <div class="db-header">
-                    <h2>// Анализ транзакций $</h2>
-                    <div class="date">май 2024 — июнь 2026</div>
+                    <h2>// Мониторинг баланса $</h2>
+                    <div class="date">май 2024 — май 2026</div>
                 </div>
 
                 <div class="stats-grid">
-                    <div class="stat-card"><h3>847</h3><p>дней аптайма</p><div class="sub" style="color: #ff3333;">🔻 эффективность 0.00%</div></div>
-                    <div class="stat-card"><h3>20 328</h3><p>циклов потрачено</p><div class="sub">🔻 0.0001R$/час</div></div>
-                    <div class="stat-card"><h3>2.00</h3><p>итого R$</p><div class="sub"><span style="color: #39ff14;">▲ +100% за все время</span></div></div>
-                    <div class="stat-card"><h3>0.86</h3><p>R$ / год</p><div class="sub" style="color: #ff3333;">🔻 -14% YoY</div></div>
+                    <div class="stat-card"><h3>847</h3><p>дней работы</p><div class="sub" style="color: #ff5555;">🔻 эффективность 0.00%</div></div>
+                    <div class="stat-card"><h3>20 328</h3><p>часов потрачено</p><div class="sub">🔻 0.0001R$/час</div></div>
+                    <div class="stat-card"><h3>2.00</h3><p>итого R$</p><div class="sub"><span style="color: #ffb703;">▲ +100% all time</span></div></div>
+                    <div class="stat-card"><h3>0.86</h3><p>R$ / год</p><div class="sub" style="color: #ff5555;">🔻 -14% YoY</div></div>
                 </div>
 
                 <div class="charts-grid">
                     <div class="chart-card">
-                        <div class="chart-title">Логи генерации дохода по месяцам</div>
+                        <div class="chart-title">Доход по месяцам</div>
                         <div class="bar-chart">
                             <div class="bar-group"><div class="bar" style="height: 10px;"></div><div class="bar-label">Июл</div></div>
                             <div class="bar-group"><div class="bar" style="height: 15px;"></div><div class="bar-label">Авг</div></div>
@@ -285,48 +298,38 @@
                         </div>
                     </div>
                     <div class="chart-card">
-                        <div class="chart-title">Прогресс до целевого уровня 3R$</div>
+                        <div class="chart-title">Прогресс до 3R$</div>
                         <div class="circle-progress-box">
                             <div class="circle-visual"><div class="circle-text">66%<span>2 / 3 R$</span></div></div>
                         </div>
-                        <div style="margin-top: 15px;" class="chart-title">Метрики распределения времени</div>
-                        <div class="time-row">🔹 Ожидание прибыли <span>89%</span></div>
-                        <div class="time-row">🔹 Прямая работа <span>7%</span></div>
-                        <div class="time-row">🔹 Модернизация знаний <span>3%</span></div>
-                        <div class="time-row">🔹 Процесс получения R$ <span>1%</span></div>
+                        <div style="margin-top: 25px;" class="chart-title">Распределение времени</div>
+                        <div class="time-row">🔹 Ожидание <span>89%</span></div>
+                        <div class="time-row">🔹 Работа <span>7%</span></div>
+                        <div class="time-row">🔹 Обучение <span>3%</span></div>
+                        <div class="time-row">🔹 Получение R$ <span>1%</span></div>
                     </div>
                 </div>
 
                 <div class="timeline">
-                    <div class="chart-title">Хронология блокчейна доходов</div>
-                    <div class="timeline-item"><div class="timeline-date">📅 12 мая 2024</div><div class="timeline-text">Старт процессов разработки. Базовый баланс: 0.00 R$</div></div>
-                    <div class="timeline-item"><div class="timeline-date">📅 15 сен 2024</div><div class="timeline-text">Зафиксирован первый робукс! +1.00 R$. Смена статуса системы.</div></div>
-                    <div class="timeline-item active"><div class="timeline-date" style="color: #39ff14;">📅 01 июн 2025</div><div class="timeline-text" style="color: #fff;">Зафиксирован второй робукс! +1.00 R$. Рекорд стабильности побит.</div></div>
-                    <div class="timeline-item forecast"><div class="timeline-date">📅 ~2028 (алгоритмический прогноз)</div><div class="timeline-text">Ожидание третьего робукса. Зависит от стабильности внешних шлюзов.</div></div>
+                    <div class="chart-title">Хронология накоплений</div>
+                    <div class="timeline-item"><div class="timeline-date">12 мая 2024</div><div class="timeline-text">Начало трудовой деятельности. Баланс: 0.00 R$</div></div>
+                    <div class="timeline-item"><div class="timeline-date">15 сен 2024</div><div class="timeline-text">Первый робукс заработан! +1.00 R$. Празднование всем селом.</div></div>
+                    <div class="timeline-item active"><div class="timeline-date" style="color: #ffb703;">01 июн 2025</div><div class="timeline-text" style="color: #fff;">Второй робукс +1.00 R$. Мировой рекорд обновлен!</div></div>
+                    <div class="timeline-item forecast"><div class="timeline-date">~2028 (прогноз)</div><div class="timeline-text">Третий робукс. При текущих темпах инфляции. Если повезёт.</div></div>
                 </div>
             </div>
-            <!-- Раздел Менеджмента Команды -->
-            <span class="section-label" style="margin-top: 40px;">// network admins</span>
-            <h2 class="section-heading">Команда Менеджмента</h2>
+            <!-- Раздел Менеджмента Команды (Фреш успешно удален) -->
+            <span class="section-label" style="margin-top: 60px;">// состав синдиката</span>
+            <h2 class="section-heading">Менеджмент проекта</h2>
             
             <div class="team-grid">
-                <div class="admin-card">
-                    <img src="images/277.jpg" class="admin-avatar" alt="Фреш" onerror="this.src='https://postimg.cc'">
-                    <div class="admin-details">
-                        <span class="admin-role">Третий владелец</span>
-                        <h4 class="admin-name">Фреш</h4>
-                        <p class="admin-desc">3-й владелец проекта.</p>
-                        <p class="admin-subtext">Руководитель оперативного сектора. Регулирует баланс и координирует игровых мастеров.</p>
-                    </div>
-                </div>
-
                 <div class="admin-card">
                     <img src="images/kumori.png" class="admin-avatar" alt="kumori" onerror="this.src='https://postimg.cc'">
                     <div class="admin-details">
                         <span class="admin-role">Второй владелец</span>
                         <h4 class="admin-name">kumori</h4>
                         <p class="admin-desc">2-й владелец проекта.</p>
-                        <p class="admin-subtext">Руководитель ядра экосистемы. Отвечает за общую стабильность и векторы развития.</p>
+                        <p class="admin-subtext">Руководитель и совладелец. Ответственный за стратегическое развитие и стабильность.</p>
                     </div>
                 </div>
 
@@ -336,7 +339,7 @@
                         <span class="admin-role">Гл. Разработчик</span>
                         <h4 class="admin-name">HSDL</h4>
                         <p class="admin-desc">Главный моделевый разработчик.</p>
-                        <p class="admin-subtext">Разрабатывает и компилирует уникальные кибер-модели для плейса.</p>
+                        <p class="admin-subtext">Проектирует и интегрирует высокополигональные 3D-модели объектов.</p>
                     </div>
                 </div>
 
@@ -346,14 +349,22 @@
                         <span class="admin-role">Head PR Manager</span>
                         <h4 class="admin-name">HOLL</h4>
                         <p class="admin-desc">Главный менеджер по связям с общественностью.</p>
-                        <p class="admin-subtext">Глава отдела трафика. Мониторит медиа-сферу, рекламу и внешние коммуникации.</p>
+                        <p class="admin-subtext">Глава медиа-отдела. Отвечает за рекламу, связи со СМИ и трафик.</p>
                     </div>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- Функциональные и защитные скрипты системы -->
+    <!-- Полноэкранный оверлей для загрузки страниц через Iframe -->
+    <div id="moduleWrapper" class="module-window">
+        <div class="top-bar">
+            <button class="btn-back" onclick="closeModule()">← Вернуться назад на сайт</button>
+        </div>
+        <div id="moduleTarget"></div>
+    </div>
+
+    <!-- Интерактивные JS-скрипты -->
     <script>
         // Функция плавного раскрытия системной аналитики Jengas
         function toggleAnalytics() {
@@ -366,28 +377,53 @@
             }
         }
 
+        // Загрузка страниц во фрейм с сохранением кнопки возврата на сайт
+        function loadModule(path) {
+            var target = document.getElementById('moduleTarget');
+            var main = document.getElementById('mainPage');
+            var wrapper = document.getElementById('moduleWrapper');
+            
+            // Внедрение iframe, который открывает физические файлы
+            target.innerHTML = '<iframe src="' + path + '" style="width:100%; height:calc(100vh - 120px); border:none; background:#060609;"></iframe>';
+            
+            main.style.display = 'none';
+            wrapper.style.display = 'block';
+            setTimeout(function() { wrapper.classList.add('active'); }, 10);
+            window.scrollTo(0, 0);
+        }
+
+        // Закрытие фрейма и возвращение к главной странице
+        function closeModule() {
+            var wrapper = document.getElementById('moduleWrapper');
+            var main = document.getElementById('mainPage');
+            var target = document.getElementById('moduleTarget');
+            
+            wrapper.classList.remove('active');
+            setTimeout(function() { 
+                wrapper.style.display = 'none'; 
+                target.innerHTML = ''; 
+                main.style.display = 'block'; 
+            }, 400);
+        }
+
         /* -------------------------------------------------------------
-           Кибер-Защита: Полное подавление попыток инспекции и копирования кода
+           Защита: Блокировка контекстного меню, выделения текста и DevTools
            ------------------------------------------------------------- */
-        
-        // Отключение вызова стандартного контекстного меню (ПКМ)
         document.addEventListener('contextmenu', function(e) { 
             e.preventDefault(); 
         });
         
-        // Отключение механизма выделения текстовых блоков на странице
         document.addEventListener('selectstart', function(e) { 
             e.preventDefault(); 
         });
         
-        // Перехват и нейтрализация горячих клавиш инструментов разработчика
         document.addEventListener('keydown', function(e) {
             if (
-                e.keyCode == 123 || // Клавиша F12 (Консоль)
-                (e.ctrlKey && e.shiftKey && e.keyCode == 73) || // Ctrl+Shift+I (Инспектор кода)
-                (e.ctrlKey && e.shiftKey && e.keyCode == 67) || // Ctrl+Shift+C (Выбор элемента)
-                (e.ctrlKey && e.keyCode == 85) ||               // Ctrl+U (Просмотр исходника)
-                (e.ctrlKey && e.keyCode == 83)                  // Ctrl+S (Попытка сохранения структуры)
+                e.keyCode == 123 || // F12
+                (e.ctrlKey && e.shiftKey && e.keyCode == 73) || // Ctrl+Shift+I
+                (e.ctrlKey && e.shiftKey && e.keyCode == 67) || // Ctrl+Shift+C
+                (e.ctrlKey && e.keyCode == 85) ||               // Ctrl+U
+                (e.ctrlKey && e.keyCode == 83)                  // Ctrl+S
             ) {
                 e.preventDefault(); 
                 return false;
