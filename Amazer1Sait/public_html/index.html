@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amazer RP — Премиум Сайт</title>
+    <title>Amazer RP — Сайт</title>
     <!-- Подключение необходимых библиотек, шрифтов и иконок -->
     <link rel="stylesheet" href="https://cloudflare.com">
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        /* Глобальные сбросы и скрытие стандартного курсора */
+        /* Базовые глобальные сбросы и скрытие стандартного системного курсора */
         * { 
             margin: 0; 
             padding: 0; 
@@ -20,10 +20,11 @@
             color: #f8f9fa; 
             overflow-x: hidden; 
             min-height: 100vh;
+            /* Скрываем дефолтную стрелку мыши для отрисовки кастомной */
             cursor: none; 
         }
         
-        /* Стили кастомного курсора (точка и следящий круг) */
+        /* Стили кастомного курсора (центральная белая точка из фото) */
         .cursor-dot {
             width: 8px;
             height: 8px;
@@ -35,6 +36,8 @@
             pointer-events: none;
             transition: width 0.15s, height 0.15s;
         }
+        
+        /* Стили внешней следящей окружности из фото (с фиолетовым неоновым свечением) */
         .cursor-outline {
             width: 42px;
             height: 42px;
@@ -44,8 +47,11 @@
             border-radius: 50%;
             z-index: 9999;
             pointer-events: none;
+            /* Плавное cubic-bezier следование для мягкого шлейфа */
             transition: transform 0.08s cubic-bezier(0.25, 1, 0.5, 1), width 0.2s, height 0.2s, border-color 0.2s;
         }
+        
+        /* Визуальный эффект при зажатии кнопки мыши (клик) */
         .cursor-outline.click-active {
             width: 26px;
             height: 26px;
@@ -141,7 +147,7 @@
         .hero-title { font-family: 'Cinzel', serif; font-size: 5.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; line-height: 1.1; margin-bottom: 20px; }
         .hero-title span { color: #9d4edd; text-shadow: 0 0 25px rgba(157, 78, 221, 0.4); }
         .hero-subtitle { color: #6e6e7e; font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 7px; margin-bottom: 40px; }
-        /* Стильный интерактивный индикатор прокрутки SCROLL из фото */
+        /* Индикатор прокрутки SCROLL из фотографии */
         .scroll-indicator-container {
             display: flex;
             flex-direction: column;
@@ -166,7 +172,7 @@
             position: relative;
             overflow: hidden;
         }
-        /* Эффект бегущей неоновой световой полосы сверху вниз */
+        /* Бегущая неоновая световая полоса сверху вниз */
         .scroll-animated-line::after {
             content: '';
             position: absolute;
@@ -293,44 +299,28 @@
         .module-window { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #040406; z-index: 100; padding: 30px; opacity: 0; transition: opacity 0.4s ease; overflow-y: auto; }
         .module-window.active { opacity: 1; }
         .top-bar { display: flex; align-items: center; padding: 15px 30px; border-bottom: 1px solid rgba(255, 255, 255, 0.03); max-width: 1200px; margin: 0 auto 30px auto; }
-        
-        /* Кнопка «Вернуться назад на сайт» */
         .btn-back { padding: 12px 28px; background: transparent; border: 1px solid rgba(157, 78, 221, 0.4); color: #9d4edd; border-radius: 6px; cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; transition: 0.3s; }
         .btn-back:hover { background: #9d4edd; color: #040406; box-shadow: 0 0 20px rgba(157, 78, 221, 0.4); }
 
-        /* Премиум стили для нового нижнего блока «Благодарности» из фото */
-        .credits-container {
-            margin-top: 60px;
-            padding: 20px 0;
-            text-align: left;
+        /* Блок «Благодарности» из фото */
+        .credits-container { margin-top: 40px; padding: 10px 0; text-align: left; }
+        .credits-item { position: relative; padding-left: 25px; margin-bottom: 24px; font-size: 0.95rem; color: #8d8d99; line-height: 1.6; }
+        .credits-item::before { content: ''; position: absolute; left: 0; top: 4px; height: 75%; width: 1.5px; background: #9d4edd; box-shadow: 0 0 8px rgba(157, 78, 221, 0.6); }
+        .credits-name { font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+        .credits-desc { color: #6a6a75; }
+
+        /* Премиальный подвал (Футер) по образу фото без кнопок навигации */
+        footer {
+            margin-top: 100px;
+            padding: 60px 20px 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            text-align: center;
+            background: rgba(4, 4, 6, 0.5);
         }
-        .credits-item {
-            position: relative;
-            padding-left: 25px;
-            margin-bottom: 24px;
-            font-size: 0.95rem;
-            color: #8d8d99;
-            line-height: 1.6;
-        }
-        /* Фиолетовая вертикальная разделительная полоса слева, как на фото */
-        .credits-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 4px;
-            height: 70%;
-            width: 1.5px;
-            background: #9d4edd;
-            box-shadow: 0 0 8px rgba(157, 78, 221, 0.6);
-        }
-        .credits-name {
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: 0.5px;
-        }
-        .credits-desc {
-            color: #6a6a75;
-        }
+        .footer-logo { font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; }
+        .footer-logo span { color: #9d4edd; text-shadow: 0 0 15px rgba(157, 78, 221, 0.6); }
+        .footer-mail { font-size: 0.85rem; color: #52525c; letter-spacing: 1px; margin-bottom: 20px; }
+        .footer-copy { font-size: 0.8rem; color: #3a3a45; font-weight: 600; letter-spacing: 0.5px; }
     </style>
 </head>
 <body>
@@ -362,8 +352,8 @@
             
             <div class="social-links">
                 <a onclick="loadModule('rules_html/index.html')" class="soc-btn"><i class="fa-solid fa-file-lines"></i> Правила</a>
-                <a href="https://discord.gg" target="_blank" class="soc-btn"><i class="fa-brands fa-discord"></i> Discord</a>
-                <a href="https://roblox.com" target="_blank" class="soc-btn"><i class="fa-solid fa-cube"></i> Roblox</a>
+                <a href="https://discord.gg/7ZzsPSePqa" target="_blank" class="soc-btn"><i class="fa-brands fa-discord"></i> Discord</a>
+                <a href="https://www.roblox.com/games/121713621611628/Amazer-RP" target="_blank" class="soc-btn"><i class="fa-solid fa-cube"></i> Roblox</a>
             </div>
 
             <!-- Добавленный анимированный индикатор прокрутки SCROLL из фото -->
@@ -480,26 +470,24 @@
                     </div>
                 </div>
             </div>
-            <!-- Раздел «Благодарности» из фото с левыми фиолетовыми линиями -->
+            <!-- Чистый раздел «Благодарности» — только Infiniti -->
             <span class="section-label" style="margin-top: 80px;">// благодарности</span>
             <h2 class="section-heading">Особый вклад</h2>
             
             <div class="credits-container">
                 <div class="credits-item">
-                    <span class="credits-name">Kluckson</span> <span class="credits-desc">— за помощь в развитии проекта</span>
-                </div>
-                <div class="credits-item">
-                    <span class="credits-name">Watcher</span> <span class="credits-desc">— за помощь в начале проекта</span>
-                </div>
-                <div class="credits-item">
                     <span class="credits-name">Infiniti</span> <span class="credits-desc">— за то, что помогал проекту</span>
-                </div>
-                <div class="credits-item">
-                    <span class="credits-name">Всем спонсорам</span> <span class="credits-desc">— за то, что верят в нас больше, чем мы сами</span>
                 </div>
             </div>
         </section>
     </div>
+
+    <!-- Премиальный подвал (Футер) по образу фото, без кнопок -->
+    <footer>
+        <div class="footer-logo">Amazer <span>RP</span></div>
+        <div class="footer-mail">support@amazer.games</div>
+        <div class="footer-copy">© 2026 Amazer Games |  Политика конфиденциальности</div>
+    </footer>
 
     <!-- Полноэкранный оверлей для загрузки страниц через Iframe -->
     <div id="moduleWrapper" class="module-window">
