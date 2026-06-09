@@ -83,9 +83,9 @@
             box-shadow: 0 0 15px rgba(255, 74, 74, 0.2);
         }
         
-        /* Стилизация разделов */
+        /* Стилизация разделов правил */
         .rules-section {
-            display: none; /* Скрыто по умолчанию для работы табов */
+            display: none; 
         }
 
         .rules-section.active {
@@ -123,7 +123,6 @@
             border-color: rgba(255, 74, 74, 0.2);
         }
 
-        /* Кнопка активации (Строка правила) */
         .rule-trigger {
             width: 100%;
             padding: 20px;
@@ -148,7 +147,6 @@
             margin-right: 5px; 
         }
 
-        /* Кнопка "Подробнее" внутри карточки */
         .details-btn {
             background: rgba(255, 255, 255, 0.02);
             color: #888991;
@@ -182,7 +180,6 @@
             transform: rotate(-180deg);
         }
 
-        /* Выпадающий контент */
         .rule-content {
             max-height: 0;
             opacity: 0;
@@ -192,7 +189,7 @@
         }
 
         .rule-card.active .rule-content {
-            max-height: 1000px; /* С запасом для больших текстов */
+            max-height: 1000px; 
             opacity: 1;
             padding: 0 20px 20px 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.01);
@@ -204,7 +201,6 @@
             margin-top: 15px;
         }
 
-        /* Наказания */
         .punishment { 
             display: block; 
             color: #ff4a4a; 
@@ -222,7 +218,6 @@
             text-transform: none;
         }
 
-        /* Информационный блок */
         .ps-block { 
             background: rgba(255, 255, 255, 0.01); 
             border: 1px dashed rgba(255,255,255,0.1); 
@@ -242,18 +237,17 @@
         <span class="section-label">// конституция сервера</span>
         <h2 class="header-title">Правила Amazer RP</h2>
 
-        <!-- Контейнер переключателей -->
+        <!-- Панель управления навигацией -->
         <div class="tabs-container">
-            <button class="tab-btn active" onclick="switchTab('main-rules')">Основные правила</button>
-            <button class="tab-btn" onclick="switchTab('behavior-rules')">Общее поведение</button>
-            <button class="tab-btn" onclick="switchTab('pgo-rules')">Правила ПГО</button>
+            <button class="tab-btn active" data-target="main-tab">Основные правила</button>
+            <button class="tab-btn" data-target="behavior-rules">Общее поведение</button>
+            <button class="tab-btn" data-target="pgo-rules">Правила ПГО</button>
         </div>
-
-        <!-- ================= СЕКЦИЯ 1: ОСНОВНЫЕ ПРАВИЛА ================= -->
-        <div id="main-rules" class="rules-section active">
+        <!-- ================= ВКЛАДКА 1: ОСНОВНЫЕ ПРАВИЛА И БОЙ ================= -->
+        <div id="main-tab" class="rules-section active">
+            
             <div class="section-title">// 1. Основные RP-Правила</div>
             <ul>
-                <!-- 1.1 -->
                 <li class="rule-card">
                     <button class="rule-trigger">
                         <div class="rule-info"><strong><span>1.1.</span> Non-RP (Нон-РП)</strong></div>
@@ -264,7 +258,6 @@
                         <span class="punishment">Kick (первый раз) / Ban 1 день (рецидив)</span>
                     </div>
                 </li>
-                <!-- 1.2 -->
                 <li class="rule-card">
                     <button class="rule-trigger">
                         <div class="rule-info"><strong><span>1.2.</span> FearRP (Фар-РП)</strong></div>
@@ -275,7 +268,6 @@
                         <span class="punishment">Kick / Ban 6-12 часов</span>
                     </div>
                 </li>
-                <!-- 1.3 -->
                 <li class="rule-card">
                     <button class="rule-trigger">
                         <div class="rule-info"><strong><span>1.3.</span> Leave RP (LRP)</strong></div>
@@ -286,18 +278,20 @@
                         <span class="punishment">Ban 1-3 дня</span>
                     </div>
                 </li>
-                <!-- 1.4 -->
                 <li class="rule-card">
                     <button class="rule-trigger">
                         <div class="rule-info"><strong><span>1.4.</span> MetaGaming (MG)</strong></div>
                         <div class="details-btn">Подробнее</div>
                     </button>
                     <div class="rule-content">
-        <!-- ================= СЕКЦИЯ 1.2: ПРАВИЛА УБИЙСТВ И БОЯ ================= -->
-        <div id="combat-rules" class="rules-section active">
+                        <p class="rule-description">Передача или использование любой информации из реального мира (OOC) в игровой процесс (IC-чат). Сюда относятся фразы вроде "добавь в дискорде", упоминание админов или обсуждение механик игры в РП чате.</p>
+                        <span class="punishment">Mute 15-30 мин</span>
+                    </div>
+                </li>
+            </ul>
+
             <div class="section-title">// 2. Правила убийств и боя</div>
             <ul>
-                <!-- 2.1 -->
                 <li class="rule-card">
                     <button class="rule-trigger">
                         <div class="rule-info"><strong><span>2.1.</span> RDM (Random DeathMatch)</strong></div>
@@ -308,7 +302,6 @@
                         <span class="punishment">Ban 1 день</span>
                     </div>
                 </li>
-                <!-- 2.2 -->
                 <li class="rule-card">
                     <button class="rule-trigger">
                         <div class="rule-info"><strong><span>2.2.</span> VDM (Vehicle DeathMatch)</strong></div>
@@ -319,7 +312,6 @@
                         <span class="punishment">Kick / Ban 12 часов</span>
                     </div>
                 </li>
-                <!-- 2.3 -->
                 <li class="rule-card">
                     <button class="rule-trigger">
                         <div class="rule-info"><strong><span>2.3.</span> Spawn Kill (SK)</strong></div>
@@ -332,11 +324,10 @@
                 </li>
             </ul>
         </div>
-        <!-- ================= СЕКЦИЯ 2: ОБЩЕЕ ПОВЕДЕНИЕ ================= -->
+        <!-- ================= ВКЛАДКА 2: ОБЩЕЕ ПОВЕДЕНИЕ ================= -->
         <div id="behavior-rules" class="rules-section">
             <div class="section-title">// 3. Общение и поведение</div>
             <ul>
-                <!-- 3.1 -->
                 <li class="rule-card">
                     <button class="rule-trigger">
                         <div class="rule-info"><strong><span>3.1.</span> Оскорбление родных</strong></div>
@@ -347,7 +338,6 @@
                         <span class="punishment">Ban 15-30 дней</span>
                     </div>
                 </li>
-                <!-- 3.2 -->
                 <li class="rule-card">
                     <button class="rule-trigger">
                         <div class="rule-info"><strong><span>3.2.</span> Обман администрации</strong></div>
@@ -358,7 +348,6 @@
                         <span class="punishment">Ban 1-7 дней</span>
                     </div>
                 </li>
-                <!-- 3.3 -->
                 <li class="rule-card">
                     <button class="rule-trigger">
                         <div class="rule-info"><strong><span>3.3.</span> Багоюз</strong></div>
@@ -369,7 +358,6 @@
                         <span class="punishment">P-Ban (Перманентный бан)</span>
                     </div>
                 </li>
-                <!-- 3.4 -->
                 <li class="rule-card">
                     <button class="rule-trigger">
                         <div class="rule-info"><strong><span>3.4.</span> Non-Rp розыск</strong></div>
@@ -380,7 +368,6 @@
                         <span class="punishment">Ban 1 день</span>
                     </div>
                 </li>
-                <!-- 3.5 -->
                 <li class="rule-card">
                     <button class="rule-trigger">
                         <div class="rule-info"><strong><span>3.5.</span> Розыск неразрешенной командой</strong></div>
@@ -393,11 +380,10 @@
                 </li>
             </ul>
         </div>
-        <!-- ================= СЕКЦИЯ 3: ПРАВИЛА ПГО ================= -->
+        <!-- ================= ВКЛАДКА 3: ПРАВИЛА ПГО ================= -->
         <div id="pgo-rules" class="rules-section">
             <div class="section-title">// 4. Правила государственных организаций (ПГО)</div>
             <ul>
-                <!-- 1.1 ПГО -->
                 <li class="rule-card">
                     <button class="rule-trigger">
                         <div class="rule-info"><strong><span>1.1. ПГО.</span> Затягивание RP процесса</strong></div>
@@ -411,52 +397,41 @@
             </ul>
         </div>
 
-        <!-- ================= СЕКЦИЯ 4: ИНФОРМАЦИОННЫЙ БЛОК ================= -->
+        <!-- Подвал и общее предупреждение -->
         <div class="ps-block">
             📌 Администрация оставляет за собой право обновлять и дополнять данный свод правил без предварительного уведомления игроков. Незнание правил не освобождает от ответственности.
         </div>
-    </div> <!-- Закрывающий тег для всего rules-container -->
-    <!-- ================= СЕКЦИЯ 5: СЦЕНАРИЙ УПРАВЛЕНИЯ (JS) ================= -->
+    </div> <!-- Конец главного контейнера rules-container -->
+    <!-- ================= ИСПРАВЛЕННЫЙ СКРИПТ УПРАВЛЕНИЯ ================= -->
     <script>
-        // Блокировка стандартного выделения текста и контекстного меню (защита от копирования правил)
+        // Защита правил от копирования и выделения
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
         document.addEventListener('selectstart', function(e) { e.preventDefault(); });
 
-        /**
-         * Функция динамического переключения разделов (Вкладок)
-         * @param {string} tabId - Идентификатор выбранной вкладки
-         */
-        function switchTab(tabId) {
-            // Сбрасываем активный класс у всех кнопок навигации
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            
-            // Скрываем абсолютно все секции с правилами
-            document.querySelectorAll('.rules-section').forEach(section => {
-                section.classList.remove('active');
-                // Закрываем все раскрытые карточки внутри скрываемых вкладок для аккуратности
-                section.querySelectorAll('.rule-card').forEach(card => card.classList.remove('active'));
-            });
-            
-            // Подсвечиваем кнопку, на которую нажал пользователь
-            event.currentTarget.classList.add('active');
-            
-            // Активируем нужный контент в зависимости от выбранного фильтра
-            if (tabId === 'main-rules') {
-                // Первая вкладка объединяет Основные правила и Правила убийств/боя
-                document.getElementById('main-rules').classList.add('active');
-                document.getElementById('combat-rules').classList.add('active');
-            } else {
-                // Для остальных вкладок (behavior-rules или pgo-rules) включаем конкретный ID
-                document.getElementById(tabId).classList.add('active');
-            }
-        }
+        // Стабильная обработка вкладок (Фикс бага с неработающими кнопками)
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Переключаем активный класс у кнопок
+                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
 
-        // Инициализация работы аккордеона (плавное раскрытие описания правил при клике)
+                // Переключаем видимую секцию правил
+                const targetId = this.getAttribute('data-target');
+                document.querySelectorAll('.rules-section').forEach(section => {
+                    section.classList.remove('active');
+                    // Срачиваем все раскрытые карточки при смене вкладки ради аккуратности
+                    section.querySelectorAll('.rule-card').forEach(card => card.classList.remove('active'));
+                });
+
+                // Активируем нужную вкладку
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+
+        // Управление аккордеонами (плавное раскрытие описания правил при клике)
         document.querySelectorAll('.rule-card').forEach(card => {
             const trigger = card.querySelector('.rule-trigger');
-            
             trigger.addEventListener('click', () => {
-                // Переключаем класс видимости у текущей карточки правила
                 card.classList.toggle('active');
             });
         });
