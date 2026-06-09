@@ -66,33 +66,34 @@
         </div>
     </div>
 
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal" id="dragModal" style="background: #111111; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; width: 420px; box-shadow: 0 30px 60px rgba(0,0,0,0.8); backdrop-filter: blur(10px);">
+      <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="dragModal" style="background: #111111; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 14px; width: 550px; box-shadow: 0 40px 80px rgba(0,0,0,0.85); backdrop-filter: blur(12px);">
             <!-- Шапка окна -->
-            <div class="modal-header spec-hover" id="modalHeader" style="padding: 20px 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; justify-content: space-between; align-items: center;">
-                <h3 style="font-size: 15px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: #eeeeee; display: flex; align-items: center; gap: 12px;">
-                    <img src="icons/blacklisticon.png" alt="" style="width: 18px; height: 18px; object-fit: contain;"> Черный список проекта
+            <div class="modal-header spec-hover" id="modalHeader" style="padding: 24px 30px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="font-size: 16px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: #ffffff; display: flex; align-items: center; gap: 14px;">
+                    <img src="icons/blacklisticon.png" alt="" style="width: 20px; height: 20px; object-fit: contain;"> Черный список проекта
                 </h3>
-                <button class="close-btn spec-hover" id="closeBtn" style="background: none; border: none; color: #555555; font-size: 22px; line-height: 1; transition: color 0.2s, transform 0.2s;">&times;</button>
+                <button class="close-btn spec-hover" id="closeBtn" style="background: none; border: none; color: #666666; font-size: 26px; line-height: 1; transition: color 0.2s;">&times;</button>
             </div>
             <!-- Список игроков -->
-            <div class="modal-body" style="padding: 24px; max-height: 340px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+            <div class="modal-body" style="padding: 30px; max-height: 450px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px;">
                 
                 <!-- Игрок 1 -->
-                <div class="blacklist-item" style="display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 8px; border-left: 4px solid #ff4444; transition: transform 0.2s, background 0.2s, border-color 0.2s;">
-                    <span class="player-name" style="font-weight: 600; font-size: 14px; color: #ffffff; letter-spacing: 0.3px;">@DanikPro277</span>
-                    <span class="ban-reason" style="font-size: 12px; color: #888888; background: rgba(255, 68, 68, 0.1); padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(255, 68, 68, 0.15);">Потеря доверия</span>
+                <div class="blacklist-item" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 10px; border-left: 5px solid #ff4444; transition: transform 0.2s, background 0.2s;">
+                    <span class="player-name" style="font-weight: 600; font-size: 15px; color: #ffffff; letter-spacing: 0.4px;">@DanikPro277</span>
+                    <span class="ban-reason" style="font-size: 13px; color: #e5e5e5; background: rgba(255, 68, 68, 0.12); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255, 68, 68, 0.2);">Потеря доверия</span>
                 </div>
                 
                 <!-- Игрок 2 -->
-                <div class="blacklist-item" style="display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 8px; border-left: 4px solid #ff4444; transition: transform 0.2s, background 0.2s, border-color 0.2s;">
-                    <span class="player-name" style="font-weight: 600; font-size: 14px; color: #ffffff; letter-spacing: 0.3px;">@fankstrans_78889</span>
-                    <span class="ban-reason" style="font-size: 12px; color: #888888; background: rgba(255, 68, 68, 0.1); padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(255, 68, 68, 0.15);">Попытка краша сервера</span>
+                <div class="blacklist-item" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 10px; border-left: 5px solid #ff4444; transition: transform 0.2s, background 0.2s;">
+                    <span class="player-name" style="font-weight: 600; font-size: 15px; color: #ffffff; letter-spacing: 0.4px;">@fankstrans_78889</span>
+                    <span class="ban-reason" style="font-size: 13px; color: #e5e5e5; background: rgba(255, 68, 68, 0.12); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255, 68, 68, 0.2);">Попытка краша сервера</span>
                 </div>
 
             </div>
         </div>
     </div>
+
 
     <style>
         :root {
