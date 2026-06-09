@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazer RP — Официальный сайт</title>
+    <style>
+        /* Общие стили и сброс настроек */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            /* Защита от выделения текста */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        body {
+            background-color: #000000; /* Глубокий черный фон */
+            color: #ffffff;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: none; /* Скрываем дефолтный курсор */
+        }
+
+        /* Кастомный курсор строго по скриншоту */
+        .cursor-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        .cursor-ring {
+            width: 40px;
+            height: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5); /* Тонкий белый круг */
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            transition: width 0.12s ease, height 0.12s ease; /* Быстрое сжатие при клике */
+            will-change: top, left, width, height;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ffffff; /* Белая точка в центре */
+            border-radius: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            will-change: top, left;
+        }
+
+        /* Главный контейнер с анимацией появления */
+        .patch-container {
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Главный заголовок обновления */
+        .patch-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        /* Подзаголовок по вашей игре */
+        .patch-subtitle {
+            font-size: 1.1rem;
+            color: #888888;
+            font-weight: 400;
+            margin-bottom: 40px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Разделительная линия */
+        .divider {
+            width: 100%;
+            height: 1px;
+            background-color: #222222;
+            margin-bottom: 40px;
+        }
+
+        /* Блок категории изменений */
+        .section-title {
+            font-size: 1.2rem;
+            color: #888888;
+            font-weight: 600;
+            margin-bottom: 25px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Текст-заглушка */
+        .empty-text {
+            font-size: 1.3rem;
+            color: #555555;
+            text-transform: lowercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        /* Всплывающее окно защиты */
+        .protection-warning {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: #ffffff;
+            color: #000000;
+            padding: 12px 24px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        .protection-warning.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Анимация появления контента */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Элементы кастомного курсора -->
+    <div class="cursor-container">
+        <div class="cursor-ring" id="cursor-ring"></div>
+        <div class="cursor-dot" id="cursor-dot"></div>
+    </div>
+
+    <!-- Защита от копирования кода -->
+    <div class="protection-warning" id="warning">Действие заблокировано защитой Amazer RP</div>
+
+    <!-- Основной контент страницы -->
+    <div class="patch-container">
+        <!-- Название вашей игры -->
+        <h1 class="patch-title">Amazer RP</h1>
+        <p class="patch-subtitle">Все изменения в текущем патче в игре Amazer RP</p>
+        
+        <div class="divider"></div>
+
+        <h2 class="section-title">Основные изменения</h2>
+        
+        <!-- Строгая заглушка "пусто" -->
+        <div class="empty-text">пусто</div>
+    </div>
+
+    <script>
+        /* Мгновенное и жесткое следование курсора за мышью без лагов */
+        const ring = document.getElementById('cursor-ring');
+        const dot = document.getElementById('cursor-dot');
+
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            ring.style.left = x + 'px';
+            ring.style.top = y + 'px';
+            
+            dot.style.left = x + 'px';
+            dot.style.top = y + 'px';
+        });
+
+        /* Эффект клика (сжатие кольца вокруг точки) */
+        document.addEventListener('mousedown', () => {
+            ring.style.width = '22px';
+            ring.style.height = '22px';
+        });
+
+        document.addEventListener('mouseup', () => {
+            ring.style.width = '40px';
+            ring.style.height = '40px';
+        });
+
+        /* Защита от копирования и просмотра кода (ПКМ, F12, Ctrl+Shift+I, Ctrl+U и т.д.) */
+        const warning = document.getElementById('warning');
+
+        function showWarning() {
+            warning.classList.add('show');
+            setTimeout(() => warning.classList.remove('show'), 2000);
+        }
+
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            showWarning();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) || 
+                (e.ctrlKey && ['U','S'].includes(e.key.toUpperCase()))) {
+                e.preventDefault();
+                showWarning();
+            }
+        });
+    </script>
+</body>
+</html>
