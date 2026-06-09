@@ -22,16 +22,16 @@
             min-height: 100vh; 
         }
         
-        /* Сетка обсидианового измерения с золотым свечением */
+        /* Сетка обсидианового измерения с фиолетовым свечением */
         .ambient-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% -20%, rgba(255, 183, 3, 0.08) 0%, transparent 50%),
+            background: radial-gradient(circle at 50% -20%, rgba(157, 78, 221, 0.08) 0%, transparent 50%),
                         radial-gradient(circle at 10% 80%, rgba(255, 255, 255, 0.01) 0%, transparent 40%);
             z-index: -2; pointer-events: none;
         }
         .gold-flare {
             position: fixed; top: 25%; right: -10%; width: 45vw; height: 45vw;
-            background: radial-gradient(circle, rgba(255, 183, 3, 0.04) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(157, 78, 221, 0.04) 0%, transparent 70%);
             z-index: -1; pointer-events: none; filter: blur(30px);
         }
 
@@ -42,14 +42,14 @@
             padding: 22px 60px; z-index: 90;
             background: rgba(6, 6, 9, 0.75);
             backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1px solid rgba(255, 183, 3, 0.08);
+            border-bottom: 1px solid rgba(157, 78, 221, 0.08);
         }
         .brand { 
             font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700; 
             letter-spacing: 3px; cursor: pointer; color: #fff; text-transform: uppercase;
         }
         .brand span { 
-            color: #ffb703; text-shadow: 0 0 15px rgba(255, 183, 3, 0.6); 
+            color: #9d4edd; text-shadow: 0 0 15px rgba(157, 78, 221, 0.6); 
             font-family: 'Cinzel', serif;
         }
         
@@ -61,21 +61,21 @@
         }
         .nav-item::before {
             content: ''; position: absolute; bottom: -8px; left: 50%; width: 0; height: 2px;
-            background: #ffb703; transition: 0.3s ease; box-shadow: 0 0 10px #ffb703; transform: translateX(-50%);
+            background: #9d4edd; transition: 0.3s ease; box-shadow: 0 0 10px #9d4edd; transform: translateX(-50%);
         }
         .nav-item:hover { color: #fff; }
         .nav-item:hover::before, .nav-item.active::before { width: 100%; }
-        .nav-item.active { color: #ffb703; }
+        .nav-item.active { color: #9d4edd; }
         
         .cabinet-btn { 
-            padding: 12px 34px; background: transparent; color: #ffb703;
-            border: 1px solid rgba(255, 183, 3, 0.3); border-radius: 4px; font-size: 0.85rem; 
+            padding: 12px 34px; background: transparent; color: #9d4edd;
+            border: 1px solid rgba(157, 78, 221, 0.3); border-radius: 4px; font-size: 0.85rem; 
             font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; 
-            letter-spacing: 1.5px; box-shadow: inset 0 0 0 rgba(255, 183, 3, 0);
+            letter-spacing: 1.5px; box-shadow: inset 0 0 0 rgba(157, 78, 221, 0);
         }
         .cabinet-btn:hover { 
-            background: #ffb703; color: #060609;
-            box-shadow: 0 0 25px rgba(255, 183, 3, 0.4); border-color: #ffb703;
+            background: #9d4edd; color: #060609;
+            box-shadow: 0 0 25px rgba(157, 78, 221, 0.4); border-color: #9d4edd;
         }
         /* Основные контейнеры страниц */
         .page-content-wrapper {
@@ -99,16 +99,16 @@
             position: relative; 
         }
         .big-logo-bg {
-            font-family: 'Cinzel', serif; font-size: 24rem; font-weight: 700; color: rgba(255, 183, 3, 0.005);
+            font-family: 'Cinzel', serif; font-size: 24rem; font-weight: 700; color: rgba(157, 78, 221, 0.005);
             position: absolute; z-index: -1; user-select: none;
-            background: linear-gradient(180deg, rgba(255, 183, 3, 0.02) 0%, transparent 100%);
+            background: linear-gradient(180deg, rgba(157, 78, 221, 0.02) 0%, transparent 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             animation: luxuryFloat 8s ease-in-out infinite alternate;
         }
         @keyframes luxuryFloat { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-15px) rotate(1deg); } }
 
         .hero-title { font-family: 'Cinzel', serif; font-size: 5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; line-height: 1; margin-bottom: 20px; }
-        .hero-title span { color: #ffb703; text-shadow: 0 0 20px rgba(255, 183, 3, 0.3); }
+        .hero-title span { color: #9d4edd; text-shadow: 0 0 20px rgba(157, 78, 221, 0.3); }
         .hero-subtitle { color: #5a5a66; font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 6px; margin-bottom: 50px; }
 
         /* Социальные кнопки */
@@ -120,35 +120,35 @@
             transition: 0.4s; text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
-        .soc-btn i { margin-right: 12px; color: #ffb703; transition: 0.3s; }
-        .soc-btn:hover { border-color: #ffb703; color: #fff; background: rgba(255, 183, 3, 0.02); box-shadow: 0 5px 25px rgba(255, 183, 3, 0.1); }
+        .soc-btn i { margin-right: 12px; color: #9d4edd; transition: 0.3s; }
+        .soc-btn:hover { border-color: #9d4edd; color: #fff; background: rgba(157, 78, 221, 0.02); box-shadow: 0 5px 25px rgba(157, 78, 221, 0.1); }
 
         /* Заголовки разделов */
         .section-label { color: #44444d; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; text-align: left; margin-bottom: 12px; display: block; }
-        .section-heading { font-family: 'Cinzel', serif; font-size: 2.5rem; font-weight: 700; text-transform: uppercase; text-align: left; margin-bottom: 45px; letter-spacing: 1px; color: #fff; border-left: 3px solid #ffb703; padding-left: 20px; }
+        .section-heading { font-family: 'Cinzel', serif; font-size: 2.5rem; font-weight: 700; text-transform: uppercase; text-align: left; margin-bottom: 45px; letter-spacing: 1px; color: #fff; border-left: 3px solid #9d4edd; padding-left: 20px; }
         
         /* Карточка Руководителя */
         .boss-card {
             background: linear-gradient(135deg, rgba(13, 13, 18, 0.6) 0%, rgba(6, 6, 9, 0.8) 100%);
-            border: 1px solid rgba(255, 183, 3, 0.05); border-radius: 6px;
+            border: 1px solid rgba(157, 78, 221, 0.05); border-radius: 6px;
             padding: 50px; display: flex; gap: 50px; align-items: center; text-align: left; margin-bottom: 40px;
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
             box-shadow: 0 30px 60px rgba(0,0,0,0.4);
         }
-        .boss-avatar { width: 150px; height: 150px; border-radius: 4px; object-fit: cover; background: #060609; border: 1px solid rgba(255,183,3,0.1); }
+        .boss-avatar { width: 150px; height: 150px; border-radius: 4px; object-fit: cover; background: #060609; border: 1px solid rgba(157, 78, 221, 0.1); }
         .boss-info { flex: 1; }
-        .boss-tag { color: #ffb703; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; display: block; }
+        .boss-tag { color: #9d4edd; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; display: block; }
         .boss-name { font-family: 'Cinzel', serif; font-size: 2.4rem; font-weight: 700; margin-bottom: 15px; }
-        .boss-stat { display: inline-flex; align-items: center; background: rgba(255, 183, 3, 0.05); border: 1px solid rgba(255, 183, 3, 0.15); padding: 8px 18px; font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #ffb703; border-radius: 4px; margin-bottom: 25px; }
+        .boss-stat { display: inline-flex; align-items: center; background: rgba(157, 78, 221, 0.05); border: 1px solid rgba(157, 78, 221, 0.15); padding: 8px 18px; font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #9d4edd; border-radius: 4px; margin-bottom: 25px; }
         .boss-stat i { margin-right: 10px; }
         .boss-quotes p { color: #8d8d99; font-style: italic; font-size: 0.95rem; margin-bottom: 8px; line-height: 1.6; }
         
-        .more-btn { margin-top: 20px; padding: 13px 32px; background: transparent; border: 1px solid rgba(255, 183, 3, 0.3); color: #ffb703; font-size: 0.8rem; font-weight: 700; border-radius: 4px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 2px; }
-        .more-btn:hover { background: #ffb703; color: #060609; box-shadow: 0 0 20px rgba(255, 183, 3, 0.2); }
+        .more-btn { margin-top: 20px; padding: 13px 32px; background: transparent; border: 1px solid rgba(157, 78, 221, 0.3); color: #9d4edd; font-size: 0.8rem; font-weight: 700; border-radius: 4px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 2px; }
+        .more-btn:hover { background: #9d4edd; color: #060609; box-shadow: 0 0 20px rgba(157, 78, 221, 0.2); }
 
         /* Всплывающая аналитика */
         .analytics-wrapper { 
-            display: none; background: rgba(9, 9, 14, 0.95); border: 1px solid rgba(255, 183, 3, 0.08); 
+            display: none; background: rgba(9, 9, 14, 0.95); border: 1px solid rgba(157, 78, 221, 0.08); 
             border-radius: 6px; padding: 45px; margin-bottom: 50px;
             box-shadow: 0 40px 80px rgba(0,0,0,0.6);
             animation: obsidianSlide 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
@@ -173,11 +173,10 @@
         .bar-chart { display: flex; justify-content: space-between; align-items: flex-end; height: 140px; position: relative; }
         .bar-group { display: flex; flex-direction: column; align-items: center; flex: 1; }
         .bar { width: 10px; background: rgba(255,255,255,0.03); border-radius: 1px; transition: 0.5s ease; position: relative; }
-        .bar.active { background: #ffb703; box-shadow: 0 0 15px rgba(255, 183, 3, 0.4); }
+        .bar.active { background: #9d4edd; box-shadow: 0 0 15px rgba(157, 78, 221, 0.4); }
         .bar-label { font-size: 0.65rem; color: #3a3a45; text-transform: uppercase; margin-top: 12px; font-weight: 700; }
-        
         .circle-progress-box { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 140px; }
-        .circle-visual { width: 110px; height: 110px; border-radius: 50%; background: conic-gradient(#ffb703 237deg, rgba(255,255,255,0.03) 0); display: flex; align-items: center; justify-content: center; position: relative; }
+        .circle-visual { width: 110px; height: 110px; border-radius: 50%; background: conic-gradient(#9d4edd 237deg, rgba(255,255,255,0.03) 0); display: flex; align-items: center; justify-content: center; position: relative; }
         .circle-visual::after { content: ''; position: absolute; width: 90px; height: 90px; background: #09090e; border-radius: 50%; }
         .circle-text { z-index: 2; font-size: 1.3rem; font-weight: 700; text-align: center; color: #fff; }
         .circle-text span { display: block; font-size: 0.7rem; color: #5a5a66; font-weight: 600; margin-top: 2px; }
@@ -189,7 +188,7 @@
         .timeline { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.02); padding: 35px; border-radius: 4px; text-align: left; }
         .timeline-item { position: relative; padding-left: 35px; margin-bottom: 30px; }
         .timeline-item::before { content: ''; position: absolute; left: 4px; top: 6px; width: 8px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 50%; }
-        .timeline-item.active::before { background: #ffb703; box-shadow: 0 0 10px #ffb703; }
+        .timeline-item.active::before { background: #9d4edd; box-shadow: 0 0 10px #9d4edd; }
         .timeline-item::after { content: ''; position: absolute; left: 7px; top: 22px; height: calc(100% + 10px); border-left: 1px dashed rgba(255,255,255,0.03); }
         .timeline-item:last-child::after { display: none; }
         .timeline-date { font-size: 0.75rem; color: #5a5a66; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
@@ -199,10 +198,10 @@
         /* Сетка команды менеджмента (Без Фреша) */
         .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
         .admin-card { background: rgba(13, 13, 18, 0.4); border: 1px solid rgba(255, 255, 255, 0.02); border-radius: 4px; padding: 35px 30px; display: flex; gap: 25px; align-items: flex-start; text-align: left; transition: 0.3s ease; backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); }
-        .admin-card:hover { border-color: rgba(255, 183, 3, 0.2); transform: translateY(-3px); }
+        .admin-card:hover { border-color: rgba(157, 78, 221, 0.2); transform: translateY(-3px); }
         .admin-avatar { width: 75px; height: 75px; border-radius: 2px; object-fit: cover; background: #060609; border: 1px solid rgba(255,255,255,0.03); }
         .admin-details { flex: 1; }
-        .admin-role { color: #ffb703; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 6px; }
+        .admin-role { color: #9d4edd; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 6px; }
         .admin-name { font-family: 'Cinzel', serif; font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
         .admin-desc { color: #8d8d99; font-size: 0.9rem; line-height: 1.5; margin-bottom: 8px; }
         .admin-subtext { color: #44444d; font-size: 0.8rem; font-style: italic; line-height: 1.4; }
@@ -213,8 +212,8 @@
         .top-bar { display: flex; align-items: center; padding: 15px 30px; border-bottom: 1px solid rgba(255, 255, 255, 0.03); max-width: 1200px; margin: 0 auto 30px auto; }
         
         /* Кнопка «Вернуться назад на сайт» */
-        .btn-back { padding: 12px 28px; background: transparent; border: 1px solid rgba(255, 183, 3, 0.3); color: #ffb703; border-radius: 4px; cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; transition: 0.3s; }
-        .btn-back:hover { background: #ffb703; color: #060609; box-shadow: 0 0 15px rgba(255, 183, 3, 0.3); }
+        .btn-back { padding: 12px 28px; background: transparent; border: 1px solid rgba(157, 78, 221, 0.3); color: #9d4edd; border-radius: 4px; cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; transition: 0.3s; }
+        .btn-back:hover { background: #9d4edd; color: #060609; box-shadow: 0 0 15px rgba(157, 78, 221, 0.3); }
     </style>
 </head>
 <body>
@@ -241,8 +240,8 @@
             
             <div class="social-links">
                 <a onclick="loadModule('rules_html/index.html')" class="soc-btn"><i class="fa-solid fa-file-lines"></i> Правила</a>
-                <a href="https://discord.gg/EZhSwWkC4C" target="_blank" class="soc-btn"><i class="fa-brands fa-discord"></i> Discord</a>
-                <a href="https://www.roblox.com/games/121713621611628/Amazer-RP" target="_blank" class="soc-btn"><i class="fa-solid fa-cube"></i> Roblox</a>
+                <a href="https://discord.gg" target="_blank" class="soc-btn"><i class="fa-brands fa-discord"></i> Discord</a>
+                <a href="https://roblox.com" target="_blank" class="soc-btn"><i class="fa-solid fa-cube"></i> Roblox</a>
             </div>
         </section>
 
@@ -275,7 +274,7 @@
                 <div class="stats-grid">
                     <div class="stat-card"><h3>847</h3><p>дней работы</p><div class="sub" style="color: #ff5555;">🔻 эффективность 0.00%</div></div>
                     <div class="stat-card"><h3>20 328</h3><p>часов потрачено</p><div class="sub">🔻 0.0001R$/час</div></div>
-                    <div class="stat-card"><h3>2.00</h3><p>итого R$</p><div class="sub"><span style="color: #ffb703;">▲ +100% all time</span></div></div>
+                    <div class="stat-card"><h3>2.00</h3><p>итого R$</p><div class="sub"><span style="color: #9d4edd;">▲ +100% all time</span></div></div>
                     <div class="stat-card"><h3>0.86</h3><p>R$ / год</p><div class="sub" style="color: #ff5555;">🔻 -14% YoY</div></div>
                 </div>
 
@@ -314,10 +313,11 @@
                     <div class="chart-title">Хронология накоплений</div>
                     <div class="timeline-item"><div class="timeline-date">12 мая 2024</div><div class="timeline-text">Начало трудовой деятельности. Баланс: 0.00 R$</div></div>
                     <div class="timeline-item"><div class="timeline-date">15 сен 2024</div><div class="timeline-text">Первый робукс заработан! +1.00 R$. Празднование всем селом.</div></div>
-                    <div class="timeline-item active"><div class="timeline-date" style="color: #ffb703;">01 июн 2025</div><div class="timeline-text" style="color: #fff;">Второй робукс +1.00 R$. Мировой рекорд обновлен!</div></div>
+                    <div class="timeline-item active"><div class="timeline-date" style="color: #9d4edd;">01 июн 2025</div><div class="timeline-text" style="color: #fff;">Второй робукс +1.00 R$. Мировой рекорд обновлен!</div></div>
                     <div class="timeline-item forecast"><div class="timeline-date">~2028 (прогноз)</div><div class="timeline-text">Третий робукс. При текущих темпах инфляции. Если повезёт.</div></div>
                 </div>
             </div>
+            
             <!-- Раздел Менеджмента Команды (Фреш успешно удален) -->
             <span class="section-label" style="margin-top: 60px;">// состав синдиката</span>
             <h2 class="section-heading">Менеджмент проекта</h2>
