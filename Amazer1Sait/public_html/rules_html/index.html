@@ -1,66 +1,163 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
-        body { background: #0a0a0c; color: #fff; padding: 20px; line-height: 1.6; }
-        .rules-container { max-width: 900px; margin: 40px auto 0 auto; padding-bottom: 40px; }
-        .section-label { color: #3e3f44; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; text-align: left; margin-bottom: 8px; display: block; }
-        .header-title { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; text-align: left; margin-bottom: 45px; letter-spacing: 0.5px; }
-        
-        .section-title { font-size: 1.1rem; color: #fff; text-transform: uppercase; margin: 35px 0 15px 0; font-weight: 800; letter-spacing: 1px; }
-        ul { list-style: none; }
-        li { background: #111114; border: 1px solid rgba(255, 255, 255, 0.01); padding: 20px; border-radius: 6px; margin-bottom: 12px; text-align: left; }
-        li strong { color: #fff; font-weight: 700; font-size: 1.05rem; }
-        li strong span { color: #888991; margin-right: 5px; }
-        .punishment { display: block; color: #ff4a4a; font-size: 0.85rem; margin-top: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-        .punishment::before { content: "⚠️ Наказание: "; color: #6e6e7a; font-weight: normal; }
-        .ps-block { background: rgba(255, 255, 255, 0.01); border: 1px dashed rgba(255,255,255,0.1); padding: 15px; border-radius: 6px; text-align: center; margin-top: 35px; color: #888991; font-weight: 600; font-size: 0.9rem; }
-    </style>
-</head>
-<body>
-    <div class="rules-container">
-        <span class="section-label">// конституция сервера</span>
-        <h2 class="header-title">Правила Amazer RP</h2>
+        <!-- ================= СЕКЦИЯ 1: ОСНОВНЫЕ ПРАВИЛА ================= -->
+        <div id="main-rules" class="rules-section active">
+            <div class="section-title">// 1. Основные RP-Правила</div>
+            <ul>
+                <!-- Правило 1.1 -->
+                <li class="rule-card">
+                    <button class="rule-trigger">
+                        <div class="rule-info"><strong><span>1.1.</span> Non-RP (Нон-РП)</strong></div>
+                        <div class="details-btn">Подробнее</div>
+                    </button>
+                    <div class="rule-content">
+                        <p class="rule-description">Совершение каких-либо действий, которые полностью невозможны, абсурдны или крайне нелогичны в реальной жизни. К этому правилу относится бег по крышам движущихся автомобилей, полное игнорирование серьезных аварий и ДТП, а также продолжение езды на тотально сломанном или горящем авто.</p>
+                        <span class="punishment">Kick (первый раз) / Ban 1 день (при рецидиве)</span>
+                    </div>
+                </li>
 
-        <div class="section-title">// 1. Основные RP-Правила</div>
-        <ul>
-            <li><strong><span>1.1.</span> Non-RP (Нон-РП):</strong> Действия, невозможные в реальной жизни (бег по крышам машин, игнорирование аварий, езда на сломанном авто).<span class="punishment">Kick (первый раз) / Ban 1 день (рецидив)</span></li>
-            <li><strong><span>1.2.</span> FearRP (Фар-РП):</strong> Отсутствие страха за жизнь персонажа. Например, если на тебя наставили 3 пушки, ты обязан подчиняться, а не убегать.<span class="punishment">Kick / Ban 6-12 часов</span></li>
-            <li><strong><span>1.3.</span> Leave RP (LRP):</strong> Выход из игры во время РП-ситуации (ареста, ограбления, допроса).<span class="punishment">Ban 1-3 дня</span></li>
-            <li><strong><span>1.4.</span> MetaGaming (MG):</strong> Использование чата для передачи инфы из реала (типа "привет, я из дискорда").<span class="punishment">Mute 15-30 мин</span></li>
-        </ul>
+                <!-- Правило 1.2 -->
+                <li class="rule-card">
+                    <button class="rule-trigger">
+                        <div class="rule-info"><strong><span>1.2.</span> FearRP (Фар-РП)</strong></div>
+                        <div class="details-btn">Подробнее</div>
+                    </button>
+                    <div class="rule-content">
+                        <p class="rule-description">Полное отсутствие страха за жизнь, здоровье и безопасность своего персонажа. Например, если на вас одновременно направили оружие 3 человека, вы обязаны беспрекословно выполнять их законные или незаконные требования, а не пытаться убежать, достать пушку в ответ или начать драку.</p>
+                        <span class="punishment">Kick / Ban от 6 до 12 часов</span>
+                    </div>
+                </li>
 
-        <div class="section-title">// 2. Правила убийств и боя</div>
-        <ul>
-            <li><strong><span>2.1.</span> RDM (Random DeathMatch):</strong> Убийство игрока без какой-либо РП причины. Просто подошел и застрелил/зарезал.<span class="punishment">Ban 1 день</span></li>
-            <li><strong><span>2.2.</span> VDM (Vehicle DeathMatch):</strong> Наезд на игрока машиной с целью убить или помешать РП.<span class="punishment">Kick / Ban 12 часов</span></li>
-            <li><strong><span>2.3.</span> Spawn Kill (SK):</strong> Убийство игроков на месте их появления (спавне).<span class="punishment">Ban 3 дня</span></li>
-        </ul>
+                <!-- Правило 1.3 -->
+                <li class="rule-card">
+                    <button class="rule-trigger">
+                        <div class="rule-info"><strong><span>1.3.</span> Leave RP (LRP)</strong></div>
+                        <div class="details-btn">Подробнее</div>
+                    </button>
+                    <div class="rule-content">
+                        <p class="rule-description">Намеренное отключение от сервера, выход из игры (Alt+F4) или уход в глубокий АФК прямо во время активной RolePlay ситуации. Это грубо срывает процесс игры для других участников во время вашего ареста полицией, ограбления бандитами или проведения допроса спецслужбами.</p>
+                        <span class="punishment">Ban от 1 до 3 дней</span>
+                    </div>
+                </li>
 
-        <div class="section-title">// 3. Общение и поведение</div>
-        <ul>
-            <li><strong><span>3.1.</span> Оскорбление родных:</strong> Строжайше запрещено в любой форме.<span class="punishment">Ban 15-30 дней</span></li>
-            <li><strong><span>3.2.</span> Обман администрации:</strong> Вранье в репорт о нарушениях других игроков.<span class="punishment">Ban 1-7 дней</span></li>
-            <li><strong><span>3.3.</span> Багоюз:</strong> Использование багов Роблокса (проход сквозь стены, полет и т.д.).<span class="punishment">P-Ban (Перманентный бан)</span></li>
-            <li><strong><span>3.4.</span> Non-Rp розыск:</strong> Розыск, выданный не по правильной причине/по приколу/странная причина.<span class="punishment">Ban 1 день</span></li>
-            <li><strong><span>3.5.</span> Розыск неразрешенной командой:</strong> Розыск выдал гражданин (Исключение: команды Полиция, ФСБ, ГУМВД, УФСБ).<span class="punishment">Ban 2-3 дня</span></li>
-        </ul>
-
-        <div class="section-title">// 4. Правила государственных организаций (ПГО)</div>
-        <ul>
-            <li><strong><span>1.1. ПГО:</span> Затягивание RP процесса:</strong> Сотрудник, задержавший вас, должен отвезти в ближайший участок. Если он везет в дальний — это затягивание.<span class="punishment">Ban 5-12 часов</span></li>
-        </ul>
-
-        <div class="ps-block">
-            📌 Правила могут обновляться без предупреждения игроков.
+                <!-- Правило 1.4 -->
+                <li class="rule-card">
+                    <button class="rule-trigger">
+                        <div class="rule-info"><strong><span>1.4.</span> MetaGaming (MG)</strong></div>
+                        <div class="details-btn">Подробнее</div>
+                    </button>
+                    <div class="rule-content">
+                        <p class="rule-description">Использование, передача или обсуждение информации из реального мира (OOC) в игровом текстовом или голосовом IC-чате. Сюда относятся любые фразы вроде "привет, я из дискорда", обсуждение механик игры, админов или вашей реальной жизни без использования специальных OOC-команд.</p>
+                        <span class="punishment">Mute от 15 до 30 минут</span>
+                    </div>
+                </li>
+            </ul>
         </div>
-    </div>
+        <!-- ================= СЕКЦИЯ 1.2: ПРАВИЛА УБИЙСТВ И БОЯ ================= -->
+        <!-- Этот блок будет отображаться на первой вкладке вместе с основными правилами -->
+        <div id="combat-rules" class="rules-section active">
+            <div class="section-title">// 2. Правила убийств и боя</div>
+            <ul>
+                <!-- Правило 2.1 -->
+                <li class="rule-card">
+                    <button class="rule-trigger">
+                        <div class="rule-info"><strong><span>2.1.</span> RDM (Random DeathMatch)</strong></div>
+                        <div class="details-btn">Подробнее</div>
+                    </button>
+                    <div class="rule-content">
+                        <p class="rule-description">Нанесение урона или полноценное убийство другого игрока без весомой на то внутриигровой RolePlay причины. Категорически запрещено бесцельно подходить к людям на улице и открывать по ним огонь, резать ножом или избивать ради забавы.</p>
+                        <span class="punishment">Ban на 1 день</span>
+                    </div>
+                </li>
+
+                <!-- Правило 2.2 -->
+                <li class="rule-card">
+                    <button class="rule-trigger">
+                        <div class="rule-info"><strong><span>2.2.</span> VDM (Vehicle DeathMatch)</strong></div>
+                        <div class="details-btn">Подробнее</div>
+                    </button>
+                    <div class="rule-content">
+                        <p class="rule-description">Намеренный наезд на пешеходов, их систематическое сбивание или убийство с помощью любого транспортного средства. Использование автомобиля в качестве оружия для срыва текущей РП-ситуации или массового нанесения урона строго наказывается.</p>
+                        <span class="punishment">Kick / Ban на 12 часов</span>
+                    </div>
+                </li>
+
+                <!-- Правило 2.3 -->
+                <li class="rule-card">
+                    <button class="rule-trigger">
+                        <div class="rule-info"><strong><span>2.3.</span> Spawn Kill (SK)</strong></div>
+                        <div class="details-btn">Подробнее</div>
+                    </button>
+                    <div class="rule-content">
+                        <p class="rule-description">Умышленное нанесение урона, преследование или убийство игроков непосредственно на месте их появления в игровом мире (точке спавна), а также на выходе из интерьеров спавна, когда игрок физически не успел сориентироваться в обстановке.</p>
+                        <span class="punishment">Ban на 3 дня</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- ================= СЕКЦИЯ 3: ПРАВИЛА ПГО ================= -->
+        <div id="pgo-rules" class="rules-section">
+            <div class="section-title">// 4. Правила государственных организаций (ПГО)</div>
+            <ul>
+                <!-- Правило 1.1 ПГО -->
+                <li class="rule-card">
+                    <button class="rule-trigger">
+                        <div class="rule-info"><strong><span>1.1. ПГО.</span> Затягивание RP процесса</strong></div>
+                        <div class="details-btn">Подробнее</div>
+                    </button>
+                    <div class="rule-content">
+                        <p class="rule-description">Умышленное удерживание задержанного игрока в наручниках или патрульном автомобиле без проведения законных процессуальных действий. По регламенту сотрудник фракции обязан незамедлительно доставить вас в ближайший работающий участок. Транспортировка кружными путями в отдаленный отдел ради удержания игрока расценивается как нарушение.</p>
+                        <span class="punishment">Ban от 5 до 12 часов</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!-- ================= СЕКЦИЯ 4: ИНФОРМАЦИОННЫЙ БЛОК ================= -->
+        <div class="ps-block">
+            📌 Главная администрация сервера Amazer RP оставляет за собой полное право изменять, дополнять или редактировать данный свод правил в любое время без предварительного уведомления игроков. Незнание правил не освобождает вас от игровой ответственности и блокировки аккаунта.
+        </div>
+    <!-- ================= СЕКЦИЯ 5: СЦЕНАРИЙ УПРАВЛЕНИЯ (JS) ================= -->
     <script>
+        // Блокировка стандартного выделения текста и контекстного меню (защита от копирования)
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
         document.addEventListener('selectstart', function(e) { e.preventDefault(); });
+
+        /**
+         * Функция динамического переключения разделов (Вкладок)
+         * @param {string} tabId - Идентификатор выбранной вкладки
+         */
+        function switchTab(tabId) {
+            // Сбрасываем активный класс у всех кнопок навигации
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Скрываем абсолютно все секции с правилами
+            document.querySelectorAll('.rules-section').forEach(section => {
+                section.classList.remove('active');
+                // Закрываем все раскрытые карточки внутри скрываемых вкладок для аккуратности
+                section.querySelectorAll('.rule-card').forEach(card => card.classList.remove('active'));
+            });
+            
+            // Подсвечиваем кнопку, на которую нажал пользователь
+            event.currentTarget.classList.add('active');
+            
+            // Активируем нужный контент в зависимости от выбранного фильтра
+            if (tabId === 'main-rules') {
+                // Первая вкладка объединяет Основные правила и Правила убийств/боя
+                document.getElementById('main-rules').classList.add('active');
+                document.getElementById('combat-rules').classList.add('active');
+            } else {
+                // Для остальных вкладок (behavior-rules или pgo-rules) включаем конкретный ID
+                document.getElementById(tabId).classList.add('active');
+            }
+        }
+
+        // Инициализация работы аккордеона (плавное раскрытие описания правил)
+        document.querySelectorAll('.rule-card').forEach(card => {
+            const trigger = card.querySelector('.rule-trigger');
+            
+            trigger.addEventListener('click', () => {
+                // Переключаем класс видимости у текущей карточки правила
+                card.classList.toggle('active');
+            });
+        });
     </script>
 </body>
 </html>
