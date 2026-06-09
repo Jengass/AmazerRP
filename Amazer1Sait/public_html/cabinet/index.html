@@ -25,7 +25,7 @@
         /* Зелёное уведомление сверху, точно как на скриншоте */
         .welcome-alert {
             width: 100%;
-            max-width: 800px;
+            max-width: 1000px;
             background: rgba(4, 28, 15, 0.6);
             border: 1px solid rgba(0, 255, 102, 0.15);
             padding: 12px 20px;
@@ -39,16 +39,20 @@
             font-weight: 600;
         }
         
-        /* Широкий премиум-контейнер профиля под стиль скриншота */
+        /* Главный контейнер кабинета (расширен под новый игровой интерфейс) */
+        .dashboard-container {
+            width: 100%;
+            max-width: 1000px;
+            display: none;
+        }
+
+        /* Верхняя панель профиля */
         .profile-container {
             background: #0b0b0f;
             border: 1px solid rgba(255, 255, 255, 0.03);
-            padding: 30px;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 800px;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.8);
-            display: none;
+            padding: 25px 30px;
+            border-radius: 6px;
+            margin-bottom: 20px;
         }
 
         .profile-layout {
@@ -59,85 +63,82 @@
             flex-wrap: wrap;
         }
 
-        .profile-main {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+        .profile-main { display: flex; align-items: center; gap: 20px; }
+        .avatar-wrapper { position: relative; width: 75px; height: 75px; }
+        .user-avatar { width: 100%; height: 100%; border-radius: 50%; background: #111116; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: #fff; border: 2px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
 
-        /* Стили для центрированного окна авторизации */
-        .auth-container { 
-            background: #0b0b0f; 
-            border: 1px solid rgba(255, 255, 255, 0.03); 
-            padding: 45px 40px; 
-            border-radius: 16px; 
-            width: 100%; 
-            max-width: 420px; 
-            text-align: center; 
-            box-shadow: 0 40px 80px rgba(0,0,0,0.8); 
-            display: none; 
-        }
+        .user-info-text { display: flex; flex-direction: column; gap: 3px; text-align: left; }
+        .user-info-text .sub-label { font-size: 0.6rem; color: #4a4b53; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
+        .user-info-text h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; }
+        
+        /* Стандартная фиолетовая плашка USER */
+        .badge-role { display: inline-flex; align-items: center; gap: 6px; background: rgba(138, 92, 246, 0.12); color: #a78bfa; padding: 3px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; width: max-content; border: 1px solid rgba(138, 92, 246, 0.15); }
 
-        /* Плавная фирменная анимация */
-        .animate-fade {
-            animation: cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s forwards appearance;
-        }
-        @keyframes appearance {
-            from { opacity: 0; transform: scale(0.97) translateY(10px); filter: blur(3px); }
-            to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
-        }
-        
-        h3 { font-size: 1.4rem; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 1.5px; }
-        
-        /* Группы полей ввода */
-        .form-group { margin-bottom: 20px; text-align: left; }
-        .form-group label { display: block; font-size: 0.72rem; color: #5a5b63; text-transform: uppercase; font-weight: 800; margin-bottom: 8px; letter-spacing: 1.2px; }
-        .form-group input { width: 100%; padding: 14px; background: #040406; border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 8px; color: #fff; font-size: 0.95rem; outline: none; font-weight: 600; transition: all 0.3s ease; }
-        .form-group input:focus { border-color: rgba(255, 255, 255, 0.15); }
-        
-        /* Главная кнопка действия (белая глянцевая) */
-        .btn-submit { padding: 14px 24px; background: #fff; color: #000; border: none; font-weight: 800; border-radius: 6px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.8px; font-size: 0.8rem; transition: all 0.3s ease; }
+        /* Эксклюзивная красная плашка SYSADMIN для админа */
+        .badge-admin { display: inline-flex; align-items: center; gap: 6px; background: rgba(239, 68, 68, 0.12); color: #ef4444; padding: 3px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; width: max-content; border: 1px solid rgba(239, 68, 68, 0.2); }
+
+        /* Правые кнопки меню */
+        .side-buttons { display: flex; flex-direction: column; gap: 8px; min-width: 180px; }
+        .btn-submit { padding: 10px 18px; background: #fff; color: #000; border: none; font-weight: 800; border-radius: 4px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.75rem; transition: all 0.2s ease; text-align: center; }
         .btn-submit:hover { background: #f0f0f0; transform: translateY(-1px); }
-        
-        /* Боковые тёмные кнопки как на скриншоте */
-        .side-buttons { display: flex; flex-direction: column; gap: 10px; min-width: 200px; }
-        .btn-secondary { background: #141419; color: #ccc; border: 1px solid rgba(255,255,255,0.02); text-align: left; display: flex; align-items: center; gap: 10px; }
-        .btn-secondary:hover { background: #1c1c24; color: #fff; }
+        .btn-secondary { background: #121216; color: #9a9aa3; border: 1px solid rgba(255,255,255,0.02); text-align: left; display: flex; align-items: center; gap: 8px; }
+        .btn-secondary:hover { background: #181822; color: #fff; }
 
-        .toggle-link { display: block; margin-top: 20px; font-size: 0.82rem; color: #5a5b63; cursor: pointer; text-decoration: none; font-weight: 600; }
+        /* Сетка карточек статистики со скриншота */
+        .stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; margin-bottom: 25px; }
+        .stat-card { background: #0b0b0f; border: 1px solid rgba(255,255,255,0.02); padding: 20px; border-radius: 6px; text-align: left; display: flex; flex-direction: column; gap: 8px; min-height: 110px; }
+        .stat-card h1 { font-size: 1.8rem; font-weight: 800; line-height: 1; }
+        .stat-card span { font-size: 0.68rem; color: #4a4b53; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; line-height: 1.2; }
+        
+        /* Цветовая палитра для цифр статистики */
+        .color-white { color: #fff; }
+        .color-red { color: #ff4a4a; }
+        .color-orange { color: #ff9900; }
+        .color-green { color: #00ff66; }
+        .color-purple { color: #a78bfa; }
+        .color-blue { color: #3b82f6; }
+
+        /* Двойная карточка для голосов слева */
+        .double-row { display: grid; grid-template-columns: 1fr 5fr; gap: 15px; margin-bottom: 25px; }
+        .votes-card { background: #0b0b0f; border: 1px solid rgba(255,255,255,0.02); padding: 20px; border-radius: 6px; text-align: left; display: flex; flex-direction: column; gap: 8px; }
+
+        /* Кнопки действий под статистикой */
+        .action-buttons-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 30px; }
+        .btn-action { background: #0b0b0f; border: 1px solid rgba(255,255,255,0.03); color: #9a9aa3; padding: 12px 20px; border-radius: 4px; font-size: 0.8rem; font-weight: 700; display: flex; align-items: center; gap: 8px; cursor: pointer; transition: 0.2s; }
+        .btn-action:hover { background: #121216; color: #fff; border-color: rgba(255,255,255,0.08); }
+        .btn-action-primary { background: rgba(255,255,255,0.04); color: #fff; border-color: rgba(255,255,255,0.08); }
+        .btn-action-primary:hover { background: rgba(255,255,255,0.08); }
+
+        /* Блоки нижних списков и обращений */
+        .lists-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .list-block { text-align: left; }
+        .list-block h3 { font-size: 0.72rem; color: #4a4b53; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .list-content { background: #0b0b0f; border: 1px solid rgba(255,255,255,0.02); border-radius: 6px; min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; color: #3a3a44; font-size: 0.85rem; font-weight: 600; }
+        .list-content i { font-size: 1.8rem; color: #1a1a24; }
+
+        /* Окно безопасных настроек */
+        .settings-block { background: #0b0b0f; border: 1px solid rgba(255, 255, 255, 0.03); border-top: none; padding: 25px 30px; border-radius: 0 0 6px 6px; margin-top: -20px; margin-bottom: 20px; display: none; }
+        .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        /* Центрированное окно авторизации */
+        .auth-container { background: #0b0b0f; border: 1px solid rgba(255, 255, 255, 0.03); padding: 45px 40px; border-radius: 8px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 40px 80px rgba(0,0,0,0.8); display: none; }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; font-size: 0.7rem; color: #4a4b53; text-transform: uppercase; font-weight: 800; margin-bottom: 8px; letter-spacing: 1px; }
+        .form-group input { width: 100%; padding: 12px 15px; background: #040406; border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 4px; color: #fff; font-size: 0.9rem; outline: none; font-weight: 600; }
+        .form-group input:focus { border-color: rgba(255, 255, 255, 0.12); }
+        .toggle-link { display: block; margin-top: 20px; font-size: 0.8rem; color: #4a4b53; cursor: pointer; font-weight: 600; }
         .toggle-link:hover { color: #fff; }
 
-        /* Оформление круглого аватара профиля */
-        .avatar-wrapper { position: relative; width: 90px; height: 90px; }
-        .user-avatar { width: 100%; height: 100%; border-radius: 50%; background: #111116; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; color: #fff; border: 2px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
-
-        .user-info-text { display: flex; flex-direction: column; gap: 5px; text-align: left; }
-        .user-info-text .sub-label { font-size: 0.65rem; color: #5a5b63; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
-        .user-info-text h2 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1; }
+        /* Анимация плавного появления */
+        .animate-fade { animation: cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s forwards appearance; }
+        @keyframes appearance { from { opacity: 0; transform: scale(0.99) translateY(5px); } to { opacity: 1; transform: scale(1) translateY(0); } }
         
-        /* Фиолетовая плашка USER как на скриншоте */
-        .badge-role { display: inline-flex; align-items: center; gap: 6px; background: rgba(138, 92, 246, 0.15); color: #a78bfa; padding: 4px 10px; border-radius: 4px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; width: max-content; margin-top: 4px; border: 1px solid rgba(138, 92, 246, 0.2); }
-
-        /* Раскрывающаяся панель изменения данных */
-        .settings-block {
-            width: 100%;
-            max-width: 800px;
-            background: #0b0b0f;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-top: none;
-            padding: 30px;
-            border-radius: 0 0 12px 12px;
-            margin-top: -10px;
-            display: none;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-        .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        @media (max-width: 600px) { .settings-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 900px) { .stats-grid, .lists-wrapper { grid-template-columns: 1fr; } .settings-grid { grid-template-columns: 1fr; } .double-row { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <!-- УВЕДОМЛЕНИЕ ПРИ УСПЕШНОМ ВХОДЕ -->
+    <!-- ЗЕЛЁНОЕ УВЕДОМЛЕНИЕ ПРИ УСПЕШНОМ ВХОДЕ -->
     <div id="welcomeAlert" class="welcome-alert">
         <i class="fa-solid fa-circle-check"></i>
         <span>Добро пожаловать, <span id="alertUsername">User</span>!</span>
@@ -145,91 +146,161 @@
 
     <!-- ОКНО ВХОДА ИЛИ РЕГИСТРАЦИИ -->
     <div id="authBlock" class="auth-container animate-fade">
-        <h3 id="authTitle">Вход в аккаунт</h3>
+        <h3 style="font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px;" id="authTitle">Вход в аккаунт</h3>
         <div class="form-group">
             <label><i class="fa-brands fa-roblox"></i> Никнейм в Roblox</label>
-            <input type="text" id="authLogin" placeholder="Имя персонажа">
+            <input type="text" id="authLogin" placeholder="Имя вашего персонажа">
         </div>
         <div class="form-group">
-            <label><i class="fa-solid fa-lock"></i> Пароль</label>
+            <label><i class="fa-solid fa-lock"></i> Пароль кабинета</label>
             <input type="password" id="authPassword" placeholder="••••••••">
         </div>
-        <button class="btn-submit" style="width: 100%;" id="btnMainAction" onclick="handleAuth()">Войти</button>
+        <button class="btn-submit" style="width: 100%; padding: 12px;" id="btnMainAction" onclick="handleAuth()">Войти</button>
         <span class="toggle-link" id="btnToggleMode" onclick="toggleMode()">У меня еще нет аккаунта</span>
     </div>
-    <!-- ЛИЧНЫЙ ПРОФИЛЬ ИГРОКА (Широкий дизайн по скриншоту) -->
-    <div id="profileBlock" class="profile-container animate-fade">
-        <div class="profile-layout">
-            <div class="profile-main">
-                <div class="avatar-wrapper">
-                    <!-- Место под аватарку игрока (по умолчанию дефолт-иконка юзера) -->
-                    <div class="user-avatar" id="avatarDiv">
-                        <i class="fa-solid fa-user"></i>
+    <!-- ГЛАВНАЯ ИГРОВАЯ ПАНЕЛЬ (DASHBOARD) -->
+    <div id="dashboardBlock" class="dashboard-container">
+        
+        <!-- Верхний блок профиля (копия верхнего бара со скриншота) -->
+        <div class="profile-container animate-fade">
+            <div class="profile-layout">
+                <div class="profile-main">
+                    <div class="avatar-wrapper">
+                        <div class="user-avatar" id="avatarDiv">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                    </div>
+                    <div class="user-info-text">
+                        <span class="sub-label">// Account</span>
+                        <h2 id="profileUsername">Загрузка...</h2>
+                        <!-- Сюда скрипт автоматически выведет красную плашку SYSADMIN или фиолетовую USER -->
+                        <div id="roleBadgeContainer"></div>
                     </div>
                 </div>
-                <div class="user-info-text">
-                    <span class="sub-label">// Account</span>
-                    <h2 id="profileUsername">Загрузка...</h2>
-                    <div class="badge-role" id="profileRoleBadge">
-                        <i class="fa-solid fa-shield-halved"></i> <span id="profileRole">USER</span>
-                    </div>
+                
+                <!-- Кнопки управления справа -->
+                <div class="side-buttons">
+                    <button class="btn-submit btn-secondary" onclick="toggleSettings()">
+                        <i class="fa-solid fa-gear"></i> Настройки
+                    </button>
+                    <button class="btn-submit btn-secondary" style="color: #ff4a4a; border-color: rgba(255, 74, 74, 0.1);" onclick="logout()">
+                        <i class="fa-solid fa-right-from-bracket"></i> Выйти из профиля
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- БЛОК НАСТРОЕК (Выезжает снизу под основным профилем) -->
+        <div id="settingsBlock" class="settings-block animate-fade">
+            <h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 20px; color: #9a9aa3;">
+                <i class="fa-solid fa-user-pen"></i> Изменение имени пользователя
+            </h3>
+            <div class="settings-grid">
+                <div class="form-group">
+                    <label>Новый никнейм Roblox</label>
+                    <input type="text" id="newUsername" placeholder="Введите новое имя">
+                </div>
+                <div class="form-group">
+                    <label>Текущий пароль от сайта</label>
+                    <input type="password" id="confirmPassword" placeholder="Введите пароль для проверки">
+                </div>
+            </div>
+            <button class="btn-submit" onclick="changeUsername()" style="background: #00ff66; color: #000; margin-top: 5px; padding: 12px 24px;">
+                Сохранить изменения
+            </button>
+        </div>
+
+        <!-- ЦЕНТРАЛЬНАЯ СЕТКА СТАТИСТИКИ (Как на скриншоте) -->
+        <div class="double-row">
+            <!-- Левая колонка: голоса -->
+            <div class="votes-card">
+                <h1 class="color-purple">0</h1>
+                <span>Голосов получено</span>
+            </div>
+            
+            <!-- Правая колонка: 6 карточек с цифрами -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h1 class="color-white">0</h1>
+                    <span>Всего обращений</span>
+                </div>
+                <div class="stat-card">
+                    <h1 class="color-red">0</h1>
+                    <span>Открытые</span>
+                </div>
+                <div class="stat-card">
+                    <h1 class="color-orange">0</h1>
+                    <span>В работе</span>
+                </div>
+                <div class="stat-card">
+                    <h1 class="color-green">0</h1>
+                    <span>Решённые</span>
+                </div>
+                <div class="stat-card">
+                    <h1 class="color-white">0</h1>
+                    <span>Заявки</span>
+                </div>
+                <div class="stat-card">
+                    <h1 class="color-blue">1</h1>
+                    <span>Тем на форуме</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- КНОПКИ БЫСТРЫХ ДЕЙСТВИЙ (Панель под статистикой) -->
+        <div class="action-buttons-row">
+            <button class="btn-action btn-action-primary"><i class="fa-solid fa-plus"></i> Новое обращение</button>
+            <button class="btn-action"><i class="fa-solid fa-bars"></i> Все обращения</button>
+            <button class="btn-action"><i class="fa-solid fa-box-archive"></i> Мои заявки</button>
+            <button class="btn-action"><i class="fa-solid fa-comments"></i> Форум</button>
+        </div>
+
+        <!-- СПИСКИ И ТАБЛИЦЫ С ЗАГЛУШКАМИ (Нижняя часть страницы) -->
+        <div class="lists-wrapper">
+            <!-- Последние обращения -->
+            <div class="list-block">
+                <h3><i class="fa-solid fa-circle" style="font-size: 0.4rem; color: #3a3a44;"></i> Последние обращения</h3>
+                <div class="list-content">
+                    <i class="fa-solid fa-folder-open"></i>
+                    <span>У вас пока нет обращений</span>
                 </div>
             </div>
             
-            <!-- Правое меню управления аккаунтом -->
-            <div class="side-buttons">
-                <button class="btn-submit btn-secondary" onclick="toggleSettings()">
-                    <i class="fa-solid fa-gear"></i> Настройки
-                </button>
-                <button class="btn-submit btn-secondary" style="color: #ff4a4a; border-color: rgba(255, 74, 74, 0.1);" onclick="logout()">
-                    <i class="fa-solid fa-right-from-bracket"></i> Выйти из профиля
-                </button>
+            <!-- Последние заявки -->
+            <div class="list-block">
+                <h3><i class="fa-solid fa-circle" style="font-size: 0.4rem; color: #3a3a44;"></i> Последние заявки</h3>
+                <div class="list-content">
+                    <i class="fa-solid fa-file-invoice"></i>
+                    <span>У вас пока нет заявок</span>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- БЛОК НАСТРОЕК (Появляется снизу под профилем) -->
-    <div id="settingsBlock" class="settings-block animate-fade">
-        <h3 style="font-size: 1.1rem; margin-bottom: 20px;"><i class="fa-solid fa-user-pen"></i> Изменение никнейма</h3>
-        <div class="settings-grid">
-            <div class="form-group">
-                <label>Новый никнейм Roblox</label>
-                <input type="text" id="newUsername" placeholder="Введите новое имя">
-            </div>
-            <div class="form-group">
-                <label>Текущий пароль от сайта</label>
-                <input type="password" id="confirmPassword" placeholder="Введите пароль для проверки">
-            </div>
-        </div>
-        <button class="btn-submit" onclick="changeUsername()" style="background: #00ff66; color: #000; margin-top: 5px;">
-            Сохранить изменения
-        </button>
     </div>
-
-    <!-- НАЧАЛО СКРИПТОВОЙ ЛОГИКИ СТРАНИЦЫ -->
+    <!-- СКРИПТОВАЯ ЛОГИКА СИСТЕМЫ -->
     <script>
         let isLoginMode = true;
 
-        // Автоматическая проверка сессии при загрузке лаунчера/страницы
+        // Автоматическая проверка активного входа при загрузке страницы
         window.onload = function() {
             const currentSession = localStorage.getItem('amazer_current_user');
             if (currentSession) {
                 const userData = JSON.parse(localStorage.getItem('user_' + currentSession.toLowerCase()));
                 if (userData) {
-                    showProfile(userData, false); // Вход без повторного отображения алерта сверху
+                    showProfile(userData, false); // Вход без повторного уведомления сверху
                     return;
                 }
             }
             document.getElementById('authBlock').style.display = 'block';
         };
 
-        // Анимация и переключение режимов Вход / Регистрация
+        // Плавное переключение режимов: Вход / Регистрация
         function toggleMode() {
             isLoginMode = !isLoginMode;
             const authBlock = document.getElementById('authBlock');
             
             authBlock.classList.remove('animate-fade');
-            void authBlock.offsetWidth; // Магический хак для перезапуска CSS-анимации
+            void authBlock.offsetWidth; // Хак перезапуска анимации
             authBlock.classList.add('animate-fade');
 
             document.getElementById('authTitle').innerText = isLoginMode ? 'Вход в аккаунт' : 'Регистрация';
@@ -240,7 +311,7 @@
             document.getElementById('authPassword').value = '';
         }
 
-        // Обработчик отправки формы авторизации и регистрации
+        // Обработка формы авторизации и регистрации
         function handleAuth() {
             const username = document.getElementById('authLogin').value.trim();
             const password = document.getElementById('authPassword').value.trim();
@@ -266,7 +337,7 @@
                 }
 
                 localStorage.setItem('amazer_current_user', username.toLowerCase());
-                showProfile(userData, true); // Вход с отображением красивого уведомления
+                showProfile(userData, true); // Вход с отображением алерта
 
             } else {
                 const checkUser = localStorage.getItem(userKey);
@@ -278,110 +349,102 @@
                 const newUserData = {
                     username: username,
                     password: password,
-                    role: 'USER'
+                    role: 'USER' // Роль по умолчанию
                 };
 
                 localStorage.setItem(userKey, JSON.stringify(newUserData));
-                alert('Аккаунт успешно создан! Теперь войдите в него.');
+                alert('Аккаунт успешно создан! Войдите в него.');
                 toggleMode();
             }
         }
-        // Показ профиля и вывод верхнего приветственного уведомления
+
+        // Отображение личного кабинета и динамическая выдача ролей
         function showProfile(user, triggerAlert) {
             document.getElementById('authBlock').style.display = 'none';
-            document.getElementById('profileBlock').style.display = 'block';
+            document.getElementById('dashboardBlock').style.display = 'block';
             
             document.getElementById('profileUsername').innerText = user.username;
-            document.getElementById('profileRole').innerText = user.role.toUpperCase();
 
-            // Всплывающее зелёное уведомление (как на скриншоте)
+            // Смена плашки роли: если никнейм admin — выдаем красную SYSADMIN
+            const badgeContainer = document.getElementById('roleBadgeContainer');
+            if (user.username.toLowerCase() === 'admin') {
+                badgeContainer.innerHTML = `<div class="badge-admin"><i class="fa-solid fa-crown"></i> <span>SYSADMIN</span></div>`;
+            } else {
+                badgeContainer.innerHTML = `<div class="badge-role"><i class="fa-solid fa-shield-halved"></i> <span id="profileRole">${user.role.toUpperCase()}</span></div>`;
+            }
+
+            // Показ верхнего зеленого уведомления
             if (triggerAlert) {
                 const welcomeAlert = document.getElementById('welcomeAlert');
                 document.getElementById('alertUsername').innerText = user.username;
                 welcomeAlert.style.display = 'flex';
-                
-                // Автоматически скрываем уведомление через 5 секунд
-                setTimeout(() => { 
-                    welcomeAlert.style.display = 'none'; 
-                }, 5000);
+                setTimeout(() => { welcomeAlert.style.display = 'none'; }, 5000);
             }
         }
 
-        // Открытие и закрытие панели настроек под профилем
+        // Переключение видимости панели настроек
         function toggleSettings() {
             const settingsBlock = document.getElementById('settingsBlock');
             if (settingsBlock.style.display === 'block') {
                 settingsBlock.style.display = 'none';
             } else {
                 settingsBlock.style.display = 'block';
-                // Очищаем поля ввода перед заполнением
                 document.getElementById('newUsername').value = '';
                 document.getElementById('confirmPassword').value = '';
             }
         }
 
-        // Безопасное изменение Username с проверкой текущего пароля
+        // Безопасное изменение юзернейма с сохранением сессии и перезаписью ключей
         function changeUsername() {
             const newName = document.getElementById('newUsername').value.trim();
             const confirmPass = document.getElementById('confirmPassword').value.trim();
             const currentSession = localStorage.getItem('amazer_current_user');
 
             if (!newName || !confirmPass) {
-                alert('Пожалуйста, заполните оба поля в настройках!');
+                alert('Пожалуйста, заполните все поля в настройках!');
                 return;
             }
 
             const oldUserKey = 'user_' + currentSession;
-            const storedData = localStorage.getItem(oldUserKey);
-            
-            if (!storedData) {
-                alert('Ошибка сессии. Перезайдите в аккаунт.');
-                logout();
-                return;
-            }
+            const userData = JSON.parse(localStorage.getItem(oldUserKey));
 
-            const userData = JSON.parse(storedData);
-
-            // 1. Сверяем пароль для защиты от несанкционированного изменения
+            // Проверка пароля перед изменением
             if (userData.password !== confirmPass) {
-                alert('Неверный пароль от сайта! Изменение никнейма отклонено.');
+                alert('Неверный пароль от сайта! Изменения отклонены.');
                 return;
             }
 
-            // 2. Проверяем, свободен ли новый никнейм в локальной базе
+            // Проверка на занятость имени
             const newConstKey = 'user_' + newName.toLowerCase();
             if (newName.toLowerCase() !== currentSession && localStorage.getItem(newConstKey)) {
                 alert('Этот никнейм уже занят другим игроком!');
                 return;
             }
 
-            // 3. Полная перезапись: удаляем старый ключ и создаем обновленный
+            // Перезапись базы данных
             localStorage.removeItem(oldUserKey);
-            
-            userData.username = newName; // Обновляем отображаемый текст
-            localStorage.setItem(newConstKey, JSON.stringify(userData)); // Записываем в базу
-            localStorage.setItem('amazer_current_user', newName.toLowerCase()); // Перевыпускаем сессию
+            userData.username = newName;
+            localStorage.setItem(newConstKey, JSON.stringify(userData));
+            localStorage.setItem('amazer_current_user', newName.toLowerCase());
 
-            // 4. Мгновенно обновляем интерфейс личного кабинета
-            document.getElementById('profileUsername').innerText = newName;
+            // Моментальное обновление интерфейса (и перерасчет роли, если ник сменили на admin или наоборот)
+            showProfile(userData, false);
             alert('Никнейм успешно изменен!');
             toggleSettings();
         }
 
-        // Полный выход из профиля и очистка временных окон
+        // Полный выход из личного кабинета
         function logout() {
             localStorage.removeItem('amazer_current_user');
-            document.getElementById('profileBlock').style.display = 'none';
+            document.getElementById('dashboardBlock').style.display = 'none';
             document.getElementById('settingsBlock').style.display = 'none';
             document.getElementById('welcomeAlert').style.display = 'none';
             document.getElementById('authBlock').style.display = 'block';
-            
-            // Возвращаем форму к дефолтному режиму входа
             isLoginMode = false;
             toggleMode();
         }
 
-        // Блокировка вызова контекстного меню через ПКМ
+        // Защита: Блокировка вызова контекстного меню через ПКМ
         document.addEventListener('contextmenu', function(e) { 
             e.preventDefault(); 
         });
