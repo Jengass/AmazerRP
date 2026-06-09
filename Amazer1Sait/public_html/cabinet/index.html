@@ -4,62 +4,117 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Amazer Games — Личный кабинет</title>
+    <!-- Подключаем современные иконки FontAwesome -->
     <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
         
-        /* Черный глубокий фон лаунчера */
-        body { background: #0a0a0c; color: #fff; padding: 20px; line-height: 1.6; display: flex; justify-content: center; align-items: center; min-height: 90vh; }
-        
-        /* Карточки входа и профиля строго в стиле сайта */
-        .auth-container, .profile-container { 
-            background: #111114; 
-            border: 1px solid rgba(255, 255, 255, 0.02); 
-            padding: 40px; 
-            border-radius: 6px; 
-            width: 100%; 
-            max-width: 420px; 
-            text-align: center; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5); 
-            display: none; 
-            animation: fadeIn 0.4s ease-out;
+        body { 
+            background: #060608; 
+            color: #fff; 
+            padding: 20px; 
+            line-height: 1.6; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh;
+            overflow-x: hidden;
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        h3 { font-size: 1.8rem; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 0.5px; }
+        /* Задний неоновый фон для атмосферы лаунчера */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, rgba(0,0,0,0) 70%);
+            top: 10%;
+            left: 10%;
+            z-index: -1;
+        }
+
+        /* Общие контейнеры */
+        .auth-container, .profile-container { 
+            background: #0d0d11; 
+            border: 1px solid rgba(255, 255, 255, 0.04); 
+            padding: 40px; 
+            border-radius: 12px; 
+            width: 100%; 
+            max-width: 440px; 
+            text-align: center; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8); 
+            display: none; 
+            position: relative;
+        }
+
+        /* Продвинутая анимация плавного появления */
+        .animate-fade {
+            animation: cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards appearance;
+        }
+        @keyframes appearance {
+            from { opacity: 0; transform: scale(0.96) translateY(12px); filter: blur(4px); }
+            to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+        }
         
+        h3 { font-size: 1.6rem; font-weight: 900; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 1px; }
+        
+        /* Стили формы */
         .form-group { margin-bottom: 20px; text-align: left; }
-        .form-group label { display: block; font-size: 0.75rem; color: #888991; text-transform: uppercase; font-weight: 700; margin-bottom: 6px; letter-spacing: 1px; }
-        .form-group input { width: 100%; padding: 13px; background: #07070a; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 4px; color: #fff; font-size: 0.95rem; outline: none; font-weight: 600; }
-        .form-group input:focus { border-color: rgba(255, 255, 255, 0.2); }
+        .form-group label { display: block; font-size: 0.75rem; color: #6c6d75; text-transform: uppercase; font-weight: 700; margin-bottom: 8px; letter-spacing: 1px; }
+        .form-group input { width: 100%; padding: 14px; background: #050507; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 6px; color: #fff; font-size: 0.95rem; outline: none; font-weight: 600; transition: 0.3s ease; }
+        .form-group input:focus { border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 0 15px rgba(255,255,255,0.03); }
         
-        /* Белые премиум-кнопки */
-        .btn-submit { width: 100%; padding: 13px; background: #fff; color: #000; border: none; font-weight: 700; border-radius: 4px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.85rem; margin-top: 10px; transition: 0.2s; }
-        .btn-submit:hover { background: #e6e6e6; }
+        /* Премиальные кнопки */
+        .btn-submit { width: 100%; padding: 14px; background: #fff; color: #000; border: none; font-weight: 700; border-radius: 6px; cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.85rem; margin-top: 10px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-submit:hover { background: #e6e6e6; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255,255,255,0.1); }
+        .btn-submit:active { transform: translateY(0); }
         
-        .toggle-link { display: block; margin-top: 15px; font-size: 0.85rem; color: #888991; cursor: pointer; text-decoration: underline; }
+        .toggle-link { display: block; margin-top: 18px; font-size: 0.85rem; color: #6c6d75; cursor: pointer; text-decoration: none; transition: 0.2s; }
         .toggle-link:hover { color: #fff; }
 
         /* Элементы личного профиля */
-        .user-avatar { width: 90px; height: 90px; border-radius: 50%; background: #1a1a1f; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: #888991; border: 1px solid rgba(255, 255, 255, 0.05); }
-        .profile-info-row { display: flex; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 0.95rem; }
-        .profile-info-row span { color: #888991; }
+        .avatar-wrapper { position: relative; width: 100px; height: 100px; margin: 0 auto 20px auto; }
+        .user-avatar { width: 100%; height: 100%; border-radius: 50%; background: #131318; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; color: #fff; border: 1px solid rgba(255, 255, 255, 0.08); transition: 0.4s ease; }
+        .avatar-wrapper:hover .user-avatar { transform: scale(1.05); border-color: #fff; }
         
-        .btn-logout { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #ff4a4a; margin-top: 25px; }
-        .btn-logout:hover { background: rgba(255,74,74,0.05); border-color: #ff4a4a; }
+        /* Индикатор онлайн-статуса */
+        .status-dot { position: absolute; bottom: 5px; right: 5px; width: 14px; height: 14px; background: #00ff66; border-radius: 50%; border: 3px solid #0d0d11; box-shadow: 0 0 10px #00ff66; }
+
+        /* Сетка параметров в виде красивых карточек */
+        .profile-stats { margin: 25px 0; text-align: left; }
+        .stat-card { background: #131318; border: 1px solid rgba(255,255,255,0.02); padding: 16px; border-radius: 8px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
+        .stat-card:hover { background: #17171e; border-color: rgba(255,255,255,0.05); }
+        .stat-label { font-size: 0.85rem; color: #6c6d75; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+        .stat-value { font-size: 1rem; font-weight: 700; color: #fff; }
+        
+        /* Динамический тег роли */
+        #profileRole { background: linear-gradient(135deg, #fff 0%, #888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; text-transform: uppercase; font-size: 0.9rem; }
+
+        /* Специальные кнопки действий */
+        .btn-deposit { background: linear-gradient(90deg, #111 0%, #222 100%); color: #fff; border: 1px solid rgba(255,255,255,0.1); margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .btn-deposit:hover { background: linear-gradient(90deg, #1c1c24 0%, #2a2a36 100%); border-color: rgba(255,255,255,0.3); color: #fff; }
+
+        .btn-logout { background: transparent; border: 1px solid rgba(255,74,74,0.2); color: #ff4a4a; margin-top: 12px; }
+        .btn-logout:hover { background: rgba(255,74,74,0.07); border-color: #ff4a4a; box-shadow: 0 5px 15px rgba(255,74,74,0.1); }
+
+        /* Всплывающее модальное окно */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 100; justify-content: center; align-items: center; }
+        .modal-content { background: #0d0d11; border: 1px solid rgba(255,255,255,0.05); padding: 30px; border-radius: 12px; width: 90%; max-width: 360px; text-align: center; }
+        .modal-close { color: #6c6d75; float: right; cursor: pointer; font-size: 1.2rem; transition: 0.2s; }
+        .modal-close:hover { color: #fff; }
     </style>
 </head>
 <body>
 
     <!-- ФОРМА ВХОДА / РЕГИСТРАЦИИ -->
-    <div id="authBlock" class="auth-container">
+    <div id="authBlock" class="auth-container animate-fade">
         <h3 id="authTitle">Вход в аккаунт</h3>
         <div class="form-group">
-            <label>Ваш никнейм в Roblox</label>
+            <label><i class="fa-brands fa-roblox"></i> Ваш никнейм в Roblox</label>
             <input type="text" id="authLogin" placeholder="Имя персонажа">
         </div>
         <div class="form-group">
-            <label>Пароль от кабинета</label>
+            <label><i class="fa-solid fa-lock"></i> Пароль от кабинета</label>
             <input type="password" id="authPassword" placeholder="••••••••">
         </div>
         <button class="btn-submit" id="btnMainAction" onclick="handleAuth()">Войти</button>
@@ -67,30 +122,50 @@
     </div>
 
     <!-- ЛИЧНЫЙ ПРОФИЛЬ ИГРОКА -->
-    <div id="profileBlock" class="profile-container">
-        <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+    <div id="profileBlock" class="profile-container animate-fade">
+        <div class="avatar-wrapper">
+            <div class="user-avatar"><i class="fa-solid fa-user-ninja"></i></div>
+            <div class="status-dot"></div>
+        </div>
         <h3 id="profileUsername">Игрок</h3>
         
-        <div class="profile-info-row">
-            <span>Статус на проекте</span>
-            <strong id="profileRole" style="color: #fff;">Игрок</strong>
-        </div>
-        <div class="profile-info-row">
-            <span>Локальный баланс</span>
-            <strong><span id="profileBalance">0</span> ₽</strong>
+        <!-- Параметры -->
+        <div class="profile-stats">
+            <div class="stat-card">
+                <span class="stat-label"><i class="fa-solid fa-shield-halved"></i> Статус проекта</span>
+                <span class="stat-value" id="profileRole">Игрок</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label"><i class="fa-solid fa-wallet"></i> Баланс счета</span>
+                <span class="stat-value"><span id="profileBalance" style="color: #00ff66;">0</span> ₽</span>
+            </div>
         </div>
         
-        <button class="btn-submit btn-logout" onclick="logout()">Выйти из профиля</button>
+        <!-- Кнопки управления -->
+        <button class="btn-submit btn-deposit" onclick="openDepositModal()"><i class="fa-solid fa-circle-plus"></i> Пополнить баланс</button>
+        <button class="btn-submit btn-logout" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i> Выйти</button>
     </div>
 
+    <!-- МОДАЛЬНОЕ ОКНО ПОПОЛНЕНИЯ -->
+    <div id="depositModal" class="modal">
+        <div class="modal-content animate-fade">
+            <span class="modal-close" onclick="closeDepositModal()"><i class="fa-solid fa-xmark"></i></span>
+            <h3 style="font-size: 1.2rem; margin-bottom: 15px;"><i class="fa-solid fa-coins" style="color: #ffd700;"></i> Пополнение</h3>
+            <div class="form-group">
+                <label>Сумма пополнения (₽)</label>
+                <input type="number" id="depositAmount" placeholder="100" min="1">
+            </div>
+            <button class="btn-submit" onclick="submitDeposit()" style="background: #00ff66; color: #000;">Подтвердить</button>
+        </div>
+    </div>
     <script>
         let isLoginMode = true;
+        let currentUserData = null; // Текущий авторизованный сессионный юзер
 
-        // Автоматическая проверка авторизации при открытии кабинета
+        // Автоматическая подгрузка сессии при старте страницы
         window.onload = function() {
             const currentSession = localStorage.getItem('amazer_current_user');
             if (currentSession) {
-                // Если сессия активна, сразу подгружаем данные аккаунта из локального хранилища
                 const userData = JSON.parse(localStorage.getItem('user_' + currentSession));
                 if (userData) {
                     showProfile(userData);
@@ -100,14 +175,22 @@
             document.getElementById('authBlock').style.display = 'block';
         };
 
+        // Переключение между входом и регистрацией
         function toggleMode() {
             isLoginMode = !isLoginMode;
+            
+            // Перезапуск CSS-анимации появления
+            const authBlock = document.getElementById('authBlock');
+            authBlock.classList.remove('animate-fade');
+            void authBlock.offsetWidth; 
+            authBlock.classList.add('animate-fade');
+
             document.getElementById('authTitle').innerText = isLoginMode ? 'Вход в аккаунт' : 'Регистрация';
             document.getElementById('btnMainAction').innerText = isLoginMode ? 'Войти' : 'Создать аккаунт';
             document.getElementById('btnToggleMode').innerText = isLoginMode ? 'У меня еще нет аккаунта' : 'У меня уже есть аккаунт';
         }
 
-        // Логика локальной регистрации и авторизации
+        // Авторизация и регистрация пользователей
         function handleAuth() {
             const username = document.getElementById('authLogin').value.trim();
             const password = document.getElementById('authPassword').value.trim();
@@ -131,7 +214,6 @@
                     return;
                 }
 
-                // Активируем текущую сессию
                 localStorage.setItem('amazer_current_user', username.toLowerCase());
                 showProfile(userData);
 
@@ -143,7 +225,6 @@
                     return;
                 }
 
-                // Создаем структуру игрока для сохранения
                 const newUserData = {
                     username: username,
                     password: password,
@@ -151,28 +232,63 @@
                     role: 'Игрок'
                 };
 
-                // Сохраняем в локальную память браузера браузера
                 localStorage.setItem('user_' + username.toLowerCase(), JSON.stringify(newUserData));
-                alert('Аккаунт успешно создан! Теперь войдите, используя свои данные.');
+                alert('Аккаунт успешно создан! Теперь войдите в него.');
                 toggleMode();
             }
         }
 
+        // Отображение личного кабинета
         function showProfile(user) {
+            currentUserData = user;
             document.getElementById('authBlock').style.display = 'none';
             document.getElementById('profileBlock').style.display = 'block';
+            
             document.getElementById('profileUsername').innerText = user.username;
             document.getElementById('profileBalance').innerText = user.balance;
             document.getElementById('profileRole').innerText = user.role;
         }
 
+        // Выход из профиля
         function logout() {
             localStorage.removeItem('amazer_current_user');
+            currentUserData = null;
             document.getElementById('profileBlock').style.display = 'none';
             document.getElementById('authBlock').style.display = 'block';
         }
 
-        // Блокировка вызова кода
+        /* ФУНКЦИОНАЛ ПОПОЛНЕНИЯ БАЛАНСА */
+        function openDepositModal() {
+            document.getElementById('depositModal').style.display = 'flex';
+        }
+
+        function closeDepositModal() {
+            document.getElementById('depositModal').style.display = 'none';
+            document.getElementById('depositAmount').value = '';
+        }
+
+        function submitDeposit() {
+            const amount = parseInt(document.getElementById('depositAmount').value);
+            
+            if (isNaN(amount) || amount <= 0) {
+                alert('Введите корректную сумму!');
+                return;
+            }
+
+            if (currentUserData) {
+                // Прибавляем баланс и сохраняем в локальное хранилище
+                currentUserData.balance = parseInt(currentUserData.balance) + amount;
+                localStorage.setItem('user_' + currentUserData.username.toLowerCase(), JSON.stringify(currentUserData));
+                
+                // Обновляем текст на экране
+                document.getElementById('profileBalance').innerText = currentUserData.balance;
+                
+                alert(`Баланс успешно пополнен на ${amount} ₽!`);
+                closeDepositModal();
+            }
+        }
+
+        // Блокировка вызова контекстного меню (кликов правой кнопкой мыши)
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
     </script>
 </body>
