@@ -7,11 +7,9 @@
 </head>
 <body>
 
-    <!-- Элементы кастомного курсора -->
     <div class="custom-cursor-dot"></div>
     <div class="custom-cursor-outline"></div>
 
-    <!-- Основной интерфейс -->
     <div class="container">
         <div class="header">
             <span>// СИСТЕМА</span>
@@ -19,55 +17,96 @@
         </div>
 
         <div class="grid">
-            <!-- 01. Отчеты -->
             <div class="card spec-hover">
                 <span class="status-badge">Доработка</span>
                 <span class="card-num">01</span>
-                <img src="icons/report.png" alt="Отчёты" class="card-icon-img">
+                <img src="icons/report.png" alt="" class="card-icon-img">
                 <h2>Отчёты</h2>
-                <p>Статусы, приоритеты, ответственные. Полный цикл</p>
+                <p>Управление тикетами</p>
             </div>
 
-            <!-- 02. Roblox -->
             <div class="card spec-hover">
                 <span class="status-badge">Доработка</span>
                 <span class="card-num">02</span>
-                <img src="icons/rbicons.png" alt="Roblox" class="card-icon-img">
+                <img src="icons/rbicons.png" alt="" class="card-icon-img">
                 <h2>Roblox</h2>
-                <p>Профили, история нарушений</p>
+                <p>История нарушений</p>
             </div>
 
-            <!-- 03. Discord -->
             <a href="https://discord.gg" target="_blank" class="card active spec-hover" style="text-decoration: none;">
                 <span class="card-num">03</span>
-                <img src="icons/dsicons.png" alt="Discord" class="card-icon-img">
+                <img src="icons/dsicons.png" alt="" class="card-icon-img">
                 <h2>Discord</h2>
-                <p>Логи, действия, уведомления</p>
+                <p>Логи и уведомления</p>
             </a>
 
-            <!-- 04. Блэклист -->
             <div class="card active spec-hover" id="blacklistCard">
                 <span class="card-num">04</span>
-                <img src="icons/blacklisticon.png" alt="Блэклист" class="card-icon-img">
+                <img src="icons/blacklisticon.png" alt="" class="card-icon-img">
                 <h2>Блэклист</h2>
-                <p>Единая база нарушителей</p>
+                <p>База нарушителей</p>
             </div>
 
-            <!-- 05. Логи -->
             <div class="card spec-hover">
                 <span class="status-badge">Доработка</span>
                 <span class="card-num">05</span>
-                <img src="icons/logsico.png" alt="Логи" class="card-icon-img">
+                <img src="icons/logsico.png" alt="" class="card-icon-img">
                 <h2>Логи</h2>
-                <p>Каждое действие фиксируется и доступно для ревью</p>
+                <p>История действий</p>
             </div>
 
-            <!-- 06. Управление командой -->
             <div class="card active grid-wide spec-hover" id="teamCard">
                 <span class="card-num">06</span>
-                <img src="icons/changeKM.png" alt="Управление командой" class="card-icon-img">
+                <img src="icons/changeKM.png" alt="" class="card-icon-img">
                 <h2>Управление командой</h2>
-                <p>Роли, разрешения, назначения. Весь стафф в одном месте</p>
+                <p>Роли проекта и стафф</p>
+            </div>
+        </div>
+    </div>
+    <!-- Модальное окно: Блэклист -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="dragModal" style="background: #111111; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 14px; width: 550px; box-shadow: 0 40px 80px rgba(0,0,0,0.85); backdrop-filter: blur(12px); position: absolute; visibility: hidden; opacity: 0; transition: opacity 0.3s, scale 0.3s; transform-origin: top left;">
+            <div class="modal-header spec-hover" id="modalHeader" style="padding: 24px 30px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="font-size: 16px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: #ffffff; display: flex; align-items: center; gap: 14px;">
+                    <img src="icons/blacklisticon.png" alt="" style="width: 20px; height: 20px; object-fit: contain;"> Черный список проекта
+                </h3>
+                <button class="close-btn spec-hover" id="closeBtn" style="background: none; border: none; color: #666666; font-size: 26px; line-height: 1; transition: color 0.2s;">&times;</button>
+            </div>
+            <div class="modal-body" style="padding: 30px; max-height: 450px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px;">
+                <div class="blacklist-item" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 10px; border-left: 5px solid #ff4444;">
+                    <span class="player-name" style="font-weight: 600; font-size: 15px; color: #ffffff; letter-spacing: 0.4px;">@DanikPro277</span>
+                    <span class="ban-reason" style="font-size: 13px; color: #e5e5e5; background: rgba(255, 68, 68, 0.12); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255, 68, 68, 0.2);">Потеря доверия</span>
+                </div>
+                <div class="blacklist-item" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 22px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 10px; border-left: 5px solid #ff4444;">
+                    <span class="player-name" style="font-weight: 600; font-size: 15px; color: #ffffff; letter-spacing: 0.4px;">@fankstrans_78889</span>
+                    <span class="ban-reason" style="font-size: 13px; color: #e5e5e5; background: rgba(255, 68, 68, 0.12); padding: 6px 14px; border-radius: 20px; border: 1px solid rgba(255, 68, 68, 0.2);">Попытка краша сервера</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно: Управление командой -->
+    <div class="modal-overlay" id="teamOverlay">
+        <div class="modal" id="dragTeamModal" style="background: #111111; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 14px; width: 550px; box-shadow: 0 40px 80px rgba(0,0,0,0.85); backdrop-filter: blur(12px); position: absolute; visibility: hidden; opacity: 0; transition: opacity 0.3s, scale 0.3s; transform-origin: top left;">
+            <div class="modal-header spec-hover" id="teamHeader" style="padding: 24px 30px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="font-size: 16px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: #ffffff; display: flex; align-items: center; gap: 14px;">
+                    <img src="icons/changeKM.png" alt="" style="width: 20px; height: 20px; object-fit: contain;"> Роли проекта
+                </h3>
+                <button class="close-btn spec-hover" id="closeTeamBtn" style="background: none; border: none; color: #666666; font-size: 26px; line-height: 1; transition: color 0.2s;">&times;</button>
+            </div>
+            <div class="modal-body" style="padding: 30px; max-height: 450px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+                <div class="blacklist-item" style="border-left: 5px solid #ffcc00;"><span class="player-name">СЗП Владелец</span></div>
+                <div class="blacklist-item" style="border-left: 5px solid #ff3366;"><span class="player-name">СЗМП</span></div>
+                <div class="blacklist-item" style="border-left: 5px solid #33ccff;"><span class="player-name">Генеральный Ассистент</span></div>
+                <div class="blacklist-item" style="border-left: 5px solid #33ff99;"><span class="player-name">Гл. Администратор</span></div>
+                <div class="blacklist-item" style="border-left: 5px solid #33ff99;"><span class="player-name">Зам. Гл Администратор</span></div>
+                <div class="blacklist-item" style="border-left: 5px solid #9933ff;"><span class="player-name">Технический Администратор</span></div>
+                <div class="blacklist-item" style="border-left: 5px solid #ff9933;"><span class="player-name">Главный Следящий за Гос</span></div>
+                <div class="blacklist-item" style="border-left: 5px solid #ff9933;"><span class="player-name">Главный Следящий за Гетто</span></div>
+                <div class="blacklist-item" style="border-left: 5px solid #ffff33;"><span class="player-name">Старший Администратор</span></div>
+                <div class="blacklist-item" style="border-left: 5px solid #ffff33;"><span class="player-name">Администратор</span></div>
+                <div class="blacklist-item" style="border-left: 5px solid #ff3333;"><span class="player-name">Чит Хантер</span></div>
+                <div class="blacklist-item" style="border-left: 5px solid #a0a0a0;"><span class="player-name">Хелпер</span></div>
             </div>
         </div>
     </div>
@@ -90,7 +129,7 @@
             -webkit-user-drag: none;
         }
 
-        html, body, a, button, .card, .modal-header, input, textarea {
+        html, body, a, button, .card, .modal-header {
             cursor: none !important;
         }
 
@@ -182,6 +221,10 @@
             transition: background-color 0.3s ease;
         }
 
+        .card.active {
+            cursor: pointer;
+        }
+
         .card.active:hover {
             background-color: var(--card-hover);
         }
@@ -237,32 +280,15 @@
             height: 100vh;
             background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(5px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: opacity 0.3s ease;
             z-index: 999;
         }
 
         .modal-overlay.show {
             opacity: 1;
             pointer-events: auto;
-        }
-
-        .modal {
-            position: absolute;
-            transform: translate(-50%, -50%) scale(0.9);
-            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .modal-overlay.show .modal {
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .modal-header {
-            cursor: move;
         }
 
         .modal-body::-webkit-scrollbar {
@@ -272,51 +298,58 @@
             background: #333;
             border-radius: 3px;
         }
+        
+        .blacklist-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        
+        .blacklist-item:hover {
+            transform: translateX(4px);
+            background: #222;
+        }
+        
+        .player-name {
+            font-weight: 600;
+            font-size: 15px;
+            color: #ffffff;
+        }
     </style>
     <script>
-        // --- 1. ОБХОД И ЗАЩИТА КОДА СТРАНИЦЫ ---
-        // Запрещаем вызов контекстного меню правой кнопкой мыши
-        document.addEventListener('contextmenu', (e) => {
-            e.preventDefault();
-        });
-
-        // Запрещаем F12, Ctrl+U (исходный код) и Ctrl+C (копирование)
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'F12') {
-                e.preventDefault();
-            }
-            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'c' || e.key === 'C')) {
+        // --- 1. ОБХОД И ЗАЩИТА ОТ ПРОСМОТРА КОДА ---
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && ['u', 'U', 'c', 'C'].includes(e.key))) {
                 e.preventDefault();
             }
         });
 
-        // --- 2. ЛОГИКА ДВИЖЕНИЯ И АНИМАЦИИ КУРСОРA ---
+        // --- 2. ДВИЖЕНИЕ КАСТОМНОГО КУРСОРA ---
         const cursorDot = document.querySelector('.custom-cursor-dot');
         const cursorOutline = document.querySelector('.custom-cursor-outline');
 
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-
-            // Центрируем элементы курсора по координатам мыши
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-
-            cursorOutline.style.left = `${posX}px`;
-            cursorOutline.style.top = `${posY}px`;
+        window.addEventListener('mousemove', e => {
+            cursorDot.style.left = `${e.clientX}px`;
+            cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.style.left = `${e.clientX}px`;
+            cursorOutline.style.top = `${e.clientY}px`;
         });
 
-        // Расширение кольца курсора при наведении на кликабельные зоны
-        const interactiveElements = document.querySelectorAll('.spec-hover, .blacklist-item, .card.active');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursorOutline.classList.add('hovered');
+        const refreshCursorHover = () => {
+            document.querySelectorAll('.spec-hover, .blacklist-item, .card.active, .close-btn').forEach(el => {
+                el.addEventListener('mouseenter', () => cursorOutline.classList.add('hovered'));
+                el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hovered'));
             });
-            el.addEventListener('mouseleave', () => {
-                cursorOutline.classList.remove('hovered');
-            });
-        });
-        // --- 3. ЛОГИКА ОКON И ПЛАВНОГО DRAG & DROP ---
+        };
+        refreshCursorHover();
+
+        // --- 3. ИСПРАВЛЕННАЯ ЛОГИКА ОКON И DRAG & DROP ---
         const blacklistCard = document.getElementById('blacklistCard');
         const teamCard = document.getElementById('teamCard');
         const modalOverlay = document.getElementById('modalOverlay');
@@ -328,65 +361,63 @@
         const modalHeader = document.getElementById('modalHeader');
         const teamHeader = document.getElementById('teamHeader');
 
-        // Открытие Блэклиста
-        blacklistCard.addEventListener('click', () => {
-            modalOverlay.classList.add('show');
-            initModalPosition(dragModal);
-        });
-
-        // Открытие Управления командой
-        teamCard.addEventListener('click', () => {
-            teamOverlay.classList.add('show');
-            initModalPosition(dragTeamModal);
-        });
-
-        function initModalPosition(modal) {
-            modal.style.position = 'absolute';
-            modal.style.top = '50%';
-            modal.style.left = '50%';
-            modal.style.transform = 'translate(-50%, -50%) scale(1)';
+        // Функция открытия и точного центрирования окна на JS (без багов transform)
+        function openModal(overlay, modal) {
+            overlay.classList.add('show');
+            modal.style.visibility = 'visible';
+            modal.style.opacity = '1';
+            modal.style.scale = '1';
+            
+            // Расчет центра экрана с учетом размеров самого окна
+            const x = (window.innerWidth - modal.offsetWidth) / 2;
+            const y = (window.innerHeight - modal.offsetHeight) / 2;
+            modal.style.left = `${x}px`;
+            modal.style.top = `${y}px`;
         }
 
-        // Закрытие окон
-        closeBtn.addEventListener('click', () => modalOverlay.classList.remove('show'));
-        closeTeamBtn.addEventListener('click', () => teamOverlay.classList.remove('show'));
+        function closeModal(overlay, modal) {
+            overlay.classList.remove('show');
+            modal.style.opacity = '0';
+            modal.style.scale = '0.9';
+            setTimeout(() => { modal.style.visibility = 'hidden'; }, 300);
+        }
 
-        modalOverlay.addEventListener('click', (e) => { 
-            if (e.target === modalOverlay) modalOverlay.classList.remove('show'); 
-        });
-        teamOverlay.addEventListener('click', (e) => { 
-            if (e.target === teamOverlay) teamOverlay.classList.remove('show'); 
-        });
+        // Клики на карточки разделов
+        blacklistCard.addEventListener('click', () => openModal(modalOverlay, dragModal));
+        teamCard.addEventListener('click', () => openModal(teamOverlay, dragTeamModal));
 
-        // Логика перемещения для каждого окна отдельно
-        let currentMovingModal = null;
-        let offsetX = 0, offsetY = 0;
+        // Клики на закрытие (крестик)
+        closeBtn.addEventListener('click', () => closeModal(modalOverlay, dragModal));
+        closeTeamBtn.addEventListener('click', () => closeModal(teamOverlay, dragTeamModal));
+
+        // Закрытие при клике по фону
+        modalOverlay.addEventListener('click', e => { if(e.target === modalOverlay) closeModal(modalOverlay, dragModal); });
+        teamOverlay.addEventListener('click', e => { if(e.target === teamOverlay) closeModal(teamOverlay, dragTeamModal); });
+
+        // Механика плавного Drag & Drop для каждого окна отдельно
+        let currentModal = null;
+        let startX = 0, startY = 0;
 
         function startDrag(e, modal) {
             if (e.target.closest('.close-btn')) return;
-            currentMovingModal = modal;
-            const rect = modal.getBoundingClientRect();
-            offsetX = e.clientX - rect.left;
-            offsetY = e.clientY - rect.top;
-            modal.style.transform = 'none';
-            modal.style.left = rect.left + 'px';
-            modal.style.top = rect.top + 'px';
+            currentModal = modal;
+            startX = e.clientX - modal.offsetLeft;
+            startY = e.clientY - modal.offsetTop;
         }
 
-        modalHeader.addEventListener('mousedown', (e) => startDrag(e, dragModal));
-        teamHeader.addEventListener('mousedown', (e) => startDrag(e, dragTeamModal));
+        modalHeader.addEventListener('mousedown', e => startDrag(e, dragModal));
+        teamHeader.addEventListener('mousedown', e => startDrag(e, dragTeamModal));
 
-        document.addEventListener('mousemove', (e) => {
-            if (!currentMovingModal) return;
-            let x = e.clientX - offsetX;
-            let y = e.clientY - offsetY;
-            currentMovingModal.style.left = x + 'px';
-            currentMovingModal.style.top = y + 'px';
+        document.addEventListener('mousemove', e => {
+            if (!currentModal) return;
+            let targetX = e.clientX - startX;
+            let targetY = e.clientY - startY;
+            
+            currentModal.style.left = `${targetX}px`;
+            currentModal.style.top = `${targetY}px`;
         });
 
-        document.addEventListener('mouseup', () => {
-            currentMovingModal = null;
-        });
+        document.addEventListener('mouseup', () => { currentModal = null; });
     </script>
 </body>
 </html>
