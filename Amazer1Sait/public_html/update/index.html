@@ -21,11 +21,13 @@
         body {
             background-color: #000000; /* Глубокий черный фон */
             color: #ffffff;
-            overflow: hidden;
-            height: 100vh;
+            overflow-x: hidden;
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
+            padding: 60px 20px;
             cursor: none; /* Скрываем дефолтный курсор */
         }
 
@@ -48,7 +50,7 @@
             position: absolute;
             transform: translate(-50%, -50%);
             pointer-events: none;
-            transition: width 0.12s ease, height 0.12s ease; /* Быстрое сжатие при клике */
+            transition: width 0.12s ease, height 0.12s ease;
             will-change: top, left, width, height;
         }
 
@@ -65,10 +67,8 @@
 
         /* Главный контейнер с анимацией появления */
         .patch-container {
-            text-align: center;
             width: 100%;
             max-width: 900px;
-            padding: 20px;
             animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             opacity: 0;
             transform: translateY(30px);
@@ -111,13 +111,42 @@
             text-transform: uppercase;
         }
 
-        /* Текст-заглушка */
-        .empty-text {
-            font-size: 1.3rem;
-            color: #555555;
-            text-transform: lowercase;
-            letter-spacing: 1px;
-            font-weight: 500;
+        /* Список изменений */
+        .changes-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            text-align: left;
+        }
+
+        /* Элемент списка */
+        .change-item {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            font-weight: 400;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        /* Стилизация номеров */
+        .change-item .number {
+            font-weight: 700;
+            color: #ffffff;
+            margin-right: 12px;
+            white-space: nowrap;
+        }
+
+        /* Подсветка категорий внутри списка */
+        .change-item .category-tag {
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        /* Дополнительные пояснения в скобках делаем чуть тускнее */
+        .change-item .note {
+            color: #888888;
         }
 
         /* Всплывающее окно защиты */
@@ -165,7 +194,6 @@
 
     <!-- Основной контент страницы -->
     <div class="patch-container">
-        <!-- Название вашей игры -->
         <h1 class="patch-title">Amazer RP</h1>
         <p class="patch-subtitle">Все изменения в текущем патче в игре Amazer RP</p>
         
@@ -173,12 +201,32 @@
 
         <h2 class="section-title">Основные изменения</h2>
         
-        <!-- Строгая заглушка "пусто" -->
-        <div class="empty-text">67</div>
+        <!-- Нумерованный список изменений -->
+        <ul class="changes-list">
+            <li class="change-item"><span class="number">1.</span><span class="category-tag">Обновление и исправление GUI:</span> Добавлен удобный интерфейс</li>
+            <li class="change-item"><span class="number">2.</span><span class="category-tag">Обновление и исправление GUI:</span> Все элементы GUI-интерфейса успешно пофикшены и оптимизированы для игры с телефона</li>
+            
+            <li class="change-item"><span class="number">3.</span><span class="category-tag">Исправления для государственных структур:</span> Добавлен интерьер для ФСБ</li>
+            <li class="change-item"><span class="number">4.</span><span class="category-tag">Исправления для государственных структур:</span> Добавлен интерьер для ФСИН</li>
+            <li class="change-item"><span class="number">5.</span><span class="category-tag">Исправления для государственных структур:</span> Добавлен интерьер для БАРАК</li>
+            <li class="change-item"><span class="number">6.</span><span class="category-tag">Исправления для государственных структур:</span> Добавлен интерьер для дежурной части тюрьмы</li>
+            
+            <li class="change-item"><span class="number">7.</span><span class="category-tag">Система оружия:</span> Переработана система оружия, отдача отдалена для комфортной игры</li>
+            <li class="change-item"><span class="number">8.</span><span class="category-tag">Система оружия:</span> Урон успешно пофикшен</li>
+            <li class="change-item"><span class="number">9.</span><span class="category-tag">Система оружия:</span> Добавлена стрельба от 3-его лица <span class="note">(без прицела)</span></li>
+            <li class="change-item"><span class="number">10.</span><span class="category-tag">Система оружия:</span> Исправлена RPG-7, скоро её можно будет купить</li>
+            <li class="change-item"><span class="number">11.</span><span class="category-tag">Система оружия:</span> В обойме RPG-7 теперь доступно 20 патронов</li>
+            <li class="change-item"><span class="number">12.</span><span class="category-tag">Система оружия:</span> Теперь заряд падает после определенной дистанции, нужно стрелять выше!</li>
+            
+            <li class="change-item"><span class="number">13.</span><span class="category-tag">Переработка карты:</span> Полностью переработали террейн и пофиксили баги</li>
+            
+            <li class="change-item"><span class="number">14.</span><span class="category-tag">Дорожная сеть:</span> Автомобильный мост полностью переработан и обновлен</li>
+            <li class="change-item"><span class="number">15.</span><span class="category-tag">Дорожная сеть:</span> Добавлены совершенно новые текстуры для дорог и моста</li>
+            <li class="change-item"><span class="number">16.</span><span class="category-tag">Дорожная сеть:</span> Проложены новые дороги, теперь их стало значительно больше!</li>
+        </ul>
     </div>
-
     <script>
-        /* Мгновенное и жесткое следование курсора за мышью без лагов */
+        /* 1. МГНОВЕННОЕ СЛЕДОВАНИЕ КУРСОРA */
         const ring = document.getElementById('cursor-ring');
         const dot = document.getElementById('cursor-dot');
 
@@ -186,6 +234,7 @@
             const x = e.clientX;
             const y = e.clientY;
             
+            // Жесткая привязка к координатам мыши без задержек
             ring.style.left = x + 'px';
             ring.style.top = y + 'px';
             
@@ -193,7 +242,7 @@
             dot.style.top = y + 'px';
         });
 
-        /* Эффект клика (сжатие кольца вокруг точки) */
+        /* 2. ЭФФЕКТ КЛИКА (быстрое сжатие кольца) */
         document.addEventListener('mousedown', () => {
             ring.style.width = '22px';
             ring.style.height = '22px';
@@ -204,19 +253,22 @@
             ring.style.height = '40px';
         });
 
-        /* Защита от копирования и просмотра кода (ПКМ, F12, Ctrl+Shift+I, Ctrl+U и т.д.) */
+        /* 3. ЗАЩИТА ОТ КОПИРОВАНИЯ И ПРОСМОТРА КОДА */
         const warning = document.getElementById('warning');
 
+        // Функция плавного показа уведомления защиты
         function showWarning() {
             warning.classList.add('show');
             setTimeout(() => warning.classList.remove('show'), 2000);
         }
 
+        // Блокировка правой кнопки мыши (ПКМ)
         document.addEventListener('contextmenu', (e) => {
             e.preventDefault();
             showWarning();
         });
 
+        // Блокировка горячих клавиш разработчика (F12, Ctrl+Shift+I, Ctrl+U и др.)
         document.addEventListener('keydown', (e) => {
             if (e.key === 'F12' || 
                 (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) || 
