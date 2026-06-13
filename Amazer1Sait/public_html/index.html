@@ -3,289 +3,455 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Армия РП — Официальный сайт</title>
-    
-    <!-- Подключение шрифтов и иконок FontAwesome -->
-    <link href="https://googleapis.com" rel="stylesheet">
+    <title>Армия РП — Сайт</title>
+    <!-- Подключение необходимых библиотек, шрифтов и иконок -->
     <link rel="stylesheet" href="https://cloudflare.com">
-    
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        /* Глобальные сбросы и базовая конфигурация */
+        /* Базовые глобальные сбросы и скрытие стандартного системного курсора */
         * { 
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
-            font-family: 'Inter', sans-serif; 
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Space Grotesk', sans-serif; 
         }
-        
         body, html {
-            background: #0a0a0c; 
-            color: #f3f4f6; 
+            background: #040406; 
+            color: #f8f9fa; 
             overflow-x: hidden; 
             min-height: 100vh;
-            scroll-behavior: smooth;
-            /* Возвращаем стандартный нормальный курсор */
-            cursor: default; 
+            /* Скрываем дефолтную стрелку мыши для отрисовки кастомной */
+            cursor: none; 
         }
-
-        /* Тонкий аккуратный скроллбар */
-        ::-webkit-scrollbar {
+        
+        /* Стили кастомного курсора (центральная белая точка из фото) */
+        .cursor-dot {
             width: 8px;
+            height: 8px;
+            background: #fff;
+            position: fixed;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 10000;
+            pointer-events: none;
+            transition: width 0.15s, height 0.15s;
         }
-        ::-webkit-scrollbar-track {
-            background: #0a0a0c;
+        
+        /* Стили внешней следящей окружности из фото (с фиолетовым неоновым свечением) */
+        .cursor-outline {
+            width: 42px;
+            height: 42px;
+            border: 1.5px solid rgba(157, 78, 221, 0.6);
+            position: fixed;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+            /* Плавное cubic-bezier следование для мягкого шлейфа */
+            transition: transform 0.08s cubic-bezier(0.25, 1, 0.5, 1), width 0.2s, height 0.2s, border-color 0.2s;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #222226;
-            border-radius: 4px;
+        
+        /* Визуальный эффект при зажатии кнопки мыши (клик) */
+        .cursor-outline.click-active {
+            width: 26px;
+            height: 26px;
+            border-color: #fff;
+            background: rgba(157, 78, 221, 0.25);
+            box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #ffffff;
-        }
-
-        /* Фоновые минималистичные акценты без неона */
-        .ambient-grid {
+        /* Обновленное неоновое пространство с мягкими градиентными вспышками */
+        .ambient-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-            background-size: 60px 60px;
+            background: radial-gradient(circle at 50% -20%, rgba(157, 78, 221, 0.15) 0%, transparent 60%),
+                        radial-gradient(circle at 80% 90%, rgba(157, 78, 221, 0.04) 0%, transparent 50%),
+                        radial-gradient(circle at 10% 40%, rgba(255, 255, 255, 0.01) 0%, transparent 30%);
             z-index: -2; pointer-events: none;
         }
-        .light-glow {
-            position: fixed; top: -10%; left: 50%; transform: translateX(-50%);
-            width: 60vw; height: 30vh;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
-            z-index: -1; pointer-events: none; filter: blur(40px);
+        .gold-flare {
+            position: fixed; top: 20%; right: -5%; width: 50vw; height: 50vw;
+            background: radial-gradient(circle, rgba(157, 78, 221, 0.06) 0%, transparent 70%);
+            z-index: -1; pointer-events: none; filter: blur(50px);
+            animation: pulseGlow 10s ease-in-out infinite alternate;
         }
-        /* Шапка сайта в стиле монохромного премиума */
+        @keyframes pulseGlow {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* Навигационная панель с эффектом ультра-матового жидкого стекла */
         header {
             position: fixed; top: 0; left: 0; width: 100%;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 24px 8%; z-index: 90;
-            background: rgba(10, 10, 12, 0.75);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
+            padding: 20px 60px; z-index: 90;
+            background: rgba(4, 4, 6, 0.7);
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border-bottom: 1px solid rgba(157, 78, 221, 0.12);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-        
         .brand { 
-            font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; 
-            letter-spacing: 2px; cursor: pointer; color: #ffffff; text-transform: uppercase;
+            font-family: 'Cinzel', serif; font-size: 1.6rem; font-weight: 700; 
+            letter-spacing: 3px; cursor: pointer; color: #fff; text-transform: uppercase;
+            transition: transform 0.3s;
         }
         .brand span { 
-            color: #999999;
-            font-weight: 400;
+            color: #9d4edd; text-shadow: 0 0 20px rgba(157, 78, 221, 0.8); 
+            font-family: 'Cinzel', serif;
         }
         
-        .main-nav { display: flex; gap: 40px; align-items: center; }
+        .main-nav { display: flex; gap: 45px; }
         .nav-item { 
-            color: #88888c; text-decoration: none; font-size: 0.8rem; 
-            font-weight: 600; text-transform: uppercase; letter-spacing: 2px; 
-            transition: color 0.3s ease; cursor: pointer; position: relative;
-            padding: 6px 0;
+            color: #a0a0ab; text-decoration: none; font-size: 0.85rem; 
+            font-weight: 600; text-transform: uppercase; letter-spacing: 2.5px; 
+            transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1); cursor: pointer; position: relative;
         }
         .nav-item::before {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
-            background: #ffffff; transition: width 0.3s ease;
+            content: ''; position: absolute; bottom: -8px; left: 50%; width: 0; height: 2px;
+            background: #9d4edd; transition: 0.3s cubic-bezier(0.25, 1, 0.5, 1); box-shadow: 0 0 15px #9d4edd; transform: translateX(-50%);
         }
-        .nav-item:hover { color: #ffffff; }
+        .nav-item:hover { color: #fff; }
         .nav-item:hover::before, .nav-item.active::before { width: 100%; }
-        .nav-item.active { color: #ffffff; }
+        .nav-item.active { color: #9d4edd; }
         
-        /* Кнопка Личного Кабинета */
         .cabinet-btn { 
-            padding: 12px 28px; background: #ffffff; color: #0a0a0c;
-            border: 1px solid #ffffff; border-radius: 4px; font-size: 0.8rem; 
-            font-weight: 700; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; 
+            padding: 12px 34px; background: transparent; color: #9d4edd;
+            border: 1px solid rgba(157, 78, 221, 0.4); border-radius: 6px; font-size: 0.85rem; 
+            font-weight: 700; cursor: pointer; transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1); text-transform: uppercase; 
             letter-spacing: 1.5px;
         }
         .cabinet-btn:hover { 
-            background: transparent; color: #ffffff;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+            background: #9d4edd; color: #040406;
+            box-shadow: 0 0 30px rgba(157, 78, 221, 0.5); border-color: #9d4edd;
+            transform: translateY(-2px);
         }
+        
         /* Основные контейнеры страниц */
-        .page-content-wrapper { padding-top: 100px; min-height: 100vh; }
-        .page-section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
+        .page-content-wrapper { padding-top: 120px; min-height: 100vh; }
+        .page-section { max-width: 1200px; margin: 0 auto; padding: 60px 20px; }
         
         /* Главный экран проекта (Hero) */
         .hero-screen { 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            min-height: 80vh; text-align: center; position: relative; 
+            min-height: 85vh; text-align: center; position: relative; 
         }
         .big-logo-bg {
-            font-family: 'Space Grotesk', sans-serif; font-size: 20rem; font-weight: 700; 
+            font-family: 'Cinzel', serif; font-size: 26rem; font-weight: 700; color: rgba(157, 78, 221, 0.003);
             position: absolute; z-index: -1; user-select: none;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+            background: linear-gradient(180deg, rgba(157, 78, 221, 0.03) 0%, transparent 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            letter-spacing: -5px;
+            animation: luxuryFloat 10s ease-in-out infinite alternate;
         }
-        .hero-title { font-family: 'Space Grotesk', sans-serif; font-size: 4.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: -1px; line-height: 1.1; margin-bottom: 24px; color: #ffffff; }
-        .hero-title span { color: #88888c; font-weight: 400; }
-        .hero-subtitle { color: #66666c; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 48px; }
-        
-        /* Кнопки соцсетей в строгом черно-белом стиле */
-        .social-links { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
-        .soc-btn { 
-            padding: 16px 36px; background: rgba(255, 255, 255, 0.02); 
-            border: 1px solid rgba(255, 255, 255, 0.08); color: #ffffff; 
-            font-size: 0.8rem; font-weight: 600; border-radius: 4px; cursor: pointer; 
-            transition: all 0.3s ease; text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
-            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+        @keyframes luxuryFloat { 
+            from { transform: translateY(0) rotate(0deg); } 
+            to { transform: translateY(-25px) rotate(1.5deg); } 
         }
-        .soc-btn i { margin-right: 10px; color: #ffffff; }
-        .soc-btn:hover { 
-            border-color: #ffffff; background: #ffffff; color: #0a0a0c;
-            transform: translateY(-2px);
-        }
-        .soc-btn:hover i { color: #0a0a0c; }
-
-        /* Индикатор прокрутки (Scroll) */
+        .hero-title { font-family: 'Cinzel', serif; font-size: 5.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; line-height: 1.1; margin-bottom: 20px; }
+        .hero-title span { color: #9d4edd; text-shadow: 0 0 25px rgba(157, 78, 221, 0.4); }
+        .hero-subtitle { color: #6e6e7e; font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 7px; margin-bottom: 40px; }
+        /* Индикатор прокрутки SCROLL из фотографии */
         .scroll-indicator-container {
-            display: flex; flex-direction: column; align-items: center; margin-top: 60px; user-select: none; gap: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+            user-select: none;
+            gap: 15px;
         }
         .scroll-text-label {
-            font-family: 'Space Grotesk', sans-serif; font-size: 0.7rem; font-weight: 700; color: #44444a; text-transform: uppercase; letter-spacing: 4px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #52525c;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: textFadePulse 2s ease-in-out infinite alternate;
         }
-        .scroll-animated-line { width: 1px; height: 50px; background: rgba(255, 255, 255, 0.1); position: relative; overflow: hidden; }
+        .scroll-animated-line {
+            width: 1px;
+            height: 60px;
+            background: rgba(157, 78, 221, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        /* Бегущая неоновая световая полоса сверху вниз */
         .scroll-animated-line::after {
-            content: ''; position: absolute; top: -50%; left: 0; width: 100%; height: 50%;
-            background: linear-gradient(to bottom, transparent, #ffffff, transparent);
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to bottom, transparent, #9d4edd, transparent);
             animation: lineFlowDown 2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
         }
-        @keyframes lineFlowDown { 0% { top: -50%; } 100% { top: 110%; } }
-
-        /* Маркировка разделов */
-        .section-label { color: #44444a; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 12px; display: block; }
-        .section-heading { font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; font-weight: 700; text-transform: uppercase; margin-bottom: 40px; letter-spacing: -0.5px; color: #ffffff; }
-        /* Карточка Руководителя — Строгий графичный Glassmorphism */
-        .boss-card {
-            background: rgba(255, 255, 255, 0.01);
-            border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 6px;
-            padding: 48px; display: flex; gap: 48px; align-items: center; text-align: left; margin-bottom: 32px;
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        @keyframes textFadePulse {
+            0% { opacity: 0.4; letter-spacing: 4px; }
+            100% { opacity: 0.9; letter-spacing: 6px; color: #8a8a9e; }
         }
-        .boss-card:hover { border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .boss-avatar { width: 140px; height: 140px; border-radius: 4px; object-fit: cover; filter: grayscale(100%); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
-        .boss-card:hover .boss-avatar { filter: grayscale(0%); border-color: #ffffff; }
+        @keyframes lineFlowDown {
+            0% { top: -50%; }
+            100% { top: 110%; }
+        }
+
+        /* Социальные кнопки со стеклянным стилем */
+        .social-links { display: flex; gap: 20px; margin-bottom: 10px; }
+        .soc-btn { 
+            padding: 16px 38px; background: rgba(18, 18, 24, 0.4); 
+            border: 1px solid rgba(255, 255, 255, 0.04); color: #b5b5c0; 
+            font-size: 0.85rem; font-weight: 600; border-radius: 6px; cursor: pointer; 
+            transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1); text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .soc-btn i { margin-right: 12px; color: #9d4edd; transition: 0.3s; text-shadow: 0 0 10px rgba(157, 78, 221, 0.5); }
+        .soc-btn:hover { 
+            border-color: rgba(157, 78, 221, 0.5); color: #fff; 
+            background: rgba(157, 78, 221, 0.05); box-shadow: 0 8px 30px rgba(157, 78, 221, 0.15);
+            transform: translateY(-3px);
+        }
+
+        /* Заголовки разделов */
+        .section-label { color: #52525c; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; text-align: left; margin-bottom: 15px; display: block; }
+        .section-heading { font-family: 'Cinzel', serif; font-size: 2.7rem; font-weight: 700; text-transform: uppercase; text-align: left; margin-bottom: 50px; letter-spacing: 1px; color: #fff; border-left: 4px solid #9d4edd; padding-left: 20px; }
+        
+        /* Карточка Руководителя с улучшенным стеклянным стилем */
+        .boss-card {
+            background: linear-gradient(135deg, rgba(18, 18, 24, 0.45) 0%, rgba(8, 8, 12, 0.6) 100%);
+            border: 1px solid rgba(157, 78, 221, 0.1); border-radius: 12px;
+            padding: 55px; display: flex; gap: 50px; align-items: center; text-align: left; margin-bottom: 40px;
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5); transition: border-color 0.4s, box-shadow 0.4s;
+        }
+        .boss-card:hover { border-color: rgba(157, 78, 221, 0.25); box-shadow: 0 40px 80px rgba(157, 78, 221, 0.05), 0 0 40px rgba(0,0,0,0.5); }
+        .boss-avatar { width: 160px; height: 160px; border-radius: 8px; object-fit: cover; background: #060609; border: 1px solid rgba(157, 78, 221, 0.2); transition: transform 0.4s; }
+        .boss-card:hover .boss-avatar { transform: scale(1.03); border-color: rgba(157, 78, 221, 0.5); }
         .boss-info { flex: 1; }
-        .boss-tag { color: #88888c; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; display: block; }
-        .boss-name { font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; font-weight: 700; margin-bottom: 12px; color: #ffffff; }
-        .boss-stat { display: inline-flex; align-items: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); padding: 8px 16px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #ffffff; border-radius: 4px; margin-bottom: 24px; }
-        .boss-stat i { margin-right: 8px; color: #ffffff; }
-        .boss-quotes p { color: #88888c; font-style: italic; font-size: 0.95rem; margin-bottom: 8px; line-height: 1.6; position: relative; padding-left: 16px; }
-        .boss-quotes p::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 1px; background: rgba(255, 255, 255, 0.2); }
-        .more-btn { margin-top: 16px; padding: 12px 28px; background: transparent; border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff; font-size: 0.75rem; font-weight: 700; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; }
-        .more-btn:hover { background: #ffffff; color: #0a0a0c; border-color: #ffffff; }
+        .boss-tag { color: #9d4edd; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 12px; display: block; opacity: 0.9; }
+        .boss-name { font-family: 'Cinzel', serif; font-size: 2.6rem; font-weight: 700; margin-bottom: 15px; letter-spacing: 1px; }
+        .boss-stat { display: inline-flex; align-items: center; background: rgba(157, 78, 221, 0.06); border: 1px solid rgba(157, 78, 221, 0.2); padding: 10px 22px; font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #bfa2db; border-radius: 6px; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .boss-stat i { margin-right: 12px; color: #9d4edd; }
+        .boss-quotes p { color: #9e9eb0; font-style: italic; font-size: 0.98rem; margin-bottom: 10px; line-height: 1.7; position: relative; padding-left: 15px; }
+        .boss-quotes p::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 2px; background: rgba(157, 78, 221, 0.3); }
+        .more-btn { margin-top: 20px; padding: 14px 34px; background: transparent; border: 1px solid rgba(157, 78, 221, 0.4); color: #9d4edd; font-size: 0.8rem; font-weight: 700; border-radius: 6px; cursor: pointer; transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1); text-transform: uppercase; letter-spacing: 2px; }
+        .more-btn:hover { background: #9d4edd; color: #040406; box-shadow: 0 0 25px rgba(157, 78, 221, 0.4); transform: translateY(-2px); }
 
         /* Всплывающий интерактивный блок аналитики */
         .analytics-wrapper { 
-            display: none; background: #0e0e12; border: 1px solid rgba(255, 255, 255, 0.06); 
-            border-radius: 6px; padding: 48px; margin-bottom: 48px; box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-            animation: panelFadeIn 0.4s ease forwards;
+            display: none; background: rgba(8, 8, 12, 0.96); border: 1px solid rgba(157, 78, 221, 0.15); 
+            border-radius: 12px; padding: 50px; margin-bottom: 50px; box-shadow: 0 50px 100px rgba(0,0,0,0.7);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); animation: obsidianSlide 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
         }
-        @keyframes panelFadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .db-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 16px; }
-        .db-header h2 { font-size: 1rem; color: #ffffff; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
-        .db-header .date { color: #44444a; font-size: 0.8rem; font-weight: 600; }
+        @keyframes obsidianSlide { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        .db-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 22px; }
+        .db-header h2 { font-size: 1.15rem; color: #6e6e7e; text-transform: uppercase; letter-spacing: 2.5px; font-weight: 700; }
+        .db-header .date { color: #52525c; font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; }
 
-        /* Сетки аналитики */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px; }
-        .stat-card { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); padding: 24px; border-radius: 4px; text-align: left; transition: all 0.3s ease; }
-        .stat-card:hover { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.02); }
-        .stat-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 2.4rem; font-weight: 700; margin-bottom: 4px; color: #ffffff; }
-        .stat-card p { font-size: 0.75rem; color: #66666c; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
-        .stat-card .sub { font-size: 0.7rem; color: #44444a; margin-top: 8px; font-weight: 600; }
-        /* Графики и диаграммы */
-        .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 32px; }
-        .chart-card { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); padding: 32px; border-radius: 4px; }
-        .chart-title { font-size: 0.8rem; color: #66666c; text-transform: uppercase; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 24px; }
+        /* Сетки аналитики и стили графиков */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .stat-card { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.02); padding: 30px; border-radius: 6px; text-align: left; transition: transform 0.3s; }
+        .stat-card:hover { transform: translateY(-2px); background: rgba(255,255,255,0.02); }
+        .stat-card h3 { font-size: 2.6rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 5px; color: #fff; }
+        .stat-card p { font-size: 0.8rem; color: #6e6e7e; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+        .stat-card .sub { font-size: 0.75rem; color: #52525c; margin-top: 8px; font-weight: 600; }
+
+        .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .chart-card { background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.01); padding: 35px; border-radius: 6px; text-align: left; }
+        .chart-title { font-size: 0.85rem; color: #6e6e7e; text-transform: uppercase; font-weight: 700; letter-spacing: 2px; margin-bottom: 30px; }
         
-        /* Столбчатый график */
-        .bar-chart { display: flex; justify-content: space-between; align-items: flex-end; height: 140px; }
+        .bar-chart { display: flex; justify-content: space-between; align-items: flex-end; height: 140px; position: relative; }
         .bar-group { display: flex; flex-direction: column; align-items: center; flex: 1; }
-        .bar { width: 8px; background: rgba(255,255,255,0.05); border-radius: 1px; transition: height 0.5s ease, background 0.3s; }
-        .bar.active { background: #ffffff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
-        .bar-label { font-size: 0.65rem; color: #44444a; text-transform: uppercase; margin-top: 12px; font-weight: 700; }
+        .bar { width: 10px; background: rgba(255,255,255,0.03); border-radius: 2px; transition: 0.5s ease; position: relative; }
+        .bar.active { background: #9d4edd; box-shadow: 0 0 20px rgba(157, 78, 221, 0.6); }
+        .bar-label { font-size: 0.65rem; color: #464654; text-transform: uppercase; margin-top: 12px; font-weight: 700; }
 
-        /* Круговой индикатор */
         .circle-progress-box { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 140px; }
-        .circle-visual { width: 110px; height: 110px; border-radius: 50%; background: conic-gradient(#ffffff 237deg, rgba(255,255,255,0.03) 0); display: flex; align-items: center; justify-content: center; position: relative; }
-        .circle-visual::after { content: ''; position: absolute; width: 92px; height: 92px; background: #0e0e12; border-radius: 50%; }
-        .circle-text { z-index: 2; font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; text-align: center; color: #ffffff; }
-        .circle-text span { display: block; font-family: 'Inter', sans-serif; font-size: 0.7rem; color: #66666c; font-weight: 600; margin-top: 2px; }
+        .circle-visual { width: 110px; height: 110px; border-radius: 50%; background: conic-gradient(#9d4edd 237deg, rgba(255,255,255,0.03) 0); display: flex; align-items: center; justify-content: center; position: relative; box-shadow: 0 0 20px rgba(157, 78, 221, 0.15); }
+        .circle-visual::after { content: ''; position: absolute; width: 90px; height: 90px; background: #08080c; border-radius: 50%; }
+        .circle-text { z-index: 2; font-size: 1.3rem; font-weight: 700; text-align: center; color: #fff; }
+        .circle-text span { display: block; font-size: 0.7rem; color: #6e6e7e; font-weight: 600; margin-top: 2px; }
 
-        /* Текстовые строки распределения данных */
-        .time-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.03); color: #88888c; }
-        .time-row span { font-weight: 600; color: #ffffff; }
+        .time-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.02); color: #9e9eb0; }
+        .time-row span { font-weight: 600; color: #fff; }
 
         /* Хронология (Timeline) */
-        .timeline { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); padding: 32px; border-radius: 4px; }
-        .timeline-item { position: relative; padding-left: 28px; margin-bottom: 24px; }
-        .timeline-item::before { content: ''; position: absolute; left: 0; top: 5px; width: 6px; height: 6px; background: rgba(255,255,255,0.2); border-radius: 50%; }
-        .timeline-item.active::before { background: #ffffff; box-shadow: 0 0 10px #ffffff; }
-        .timeline-item::after { content: ''; position: absolute; left: 2px; top: 18px; height: calc(100% + 10px); border-left: 1px dashed rgba(255,255,255,0.08); }
+        .timeline { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.02); padding: 35px; border-radius: 6px; text-align: left; }
+        .timeline-item { position: relative; padding-left: 35px; margin-bottom: 30px; }
+        .timeline-item::before { content: ''; position: absolute; left: 4px; top: 6px; width: 8px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 50%; }
+        .timeline-item.active::before { background: #9d4edd; box-shadow: 0 0 15px #9d4edd; }
+        .timeline-item::after { content: ''; position: absolute; left: 7px; top: 22px; height: calc(100% + 10px); border-left: 1px dashed rgba(255,255,255,0.04); }
         .timeline-item:last-child::after { display: none; }
-        .timeline-date { font-size: 0.75rem; color: #66666c; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
-        .timeline-text { font-size: 0.9rem; color: #88888c; }
-        .timeline-item.forecast .timeline-text { color: #44444a; font-style: italic; }
+        .timeline-date { font-size: 0.75rem; color: #6e6e7e; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
+        .timeline-text { font-size: 0.95rem; color: #9e9eb0; }
+        .timeline-item.forecast .timeline-text { color: #52525c; font-style: italic; }
 
         /* Сетка команды менеджмента */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
-        .admin-card { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); border-radius: 4px; padding: 32px; display: flex; gap: 24px; align-items: flex-start; transition: all 0.3s ease; }
-        .admin-card:hover { border-color: #ffffff; transform: translateY(-2px); }
-        .admin-avatar { width: 64px; height: 64px; border-radius: 2px; object-fit: cover; filter: grayscale(100%); border: 1px solid rgba(255,255,255,0.08); transition: filter 0.3s; }
-        .admin-card:hover .admin-avatar { filter: grayscale(0%); }
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 30px; }
+        .admin-card { background: rgba(18, 18, 24, 0.4); border: 1px solid rgba(255, 255, 255, 0.02); border-radius: 8px; padding: 35px 30px; display: flex; gap: 25px; align-items: flex-start; text-align: left; transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); }
+        .admin-card:hover { border-color: rgba(157, 78, 221, 0.3); transform: translateY(-4px); box-shadow: 0 15px 30px rgba(157, 78, 221, 0.05); }
+        .admin-avatar { width: 75px; height: 75px; border-radius: 4px; object-fit: cover; background: #060609; border: 1px solid rgba(255,255,255,0.03); transition: border-color 0.3s; }
+        .admin-card:hover .admin-avatar { border-color: rgba(157, 78, 221, 0.4); }
         .admin-details { flex: 1; }
-        .admin-role { color: #66666c; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 4px; }
-        .admin-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: #ffffff; }
-        .admin-desc { color: #88888c; font-size: 0.85rem; line-height: 1.5; margin-bottom: 6px; }
-        .admin-subtext { color: #44444a; font-size: 0.75rem; font-style: italic; line-height: 1.4; }
+        .admin-role { color: #9d4edd; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 6px; }
+        .admin-name { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; color: #fff; letter-spacing: 0.5px; }
+        .admin-desc { color: #9e9eb0; font-size: 0.9rem; line-height: 1.5; margin-bottom: 8px; }
+        .admin-subtext { color: #52525c; font-size: 0.8rem; font-style: italic; line-height: 1.4; }
 
-        /* Раздел «Благодарности» */
-        .credits-container { margin-top: 32px; }
-        .credits-item { position: relative; padding-left: 20px; margin-bottom: 16px; font-size: 0.9rem; color: #88888c; }
-        .credits-item::before { content: ''; position: absolute; left: 0; top: 5px; height: 12px; width: 2px; background: #ffffff; }
-        .credits-name { font-weight: 700; color: #ffffff; }
-        .credits-desc { color: #55555a; }
-
-        /* Полноэкранные iframe-модули сайта */
-        .module-window { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #0a0a0c; z-index: 100; padding: 24px; opacity: 0; transition: opacity 0.3s ease; overflow-y: auto; }
+        /* Полноэкранный оверлей для iframe-модулей сайта */
+        .module-window { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #040406; z-index: 100; padding: 30px; opacity: 0; transition: opacity 0.4s ease; overflow-y: auto; }
         .module-window.active { opacity: 1; }
-        .top-bar { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); max-width: 1200px; margin: 0 auto 32px auto; }
-        .btn-back { padding: 10px 24px; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #ffffff; border-radius: 4px; cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; transition: all 0.3s; }
-        .btn-back:hover { background: #ffffff; color: #0a0a0c; border-color: #ffffff; }
+        .top-bar { display: flex; align-items: center; padding: 15px 30px; border-bottom: 1px solid rgba(255, 255, 255, 0.03); max-width: 1200px; margin: 0 auto 30px auto; }
+        .btn-back { padding: 12px 28px; background: transparent; border: 1px solid rgba(157, 78, 221, 0.4); color: #9d4edd; border-radius: 6px; cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; transition: 0.3s; }
+        .btn-back:hover { background: #9d4edd; color: #040406; box-shadow: 0 0 20px rgba(157, 78, 221, 0.4); }
 
-        /* Премиальный монохромный подвал (Футер) */
-        footer { margin-top: 120px; padding: 48px 24px; border-top: 1px solid rgba(255, 255, 255, 0.04); text-align: center; }
-        .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: #ffffff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
-        .footer-logo span { color: #66666c; font-weight: 400; }
-        .footer-mail { font-size: 0.8rem; color: #44444a; letter-spacing: 0.5px; margin-bottom: 16px; }
-        .footer-copy { font-size: 0.75rem; color: #333338; font-weight: 600; }
+        /* Блок «Благодарности» из фото */
+        .credits-container { margin-top: 40px; padding: 10px 0; text-align: left; }
+        .credits-item { position: relative; padding-left: 25px; margin-bottom: 24px; font-size: 0.95rem; color: #8d8d99; line-height: 1.6; }
+        .credits-item::before { content: ''; position: absolute; left: 0; top: 4px; height: 75%; width: 1.5px; background: #9d4edd; box-shadow: 0 0 8px rgba(157, 78, 221, 0.6); }
+        .credits-name { font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+        .credits-desc { color: #6a6a75; }
+
+        /* Премиальный подвал (Футер) по образу фото без кнопок навигации */
+        footer {
+            margin-top: 100px;
+            padding: 60px 20px 40px 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.02);
+            text-align: center;
+            background: rgba(4, 4, 6, 0.5);
+        }
+        .footer-logo { font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; }
+        .footer-logo span { color: #9d4edd; text-shadow: 0 0 15px rgba(157, 78, 221, 0.6); }
+        .footer-mail { font-size: 0.85rem; color: #52525c; letter-spacing: 1px; margin-bottom: 20px; }
+        .footer-copy { font-size: 0.8rem; color: #3a3a45; font-weight: 600; letter-spacing: 0.5px; }
     </style>
 </head>
-            <!-- Продолжение основного контента: Состав менеджмента -->
-            <span class="section-label" style="margin-top: 60px;">// персонал синдиката</span>
-            <h2 class="section-heading">Менеджмент проекта</h2>
+<body>
+    <!-- Элементы нового интерактивного кастомного курсора из фото -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-outline" id="cursorOutline"></div>
+
+    <div class="ambient-bg"></div>
+    <div class="gold-flare"></div>
+    
+    <!-- Панель управления и навигация -->
+    <header>
+        <div class="brand" onclick="location.reload()">Армия<span> РП</span></div>
+        <div class="main-nav">
+            <span class="nav-item active" onclick="location.reload()">Главная</span>
+            <span class="nav-item" onclick="loadModule('system/index.html')">Система</span>
+            <span class="nav-item" onclick="loadModule('update/index.html')">Обновления</span>
+            <span class="nav-item" onclick="loadModule('rules_html/index.html')">Правила</span>
+        </div>
+        <button class="cabinet-btn" onclick="loadModule('cabinet/index.html')">Кабинет</button>
+    </header>
+
+    <div class="page-content-wrapper" id="mainPage">
+        <!-- Главный приветственный экран (Hero) -->
+        <section class="page-section hero-screen">
+            <div class="big-logo-bg">Армия</div>
+            <h1 class="hero-title">Армия <span>РП</span></h1>
+            <p class="hero-subtitle">Официальное руководство и мониторинг экосистемы</p>
             
-            <div class="team-grid">
-                <!-- Карточка куратора проекта -->
-                <div class="admin-card">
-                    <img src="images/kumori.png" class="admin-avatar" alt="kumori" onerror="this.src='https://unsplash.com'">
-                    <div class="admin-details">
-                        <span class="admin-role">Второй владелец</span>
-                        <h4 class="admin-name">kumori</h4>
-                        <p class="admin-desc">Совладелец проекта.</p>
-                        <p class="admin-subtext">Руководитель. Ответственный за стратегическое развитие и общую стабильность.</p>
+            <div class="social-links">
+                <a onclick="loadModule('rules_html/index.html')" class="soc-btn"><i class="fa-solid fa-file-lines"></i> Правила</a>
+                <a href="https://discord.gg/7ZzsPSePqa" target="_blank" class="soc-btn"><i class="fa-brands fa-discord"></i> Discord</a>
+                <a href="https://www.roblox.com/games/121713621611628/Amazer-RP" target="_blank" class="soc-btn"><i class="fa-solid fa-cube"></i> Roblox</a>
+            </div>
+
+            <!-- Добавленный анимированный индикатор прокрутки SCROLL из фото -->
+            <div class="scroll-indicator-container">
+                <span class="scroll-text-label">Scroll</span>
+                <div class="scroll-animated-line"></div>
+            </div>
+        </section>
+
+        <!-- Раздел Высшего Командования -->
+        <section class="page-section">
+            <span class="section-label">// высший состав</span>
+            <h2 class="section-heading">Начальник</h2>
+
+            <div class="boss-card">
+                <img src="images/jengass.jpg" class="boss-avatar" alt="Jengas" onerror="this.src='https://postimg.cc'">
+                <div class="boss-info">
+                    <span class="boss-tag">// Главный основатель</span>
+                    <h3 class="boss-name">Бананчик AKA биг банан</h3>
+                    <div class="boss-stat"><i class="fa-solid fa-trophy"></i> Заработал более 2 робуксов</div>
+                    <div class="boss-quotes">
+                        <p>«Как стать успешным как я? Зарабатывай деньги»</p>
+                        <p>«Как заработать денег? Работай»</p>
+                    </div>
+                    <button class="more-btn" onclick="toggleAnalytics()">Аналитика заработка</button>
+                </div>
+            </div>
+
+            <!-- Внутренний интерактивный блок аналитики -->
+            <div id="analyticsSection" class="analytics-wrapper">
+                <div class="db-header">
+                    <h2>// Мониторинг баланса $</h2>
+                    <div class="date">май 2024 — май 2026</div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card"><h3>847</h3><p>дней работы</p><div class="sub" style="color: #ff5555;">🔻 эффективность 0.00%</div></div>
+                    <div class="stat-card"><h3>20 328</h3><p>часов потрачено</p><div class="sub">🔻 0.0001R$/час</div></div>
+                    <div class="stat-card"><h3>2.00</h3><p>итого R$</p><div class="sub"><span style="color: #9d4edd;">▲ +100% all time</span></div></div>
+                    <div class="stat-card"><h3>0.86</h3><p>R$ / год</p><div class="sub" style="color: #ff5555;">🔻 -14% YoY</div></div>
+                </div>
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-title">Доход по месяцам</div>
+                        <div class="bar-chart">
+                            <div class="bar-group"><div class="bar" style="height: 10px;"></div><div class="bar-label">Июл</div></div>
+                            <div class="bar-group"><div class="bar" style="height: 15px;"></div><div class="bar-label">Авг</div></div>
+                            <div class="bar-group"><div class="bar active" style="height: 110px;"></div><div class="bar-label" style="color:#fff;">Сен</div></div>
+                            <div class="bar-group"><div class="bar" style="height: 5px;"></div><div class="bar-label">Окт</div></div>
+                            <div class="bar-group"><div class="bar" style="height: 8px;"></div><div class="bar-label">Ноя</div></div>
+                            <div class="bar-group"><div class="bar" style="height: 12px;"></div><div class="bar-label">Дек</div></div>
+                            <div class="bar-group"><div class="bar" style="height: 6px;"></div><div class="bar-label">Янв</div></div>
+                            <div class="bar-group"><div class="bar" style="height: 4px;"></div><div class="bar-label">Фев</div></div>
+                            <div class="bar-group"><div class="bar" style="height: 14px;"></div><div class="bar-label">Мар</div></div>
+                            <div class="bar-group"><div class="bar" style="height: 9px;"></div><div class="bar-label">Апр</div></div>
+                            <div class="bar-group"><div class="bar" style="height: 18px;"></div><div class="bar-label">Май</div></div>
+                            <div class="bar-group"><div class="bar active" style="height: 95px;"></div><div class="bar-label" style="color:#fff;">Июн</div></div>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-title">Прогресс до 3R$</div>
+                        <div class="circle-progress-box">
+                            <div class="circle-visual"><div class="circle-text">66%<span>2 / 3 R$</span></div></div>
+                        </div>
+                        <div style="margin-top: 25px;" class="chart-title">Распределение времени</div>
+                        <div class="time-row">🔹 Ожидание <span>89%</span></div>
+                        <div class="time-row">🔹 Работа <span>7%</span></div>
+                        <div class="time-row">🔹 Обучение <span>3%</span></div>
+                        <div class="time-row">🔹 Получение R$ <span>1%</span></div>
                     </div>
                 </div>
 
-                <!-- Карточка главного инженера-моделлера -->
+                <div class="timeline">
+                    <div class="chart-title">Хронология накоплений</div>
+                    <div class="timeline-item"><div class="timeline-date">12 мая 2024</div><div class="timeline-text">Начало трудовой деятельности. Баланс: 0.00 R$</div></div>
+                    <div class="timeline-item"><div class="timeline-date">15 сен 2024</div><div class="timeline-text">Первый робукс заработан! +1.00 R$. Празднование всем селом.</div></div>
+                    <div class="timeline-item active"><div class="timeline-date" style="color: #9d4edd;">01 июн 2025</div><div class="timeline-text" style="color: #fff;">Второй робукс +1.00 R$. Мировой рекорд обновлен!</div></div>
+                    <div class="timeline-item forecast"><div class="timeline-date">~2028 (прогноз)</div><div class="timeline-text">Третий робукс. При текущих темпах инфляции. Если повезёт.</div></div>
+                </div>
+            </div>
+            
+            <!-- Раздел Менеджмента Команды -->
+            <span class="section-label" style="margin-top: 60px;">// состав синдиката</span>
+            <h2 class="section-heading">Менеджмент проекта</h2>
+            
+            <div class="team-grid">
                 <div class="admin-card">
-                    <img src="images/hsdl.png" class="admin-avatar" alt="HSDL" onerror="this.src='https://unsplash.com'">
+                    <img src="images/kumori.png" class="admin-avatar" alt="kumori" onerror="this.src='https://postimg.cc'">
+                    <div class="admin-details">
+                        <span class="admin-role">Второй владелец</span>
+                        <h4 class="admin-name">kumori</h4>
+                        <p class="admin-desc">2-й владелец проекта.</p>
+                        <p class="admin-subtext">Руководитель и совладелец. Ответственный за стратегическое развитие и стабильность.</p>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <img src="images/hsdl.png" class="admin-avatar" alt="HSDL" onerror="this.src='https://postimg.cc'">
                     <div class="admin-details">
                         <span class="admin-role">Гл. Разработчик</span>
                         <h4 class="admin-name">HSDL</h4>
@@ -294,63 +460,90 @@
                     </div>
                 </div>
 
-                <!-- Карточка медиа-менеджера -->
                 <div class="admin-card">
-                    <img src="images/holl.png" class="admin-avatar" alt="HOLL" onerror="this.src='https://unsplash.com'">
+                    <img src="images/holl.png" class="admin-avatar" alt="HOLL" onerror="this.src='https://postimg.cc'">
                     <div class="admin-details">
                         <span class="admin-role">Head PR Manager</span>
                         <h4 class="admin-name">HOLL</h4>
                         <p class="admin-desc">Главный менеджер по связям с общественностью.</p>
-                        <p class="admin-subtext">Глава медиа-отдела. Отвечает за рекламу и входящий трафик.</p>
+                        <p class="admin-subtext">Глава медиа-отдела. Отвечает за рекламу, связи со СМИ и трафик.</p>
                     </div>
                 </div>
             </div>
-
-            <!-- Раздел признания заслуг -->
-            <span class="section-label" style="margin-top: 80px;">// признание заслуг</span>
+            <!-- Чистый раздел «Благодарности» — только Infiniti -->
+            <span class="section-label" style="margin-top: 80px;">// благодарности</span>
             <h2 class="section-heading">Особый вклад</h2>
             
             <div class="credits-container">
                 <div class="credits-item">
-                    <span class="credits-name">Infiniti</span> <span class="credits-desc">— за то, что помогал проекту в критические этапы развития</span>
+                    <span class="credits-name">Infiniti</span> <span class="credits-desc">— за то, что помогал проекту</span>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- Строгий монохромный футер сайта -->
+    <!-- Премиальный подвал (Футер) по образу фото, без кнопок -->
     <footer>
         <div class="footer-logo">Армия <span>RP</span></div>
         <div class="footer-mail">support@army.games</div>
-        <div class="footer-copy">© 2026 Army Games | Все права защищены</div>
+        <div class="footer-copy">© 2026 Army Games |  Политика конфиденциальности</div>
     </footer>
 
-    <!-- Полноэкранный Iframe-модуль -->
+    <!-- Полноэкранный оверлей для загрузки страниц через Iframe -->
     <div id="moduleWrapper" class="module-window">
         <div class="top-bar">
-            <button class="btn-back" onclick="closeModule()">← Назад на главную</button>
+            <button class="btn-back" onclick="closeModule()">← Вернуться назад на сайт</button>
         </div>
         <div id="moduleTarget"></div>
     </div>
+
+    <!-- Интерактивные JS-скрипты -->
     <script>
-        /* Интерактивное отображение скрытого блока аналитики */
+        /* Логика кастомного курсора (Точка и следящая окружность) */
+        const cursorDot = document.getElementById('cursorDot');
+        const cursorOutline = document.getElementById('cursorOutline');
+
+        window.addEventListener('mousemove', function(e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = posX + 'px';
+            cursorDot.style.top = posY + 'px';
+
+            cursorOutline.style.left = posX + 'px';
+            cursorOutline.style.top = posY + 'px';
+        });
+
+        window.addEventListener('mousedown', function() {
+            cursorOutline.classList.add('click-active');
+        });
+        window.addEventListener('mouseup', function() {
+            cursorOutline.classList.remove('click-active');
+        });
+
+        window.addEventListener('touchstart', function() {
+            document.body.style.cursor = 'default';
+            cursorDot.style.display = 'none';
+            cursorOutline.style.display = 'none';
+        }, { passive: true });
+
+        /* Функции интерфейса и модулей */
         function toggleAnalytics() {
             var block = document.getElementById('analyticsSection');
             if (block.style.display === 'block') {
                 block.style.display = 'none';
             } else {
                 block.style.display = 'block';
-                block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                block.scrollIntoView({ behavior: 'smooth' });
             }
         }
 
-        /* Загрузка внешних страниц во внутреннее изолированное модульное окно */
         function loadModule(path) {
             var target = document.getElementById('moduleTarget');
             var main = document.getElementById('mainPage');
             var wrapper = document.getElementById('moduleWrapper');
             
-            target.innerHTML = '<iframe src="' + path + '" style="width:100%; height:calc(100vh - 100px); border:none; background:#0a0a0c;"></iframe>';
+            target.innerHTML = '<iframe src="' + path + '" style="width:100%; height:calc(100vh - 120px); border:none; background:#040406;"></iframe>';
             
             main.style.display = 'none';
             wrapper.style.display = 'block';
@@ -358,7 +551,6 @@
             window.scrollTo(0, 0);
         }
 
-        /* Бесшовный возврат из iframe на главный экран сайта */
         function closeModule() {
             var wrapper = document.getElementById('moduleWrapper');
             var main = document.getElementById('mainPage');
@@ -369,19 +561,19 @@
                 wrapper.style.display = 'none'; 
                 target.innerHTML = ''; 
                 main.style.display = 'block'; 
-            }, 300);
+            }, 400);
         }
 
-        /* Комплексная защита кода среды от несанкционированного копирования */
+        /* Защита: Блокировка контекстного меню, выделения текста и DevTools */
         document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
         document.addEventListener('selectstart', function(e) { e.preventDefault(); });
         document.addEventListener('keydown', function(e) {
             if (
-                e.keyCode == 123 || // Клавиша F12
-                (e.ctrlKey && e.shiftKey && e.keyCode == 73) || // Ctrl + Shift + I
-                (e.ctrlKey && e.shiftKey && e.keyCode == 67) || // Ctrl + Shift + C
-                (e.ctrlKey && e.keyCode == 85) ||               // Ctrl + U (Просмотр кода)
-                (e.ctrlKey && e.keyCode == 83)                  // Ctrl + S (Сохранение)
+                e.keyCode == 123 || 
+                (e.ctrlKey && e.shiftKey && e.keyCode == 73) || 
+                (e.ctrlKey && e.shiftKey && e.keyCode == 67) || 
+                (e.ctrlKey && e.keyCode == 85) ||               
+                (e.ctrlKey && e.keyCode == 83)                  
             ) {
                 e.preventDefault(); 
                 return false;
