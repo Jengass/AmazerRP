@@ -3,518 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Армия РП — Премиум Экосистема</title>
+    <title>Армия РП — Официальный сайт</title>
     
-    <!-- Подключение топовых шрифтов и иконок FontAwesome -->
+    <!-- Подключение шрифтов и иконок FontAwesome -->
+    <link href="https://googleapis.com" rel="stylesheet">
     <link rel="stylesheet" href="https://cloudflare.com">
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+    
     <style>
         /* Глобальные сбросы и базовая конфигурация */
         * { 
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
+            font-family: 'Inter', sans-serif; 
             -webkit-font-smoothing: antialiased;
         }
         
         body, html {
-            background: #020204; 
+            background: #0a0a0c; 
             color: #f3f4f6; 
             overflow-x: hidden; 
             min-height: 100vh;
             scroll-behavior: smooth;
+            /* Возвращаем стандартный нормальный курсор */
+            cursor: default; 
         }
 
-        /* Выделение текста в фирменных цветах */
-        ::selection {
-            background: rgba(139, 92, 246, 0.3);
-            color: #ffffff;
-        }
-
-        /* Кастомный минималистичный скроллбар */
+        /* Тонкий аккуратный скроллбар */
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #020204;
+            background: #0a0a0c;
         }
         ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.1);
+            background: #222226;
             border-radius: 4px;
-            border: 2px solid #020204;
         }
         ::-webkit-scrollbar-thumb:hover {
-            background: rgba(139, 92, 246, 0.4);
+            background: #ffffff;
         }
 
-        /* Премиальный эмбиент-фон с эффектом глубокого космоса */
-        .ambient-bg {
+        /* Фоновые минималистичные акценты без неона */
+        .ambient-grid {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 50% -10%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.03) 0%, transparent 40%),
-                radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.005) 0%, transparent 30%);
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 60px 60px;
             z-index: -2; pointer-events: none;
         }
-        
-        .gold-flare {
-            position: fixed; top: -10%; right: -10%; width: 60vw; height: 60vw;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.04) 0%, transparent 70%);
-            z-index: -1; pointer-events: none; filter: blur(80px);
-            animation: pulseGlow 12s ease-in-out infinite alternate;
+        .light-glow {
+            position: fixed; top: -10%; left: 50%; transform: translateX(-50%);
+            width: 60vw; height: 30vh;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+            z-index: -1; pointer-events: none; filter: blur(40px);
         }
-        
-        @keyframes pulseGlow {
-            0% { transform: scale(1) translate(0, 0); opacity: 0.6; }
-            100% { transform: scale(1.1) translate(-5%, 5%); opacity: 1; }
-        }
-        /* Навигационная панель — ультра-современное жидкое стекло */
+        /* Шапка сайта в стиле монохромного премиума */
         header {
             position: fixed; top: 0; left: 0; width: 100%;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 24px 80px; z-index: 90;
-            background: rgba(2, 2, 4, 0.4);
+            padding: 24px 8%; z-index: 90;
+            background: rgba(10, 10, 12, 0.75);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            transition: all 0.4s ease;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
         }
         
         .brand { 
-            font-family: 'Cinzel', serif; font-size: 1.5rem; font-weight: 800; 
-            letter-spacing: 4px; cursor: pointer; color: #fff; text-transform: uppercase;
-            display: flex; align-items: center; gap: 8px;
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; 
+            letter-spacing: 2px; cursor: pointer; color: #ffffff; text-transform: uppercase;
         }
         .brand span { 
-            color: #8b5cf6; 
-            font-family: 'Cinzel', serif;
-            position: relative;
+            color: #999999;
+            font-weight: 400;
         }
         
-        .main-nav { display: flex; gap: 40px; }
+        .main-nav { display: flex; gap: 40px; align-items: center; }
         .nav-item { 
-            color: #9ca3af; text-decoration: none; font-size: 0.8rem; 
+            color: #88888c; text-decoration: none; font-size: 0.8rem; 
             font-weight: 600; text-transform: uppercase; letter-spacing: 2px; 
             transition: color 0.3s ease; cursor: pointer; position: relative;
-            padding: 4px 0;
+            padding: 6px 0;
         }
         .nav-item::before {
-            content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 1.5px;
-            background: #8b5cf6; transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1); transform: translateX(-50%);
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+            background: #ffffff; transition: width 0.3s ease;
         }
-        .nav-item:hover { color: #fff; }
+        .nav-item:hover { color: #ffffff; }
         .nav-item:hover::before, .nav-item.active::before { width: 100%; }
-        .nav-item.active { color: #8b5cf6; }
+        .nav-item.active { color: #ffffff; }
         
+        /* Кнопка Личного Кабинета */
         .cabinet-btn { 
-            padding: 12px 28px; background: rgba(139, 92, 246, 0.08); color: #a78bfa;
-            border: 1px solid rgba(139, 92, 246, 0.25); border-radius: 8px; font-size: 0.8rem; 
+            padding: 12px 28px; background: #ffffff; color: #0a0a0c;
+            border: 1px solid #ffffff; border-radius: 4px; font-size: 0.8rem; 
             font-weight: 700; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; 
             letter-spacing: 1.5px;
         }
         .cabinet-btn:hover { 
-            background: #8b5cf6; color: #020204;
-            box-shadow: 0 0 25px rgba(139, 92, 246, 0.4); border-color: #8b5cf6;
+            background: transparent; color: #ffffff;
             transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
         }
-        
-        /* Главный экран (Hero Section) */
+        /* Основные контейнеры страниц */
         .page-content-wrapper { padding-top: 100px; min-height: 100vh; }
         .page-section { max-width: 1200px; margin: 0 auto; padding: 80px 24px; }
         
+        /* Главный экран проекта (Hero) */
         .hero-screen { 
             display: flex; flex-direction: column; align-items: center; justify-content: center; 
             min-height: 80vh; text-align: center; position: relative; 
         }
         .big-logo-bg {
-            font-family: 'Cinzel', serif; font-size: 20rem; font-weight: 800; color: transparent;
-            position: absolute; z-index: -1; user-select: none; pointer-events: none;
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.015) 0%, transparent 100%);
-            -webkit-background-clip: text;
-            animation: luxuryFloat 8s ease-in-out infinite alternate;
+            font-family: 'Space Grotesk', sans-serif; font-size: 20rem; font-weight: 700; 
+            position: absolute; z-index: -1; user-select: none;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            letter-spacing: -5px;
         }
-        @keyframes luxuryFloat { 
-            from { transform: translateY(0); } to { transform: translateY(-15px); } 
-        }
-        .hero-title { font-family: 'Cinzel', serif; font-size: 5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 6px; line-height: 1.1; margin-bottom: 24px; color: #fff; }
-        .hero-title span { color: #8b5cf6; text-shadow: 0 0 40px rgba(139, 92, 246, 0.2); }
-        .hero-subtitle { color: #6b7280; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 6px; margin-bottom: 48px; }
-        /* Индикатор прокрутки */
-        .scroll-indicator-container {
-            display: flex; flex-direction: column; align-items: center; margin-top: 60px; gap: 12px;
-        }
-        .scroll-text-label {
-            font-size: 0.7rem; font-weight: 700; color: #4b5563; text-transform: uppercase; letter-spacing: 4px;
-            animation: textFadePulse 2s ease-in-out infinite alternate;
-        }
-        .scroll-animated-line { width: 1px; height: 50px; background: rgba(255, 255, 255, 0.05); position: relative; overflow: hidden; }
-        .scroll-animated-line::after {
-            content: ''; position: absolute; top: -50%; left: 0; width: 100%; height: 50%;
-            background: linear-gradient(to bottom, transparent, #8b5cf6, transparent);
-            animation: lineFlowDown 2.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-        @keyframes textFadePulse { 0% { opacity: 0.3; } 100% { opacity: 0.8; color: #6b7280; } }
-        @keyframes lineFlowDown { 0% { top: -50%; } 100% { top: 100%; } }
-
-        /* Стильные социальные медиа-кнопки */
-        .social-links { display: flex; gap: 16px; z-index: 2; }
+        .hero-title { font-family: 'Space Grotesk', sans-serif; font-size: 4.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: -1px; line-height: 1.1; margin-bottom: 24px; color: #ffffff; }
+        .hero-title span { color: #88888c; font-weight: 400; }
+        .hero-subtitle { color: #66666c; font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 48px; }
+        
+        /* Кнопки соцсетей в строгом черно-белом стиле */
+        .social-links { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center; }
         .soc-btn { 
             padding: 16px 36px; background: rgba(255, 255, 255, 0.02); 
-            border: 1px solid rgba(255, 255, 255, 0.05); color: #d1d5db; 
-            font-size: 0.8rem; font-weight: 600; border-radius: 12px; cursor: pointer; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-decoration: none; text-transform: uppercase; letter-spacing: 1.5px;
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08); color: #ffffff; 
+            font-size: 0.8rem; font-weight: 600; border-radius: 4px; cursor: pointer; 
+            transition: all 0.3s ease; text-decoration: none; text-transform: uppercase; letter-spacing: 2px;
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
-        .soc-btn i { margin-right: 10px; color: #8b5cf6; transition: transform 0.3s; }
+        .soc-btn i { margin-right: 10px; color: #ffffff; }
         .soc-btn:hover { 
-            border-color: rgba(139, 92, 246, 0.4); color: #fff; 
-            background: rgba(139, 92, 246, 0.04); box-shadow: 0 10px 30px rgba(139, 92, 246, 0.08);
+            border-color: #ffffff; background: #ffffff; color: #0a0a0c;
             transform: translateY(-2px);
         }
-        .soc-btn:hover i { transform: scale(1.1); }
+        .soc-btn:hover i { color: #0a0a0c; }
 
-        /* Оформление заголовков секций */
-        .section-label { color: #4b5563; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 12px; display: block; }
-        .section-heading { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 700; text-transform: uppercase; margin-bottom: 40px; letter-spacing: 2px; color: #fff; display: flex; align-items: center; gap: 15px; }
-        .section-heading::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, rgba(139, 92, 246, 0.2), transparent); }
-        
-        /* Карточка Босса */
+        /* Индикатор прокрутки (Scroll) */
+        .scroll-indicator-container {
+            display: flex; flex-direction: column; align-items: center; margin-top: 60px; user-select: none; gap: 12px;
+        }
+        .scroll-text-label {
+            font-family: 'Space Grotesk', sans-serif; font-size: 0.7rem; font-weight: 700; color: #44444a; text-transform: uppercase; letter-spacing: 4px;
+        }
+        .scroll-animated-line { width: 1px; height: 50px; background: rgba(255, 255, 255, 0.1); position: relative; overflow: hidden; }
+        .scroll-animated-line::after {
+            content: ''; position: absolute; top: -50%; left: 0; width: 100%; height: 50%;
+            background: linear-gradient(to bottom, transparent, #ffffff, transparent);
+            animation: lineFlowDown 2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+        }
+        @keyframes lineFlowDown { 0% { top: -50%; } 100% { top: 110%; } }
+
+        /* Маркировка разделов */
+        .section-label { color: #44444a; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 12px; display: block; }
+        .section-heading { font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; font-weight: 700; text-transform: uppercase; margin-bottom: 40px; letter-spacing: -0.5px; color: #ffffff; }
+        /* Карточка Руководителя — Строгий графичный Glassmorphism */
         .boss-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.005) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 20px;
-            padding: 48px; display: flex; gap: 48px; align-items: center; margin-bottom: 32px;
-            backdrop-filter: blur(20px); box-shadow: 0 30px 60px rgba(0,0,0,0.4); transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 6px;
+            padding: 48px; display: flex; gap: 48px; align-items: center; text-align: left; margin-bottom: 32px;
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
-        .boss-card:hover { border-color: rgba(139, 92, 246, 0.2); box-shadow: 0 30px 60px rgba(139, 92, 246, 0.03); }
-        .boss-avatar { width: 140px; height: 140px; border-radius: 16px; object-fit: cover; border: 1px solid rgba(255, 255, 255, 0.08); transition: transform 0.4s ease; }
-        .boss-card:hover .boss-avatar { transform: scale(1.02); border-color: rgba(139, 92, 246, 0.3); }
+        .boss-card:hover { border-color: rgba(255, 255, 255, 0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .boss-avatar { width: 140px; height: 140px; border-radius: 4px; object-fit: cover; filter: grayscale(100%); border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; }
+        .boss-card:hover .boss-avatar { filter: grayscale(0%); border-color: #ffffff; }
         .boss-info { flex: 1; }
-        .boss-tag { color: #8b5cf6; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; display: block; }
-        .boss-name { font-family: 'Cinzel', serif; font-size: 2.2rem; font-weight: 700; margin-bottom: 12px; color: #fff; }
-        .boss-stat { display: inline-flex; align-items: center; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); padding: 8px 16px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #d1d5db; border-radius: 8px; margin-bottom: 20px; }
-        .boss-stat i { margin-right: 8px; color: #8b5cf6; }
-        .boss-quotes p { color: #9ca3af; font-style: italic; font-size: 0.95rem; margin-bottom: 8px; line-height: 1.6; border-left: 2px solid rgba(139, 92, 246, 0.4); padding-left: 16px; }
-        .more-btn { margin-top: 16px; padding: 12px 28px; background: transparent; border: 1px solid rgba(139, 92, 246, 0.3); color: #a78bfa; font-size: 0.75rem; font-weight: 700; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; }
-        .more-btn:hover { background: #8b5cf6; color: #020204; box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
-        /* Блок Аналитики */
+        .boss-tag { color: #88888c; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; display: block; }
+        .boss-name { font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; font-weight: 700; margin-bottom: 12px; color: #ffffff; }
+        .boss-stat { display: inline-flex; align-items: center; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); padding: 8px 16px; font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #ffffff; border-radius: 4px; margin-bottom: 24px; }
+        .boss-stat i { margin-right: 8px; color: #ffffff; }
+        .boss-quotes p { color: #88888c; font-style: italic; font-size: 0.95rem; margin-bottom: 8px; line-height: 1.6; position: relative; padding-left: 16px; }
+        .boss-quotes p::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 1px; background: rgba(255, 255, 255, 0.2); }
+        .more-btn { margin-top: 16px; padding: 12px 28px; background: transparent; border: 1px solid rgba(255, 255, 255, 0.2); color: #ffffff; font-size: 0.75rem; font-weight: 700; border-radius: 4px; cursor: pointer; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1.5px; }
+        .more-btn:hover { background: #ffffff; color: #0a0a0c; border-color: #ffffff; }
+
+        /* Всплывающий интерактивный блок аналитики */
         .analytics-wrapper { 
-            display: none; background: rgba(3, 3, 6, 0.7); border: 1px solid rgba(255,255,255,0.04); 
-            border-radius: 20px; padding: 40px; margin-bottom: 40px; box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-            backdrop-filter: blur(30px); animation: smoothSlideDown 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            display: none; background: #0e0e12; border: 1px solid rgba(255, 255, 255, 0.06); 
+            border-radius: 6px; padding: 48px; margin-bottom: 48px; box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            animation: panelFadeIn 0.4s ease forwards;
         }
-        @keyframes smoothSlideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .db-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 16px; }
-        .db-header h2 { font-size: 1rem; color: #9ca3af; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
-        .db-header .date { color: #4b5563; font-size: 0.8rem; font-weight: 600; }
+        @keyframes panelFadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .db-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 16px; }
+        .db-header h2 { font-size: 1rem; color: #ffffff; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+        .db-header .date { color: #44444a; font-size: 0.8rem; font-weight: 600; }
 
-        /* Сетки метрик */
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 32px; }
-        .stat-card { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); padding: 24px; border-radius: 12px; }
-        .stat-card h3 { font-size: 2.2rem; font-weight: 700; margin-bottom: 4px; color: #fff; }
-        .stat-card p { font-size: 0.75rem; color: #9ca3af; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
-        .stat-card .sub { font-size: 0.7rem; color: #4b5563; margin-top: 8px; font-weight: 600; }
-
-        .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 32px; }
-        .chart-card { background: rgba(255,255,255,0.005); border: 1px solid rgba(255,255,255,0.03); padding: 32px; border-radius: 12px; }
-        .chart-title { font-size: 0.8rem; color: #9ca3af; text-transform: uppercase; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 24px; }
+        /* Сетки аналитики */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 32px; }
+        .stat-card { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); padding: 24px; border-radius: 4px; text-align: left; transition: all 0.3s ease; }
+        .stat-card:hover { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.02); }
+        .stat-card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 2.4rem; font-weight: 700; margin-bottom: 4px; color: #ffffff; }
+        .stat-card p { font-size: 0.75rem; color: #66666c; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+        .stat-card .sub { font-size: 0.7rem; color: #44444a; margin-top: 8px; font-weight: 600; }
+        /* Графики и диаграммы */
+        .charts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; margin-bottom: 32px; }
+        .chart-card { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); padding: 32px; border-radius: 4px; }
+        .chart-title { font-size: 0.8rem; color: #66666c; text-transform: uppercase; font-weight: 700; letter-spacing: 1.5px; margin-bottom: 24px; }
         
         /* Столбчатый график */
-        .bar-chart { display: flex; justify-content: space-between; align-items: flex-end; height: 130px; }
+        .bar-chart { display: flex; justify-content: space-between; align-items: flex-end; height: 140px; }
         .bar-group { display: flex; flex-direction: column; align-items: center; flex: 1; }
-        .bar { width: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-        .bar.active { background: #8b5cf6; box-shadow: 0 0 20px rgba(139, 92, 246, 0.4); }
-        .bar-label { font-size: 0.6rem; color: #4b5563; text-transform: uppercase; margin-top: 10px; font-weight: 700; }
+        .bar { width: 8px; background: rgba(255,255,255,0.05); border-radius: 1px; transition: height 0.5s ease, background 0.3s; }
+        .bar.active { background: #ffffff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.2); }
+        .bar-label { font-size: 0.65rem; color: #44444a; text-transform: uppercase; margin-top: 12px; font-weight: 700; }
 
         /* Круговой индикатор */
-        .circle-progress-box { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 130px; }
-        .circle-visual { width: 100px; height: 100px; border-radius: 50%; background: conic-gradient(#8b5cf6 237deg, rgba(255,255,255,0.03) 0); display: flex; align-items: center; justify-content: center; position: relative; }
-        .circle-visual::after { content: ''; position: absolute; width: 84px; height: 84px; background: #030306; border-radius: 50%; }
-        .circle-text { z-index: 2; font-size: 1.2rem; font-weight: 700; text-align: center; color: #fff; }
-        .circle-text span { display: block; font-size: 0.65rem; color: #6b7280; font-weight: 600; margin-top: 1px; }
+        .circle-progress-box { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 140px; }
+        .circle-visual { width: 110px; height: 110px; border-radius: 50%; background: conic-gradient(#ffffff 237deg, rgba(255,255,255,0.03) 0); display: flex; align-items: center; justify-content: center; position: relative; }
+        .circle-visual::after { content: ''; position: absolute; width: 92px; height: 92px; background: #0e0e12; border-radius: 50%; }
+        .circle-text { z-index: 2; font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; text-align: center; color: #ffffff; }
+        .circle-text span { display: block; font-family: 'Inter', sans-serif; font-size: 0.7rem; color: #66666c; font-weight: 600; margin-top: 2px; }
 
-        .time-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.02); color: #9ca3af; }
-        .time-row span { font-weight: 600; color: #fff; }
+        /* Текстовые строки распределения данных */
+        .time-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.03); color: #88888c; }
+        .time-row span { font-weight: 600; color: #ffffff; }
 
-        /* Таймлайн */
-        .timeline { background: rgba(255,255,255,0.005); border: 1px solid rgba(255,255,255,0.03); padding: 32px; border-radius: 12px; }
+        /* Хронология (Timeline) */
+        .timeline { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); padding: 32px; border-radius: 4px; }
         .timeline-item { position: relative; padding-left: 28px; margin-bottom: 24px; }
-        .timeline-item::before { content: ''; position: absolute; left: 0; top: 5px; width: 6px; height: 6px; background: rgba(255,255,255,0.15); border-radius: 50%; }
-        .timeline-item.active::before { background: #8b5cf6; box-shadow: 0 0 10px #8b5cf6; }
-        .timeline-item::after { content: ''; position: absolute; left: 2.5px; top: 19px; height: calc(100% + 4px); border-left: 1px dashed rgba(255,255,255,0.05); }
+        .timeline-item::before { content: ''; position: absolute; left: 0; top: 5px; width: 6px; height: 6px; background: rgba(255,255,255,0.2); border-radius: 50%; }
+        .timeline-item.active::before { background: #ffffff; box-shadow: 0 0 10px #ffffff; }
+        .timeline-item::after { content: ''; position: absolute; left: 2px; top: 18px; height: calc(100% + 10px); border-left: 1px dashed rgba(255,255,255,0.08); }
         .timeline-item:last-child::after { display: none; }
-        .timeline-date { font-size: 0.7rem; color: #6b7280; font-weight: 700; text-transform: uppercase; margin-bottom: 2px; }
-        .timeline-text { font-size: 0.85rem; color: #9ca3af; }
-        .timeline-item.forecast .timeline-text { color: #4b5563; font-style: italic; }
-        /* Сетка команды */
+        .timeline-date { font-size: 0.75rem; color: #66666c; font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
+        .timeline-text { font-size: 0.9rem; color: #88888c; }
+        .timeline-item.forecast .timeline-text { color: #44444a; font-style: italic; }
+
+        /* Сетка команды менеджмента */
         .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
-        .admin-card { background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 16px; padding: 32px 24px; display: flex; gap: 20px; align-items: flex-start; transition: all 0.3s ease; }
-        .admin-card:hover { border-color: rgba(139, 92, 246, 0.2); transform: translateY(-2px); background: rgba(255,255,255,0.015); }
-        .admin-avatar { width: 64px; height: 64px; border-radius: 10px; object-fit: cover; border: 1px solid rgba(255,255,255,0.05); }
-        .admin-role { color: #8b5cf6; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 4px; }
-        .admin-name { font-family: 'Cinzel', serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 6px; color: #fff; }
-        .admin-desc { color: #9ca3af; font-size: 0.85rem; margin-bottom: 6px; }
-        .admin-subtext { color: #4b5563; font-size: 0.75rem; font-style: italic; line-height: 1.4; }
+        .admin-card { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); border-radius: 4px; padding: 32px; display: flex; gap: 24px; align-items: flex-start; transition: all 0.3s ease; }
+        .admin-card:hover { border-color: #ffffff; transform: translateY(-2px); }
+        .admin-avatar { width: 64px; height: 64px; border-radius: 2px; object-fit: cover; filter: grayscale(100%); border: 1px solid rgba(255,255,255,0.08); transition: filter 0.3s; }
+        .admin-card:hover .admin-avatar { filter: grayscale(0%); }
+        .admin-details { flex: 1; }
+        .admin-role { color: #66666c; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; display: block; margin-bottom: 4px; }
+        .admin-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: #ffffff; }
+        .admin-desc { color: #88888c; font-size: 0.85rem; line-height: 1.5; margin-bottom: 6px; }
+        .admin-subtext { color: #44444a; font-size: 0.75rem; font-style: italic; line-height: 1.4; }
 
-        /* Оверлей для Модулей */
-        .module-window { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #020204; z-index: 100; padding: 24px; opacity: 0; transition: opacity 0.4s ease; overflow-y: auto; }
+        /* Раздел «Благодарности» */
+        .credits-container { margin-top: 32px; }
+        .credits-item { position: relative; padding-left: 20px; margin-bottom: 16px; font-size: 0.9rem; color: #88888c; }
+        .credits-item::before { content: ''; position: absolute; left: 0; top: 5px; height: 12px; width: 2px; background: #ffffff; }
+        .credits-name { font-weight: 700; color: #ffffff; }
+        .credits-desc { color: #55555a; }
+
+        /* Полноэкранные iframe-модули сайта */
+        .module-window { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #0a0a0c; z-index: 100; padding: 24px; opacity: 0; transition: opacity 0.3s ease; overflow-y: auto; }
         .module-window.active { opacity: 1; }
-        .top-bar { display: flex; align-items: center; padding: 12px 24px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); max-width: 1200px; margin: 0 auto 24px auto; }
-        .btn-back { padding: 10px 24px; background: transparent; border: 1px solid rgba(255, 255, 255, 0.1); color: #9ca3af; border-radius: 8px; cursor: pointer; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; transition: all 0.2s; }
-        .btn-back:hover { border-color: #8b5cf6; color: #fff; }
+        .top-bar { display: flex; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); max-width: 1200px; margin: 0 auto 32px auto; }
+        .btn-back { padding: 10px 24px; background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #ffffff; border-radius: 4px; cursor: pointer; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; transition: all 0.3s; }
+        .btn-back:hover { background: #ffffff; color: #0a0a0c; border-color: #ffffff; }
 
-        /* Вклад */
-        .credits-container { margin-top: 24px; }
-        .credits-item { position: relative; padding-left: 20px; font-size: 0.9rem; color: #9ca3af; }
-        .credits-item::before { content: ''; position: absolute; left: 0; top: 4px; height: 14px; width: 2px; background: #8b5cf6; }
-        .credits-name { font-weight: 700; color: #fff; }
-        .credits-desc { color: #4b5563; }
-
-        /* Футер */
-        footer { margin-top: 120px; padding: 50px 24px; border-top: 1px solid rgba(255, 255, 255, 0.03); text-align: center; background: rgba(1, 1, 2, 0.3); }
-        .footer-logo { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 800; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
-        .footer-logo span { color: #8b5cf6; }
-        .footer-mail { font-size: 0.8rem; color: #4b5563; margin-bottom: 16px; }
-        .footer-copy { font-size: 0.75rem; color: #2e333f; font-weight: 600; }
+        /* Премиальный монохромный подвал (Футер) */
+        footer { margin-top: 120px; padding: 48px 24px; border-top: 1px solid rgba(255, 255, 255, 0.04); text-align: center; }
+        .footer-logo { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: #ffffff; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+        .footer-logo span { color: #66666c; font-weight: 400; }
+        .footer-mail { font-size: 0.8rem; color: #44444a; letter-spacing: 0.5px; margin-bottom: 16px; }
+        .footer-copy { font-size: 0.75rem; color: #333338; font-weight: 600; }
     </style>
 </head>
-<body>
-    <div class="ambient-bg"></div>
-    <div class="gold-flare"></div>
-    
-    <header id="siteHeader">
-        <div class="brand" onclick="location.reload()">Армия<span>РП</span></div>
-        <div class="main-nav">
-            <span class="nav-item active" onclick="location.reload()">Главная</span>
-            <span class="nav-item" onclick="loadModule('system/index.html')">Система</span>
-            <span class="nav-item" onclick="loadModule('update/index.html')">Обновления</span>
-            <span class="nav-item" onclick="loadModule('rules_html/index.html')">Правила</span>
-        </div>
-        <button class="cabinet-btn" onclick="loadModule('cabinet/index.html')">Кабинет</button>
-    </header>
-        <!-- Раздел Менеджмента Команды (Синдикат) -->
-        <section class="page-section">
-            <span class="section-label">// структура синдиката</span>
+            <!-- Продолжение основного контента: Состав менеджмента -->
+            <span class="section-label" style="margin-top: 60px;">// персонал синдиката</span>
             <h2 class="section-heading">Менеджмент проекта</h2>
             
             <div class="team-grid">
-                <!-- Карточка 1: Kumori -->
+                <!-- Карточка куратора проекта -->
                 <div class="admin-card">
-                    <div class="admin-avatar-wrapper">
-                        <img src="images/kumori.png" class="admin-avatar" alt="kumori" onerror="this.src='https://unsplash.com'">
-                        <div class="avatar-pulse"></div>
-                    </div>
+                    <img src="images/kumori.png" class="admin-avatar" alt="kumori" onerror="this.src='https://unsplash.com'">
                     <div class="admin-details">
                         <span class="admin-role">Второй владелец</span>
                         <h4 class="admin-name">kumori</h4>
-                        <p class="admin-desc">Совладелец экосистемы</p>
-                        <p class="admin-subtext">Руководитель высшего звена. Ответственный за глобальное стратегическое планирование, распределение ресурсов и общую стабильность.</p>
+                        <p class="admin-desc">Совладелец проекта.</p>
+                        <p class="admin-subtext">Руководитель. Ответственный за стратегическое развитие и общую стабильность.</p>
                     </div>
                 </div>
 
-                <!-- Карточка 2: HSDL -->
+                <!-- Карточка главного инженера-моделлера -->
                 <div class="admin-card">
-                    <div class="admin-avatar-wrapper">
-                        <img src="images/hsdl.png" class="admin-avatar" alt="HSDL" onerror="this.src='https://unsplash.com'">
-                        <div class="avatar-pulse"></div>
-                    </div>
+                    <img src="images/hsdl.png" class="admin-avatar" alt="HSDL" onerror="this.src='https://unsplash.com'">
                     <div class="admin-details">
                         <span class="admin-role">Гл. Разработчик</span>
                         <h4 class="admin-name">HSDL</h4>
-                        <p class="admin-desc">Lead 3D & Technical Artist</p>
-                        <p class="admin-subtext">Проектирует, оптимизирует и интегрирует высокополигональные hard-surface модели объектов, оружия и транспорта в игровой движок.</p>
+                        <p class="admin-desc">Главный моделевый разработчик.</p>
+                        <p class="admin-subtext">Проектирует и интегрирует высокополигональные 3D-модели объектов.</p>
                     </div>
                 </div>
 
-                <!-- Карточка 3: HOLL -->
+                <!-- Карточка медиа-менеджера -->
                 <div class="admin-card">
-                    <div class="admin-avatar-wrapper">
-                        <img src="images/holl.png" class="admin-avatar" alt="HOLL" onerror="this.src='https://unsplash.com'">
-                        <div class="avatar-pulse"></div>
-                    </div>
+                    <img src="images/holl.png" class="admin-avatar" alt="HOLL" onerror="this.src='https://unsplash.com'">
                     <div class="admin-details">
                         <span class="admin-role">Head PR Manager</span>
                         <h4 class="admin-name">HOLL</h4>
-                        <p class="admin-desc">Директор по маркетингу</p>
-                        <p class="admin-subtext">Глава медиа-департамента. Формирует имидж бренда, руководит рекламными кампаниями и координирует входящий трафик.</p>
+                        <p class="admin-desc">Главный менеджер по связям с общественностью.</p>
+                        <p class="admin-subtext">Глава медиа-отдела. Отвечает за рекламу и входящий трафик.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Раздел «Благодарности» -->
-            <span class="section-label" style="margin-top: 100px;">// признание заслуг</span>
+            <!-- Раздел признания заслуг -->
+            <span class="section-label" style="margin-top: 80px;">// признание заслуг</span>
             <h2 class="section-heading">Особый вклад</h2>
             
             <div class="credits-container">
                 <div class="credits-item">
-                    <span class="credits-name">Infiniti</span> 
-                    <span class="credits-desc">— за неоценимую техническую поддержку, ультимативную помощь в критические моменты и преданность вектору развития проекта.</span>
+                    <span class="credits-name">Infiniti</span> <span class="credits-desc">— за то, что помогал проекту в критические этапы развития</span>
                 </div>
             </div>
         </section>
     </div>
 
-    <!-- Премиальный Кинематографичный Подвал (Футер) -->
+    <!-- Строгий монохромный футер сайта -->
     <footer>
-        <div class="footer-blur-anchor"></div>
-        <div class="footer-content">
-            <div class="footer-logo" onclick="window.scrollTo({top:0, behavior:'smooth'})">Армия <span>RP</span></div>
-            <div class="footer-mail">support@army.games</div>
-            <div class="footer-divider"></div>
-            <div class="footer-bottom-row">
-                <div class="footer-copy">© 2026 Army Games. Все права защищены. Разработано для ценителей глубокого погружения.</div>
-                <div class="footer-status-tag"><span class="status-dot-green"></span> Все системы стабильны</div>
-            </div>
-        </div>
+        <div class="footer-logo">Армия <span>RP</span></div>
+        <div class="footer-mail">support@army.games</div>
+        <div class="footer-copy">© 2026 Army Games | Все права защищены</div>
     </footer>
 
-    <!-- Полноэкранный оверлей модульной системы (AJAX/Iframe-окно) -->
+    <!-- Полноэкранный Iframe-модуль -->
     <div id="moduleWrapper" class="module-window">
         <div class="top-bar">
-            <button class="btn-back" onclick="closeModule()">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right: 10px; vertical-align: middle;"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                Вернуться на главную
-            </button>
-            <div class="module-secure-badge"><i class="fa-solid fa-shield-halved"></i> Безопасное соединение зашифровано</div>
+            <button class="btn-back" onclick="closeModule()">← Назад на главную</button>
         </div>
         <div id="moduleTarget"></div>
     </div>
-    <!-- Интерактивные JS-скрипты управления интерфейсом -->
     <script>
-        // Инициализация анимаций при скролле (Intersection Observer)
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.stat-card, .chart-card, .admin-card, .boss-card, .timeline-item');
-            
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const revealOnScroll = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0) scale(1)';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            cards.forEach(card => {
-                // Задаем начальное состояние для плавного проявления
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px) scale(0.98)';
-                card.style.transition = 'all 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
-                revealOnScroll.observe(card);
-            });
-        });
-
-        /* Управление интерактивным блоком аналитики */
+        /* Интерактивное отображение скрытого блока аналитики */
         function toggleAnalytics() {
-            const block = document.getElementById('analyticsSection');
-            const btn = document.querySelector('.more-btn');
-            
-            if (block.classList.contains('visible')) {
-                block.classList.remove('visible');
-                btn.innerHTML = 'Аналитика заработка';
-                btn.style.background = 'transparent';
-                btn.style.color = '#9d4edd';
+            var block = document.getElementById('analyticsSection');
+            if (block.style.display === 'block') {
+                block.style.display = 'none';
             } else {
-                block.classList.add('visible');
-                btn.innerHTML = '<i class="fa-solid fa-eye-slash" style="margin-right:8px;"></i> Свернуть графики';
-                btn.style.background = '#9d4edd';
-                btn.style.color = '#040406';
-                
-                // Плавный скролл к открывшейся панели аналитики
-                setTimeout(() => {
-                    block.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 300);
+                block.style.display = 'block';
+                block.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
 
-        /* Загрузка изолированных модулей (Iframe-надстройка) */
+        /* Загрузка внешних страниц во внутреннее изолированное модульное окно */
         function loadModule(path) {
-            const target = document.getElementById('moduleTarget');
-            const main = document.getElementById('mainPage');
-            const wrapper = document.getElementById('moduleWrapper');
-            const header = document.querySelector('header');
-            const footer = document.querySelector('footer');
+            var target = document.getElementById('moduleTarget');
+            var main = document.getElementById('mainPage');
+            var wrapper = document.getElementById('moduleWrapper');
             
-            // Анимированный лоадер внутри фрейма перед загрузкой
-            target.innerHTML = `
-                <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:70vh; color:#6e6e7e;">
-                    <div style="width:40px; height:40px; border:3px solid rgba(157,78,221,0.1); border-top-color:#9d4edd; border-radius:50%; animation:spin 1s linear infinite; margin-bottom:20px;"></div>
-                    <span style="font-family:'Space Grotesk',sans-serif; letter-spacing:2px; font-size:0.8rem; text-transform:uppercase;">Загрузка защищенного шлюза...</span>
-                </div>
-            `;
+            target.innerHTML = '<iframe src="' + path + '" style="width:100%; height:calc(100vh - 100px); border:none; background:#0a0a0c;"></iframe>';
             
-            // Скрываем основные тяжелые узлы DOM
-            main.style.opacity = '0';
-            header.style.transform = 'translateY(-100%)';
-            if(footer) footer.style.opacity = '0';
-            
-            setTimeout(() => {
-                main.style.display = 'none';
-                wrapper.style.display = 'block';
-                
-                // Встраиваем защищенный iframe
-                target.innerHTML = `<iframe src="${path}" style="width:100%; height:calc(100vh - 90px); border:none; background:#040406; color-scheme: dark;"></iframe>`;
-                
-                setTimeout(() => {
-                    wrapper.classList.add('active');
-                }, 50);
-            }, 400);
-            
-            window.scrollTo({ top: 0, behavior: 'instant' });
+            main.style.display = 'none';
+            wrapper.style.display = 'block';
+            setTimeout(function() { wrapper.classList.add('active'); }, 10);
+            window.scrollTo(0, 0);
         }
 
-        /* Выход из фрейма, возврат на основной сайт */
+        /* Бесшовный возврат из iframe на главный экран сайта */
         function closeModule() {
-            const wrapper = document.getElementById('moduleWrapper');
-            const main = document.getElementById('mainPage');
-            const target = document.getElementById('moduleTarget');
-            const header = document.querySelector('header');
-            const footer = document.querySelector('footer');
+            var wrapper = document.getElementById('moduleWrapper');
+            var main = document.getElementById('mainPage');
+            var target = document.getElementById('moduleTarget');
             
             wrapper.classList.remove('active');
-            
-            setTimeout(() => {
-                wrapper.style.display = 'none';
-                target.innerHTML = '';
-                main.style.display = 'block';
-                
-                setTimeout(() => {
-                    main.style.opacity = '1';
-                    header.style.transform = 'translateY(0)';
-                    if(footer) footer.style.opacity = '1';
-                }, 50);
-            }, 400);
+            setTimeout(function() { 
+                wrapper.style.display = 'none'; 
+                target.innerHTML = ''; 
+                main.style.display = 'block'; 
+            }, 300);
         }
 
-        /* Безопасность среды: Блокировка стандартных уязвимостей */
-        document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('selectstart', e => e.preventDefault());
-        document.addEventListener('keydown', e => {
+        /* Комплексная защита кода среды от несанкционированного копирования */
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        document.addEventListener('selectstart', function(e) { e.preventDefault(); });
+        document.addEventListener('keydown', function(e) {
             if (
-                e.keyCode === 123 || // F12
-                (e.ctrlKey && e.shiftKey && e.keyCode === 73) || // Ctrl+Shift+I
-                (e.ctrlKey && e.shiftKey && e.keyCode === 67) || // Ctrl+Shift+C
-                (e.ctrlKey && e.keyCode === 85) ||               // Ctrl+U
-                (e.ctrlKey && e.keyCode === 83)                  // Ctrl+S
+                e.keyCode == 123 || // Клавиша F12
+                (e.ctrlKey && e.shiftKey && e.keyCode == 73) || // Ctrl + Shift + I
+                (e.ctrlKey && e.shiftKey && e.keyCode == 67) || // Ctrl + Shift + C
+                (e.ctrlKey && e.keyCode == 85) ||               // Ctrl + U (Просмотр кода)
+                (e.ctrlKey && e.keyCode == 83)                  // Ctrl + S (Сохранение)
             ) {
-                e.preventDefault();
+                e.preventDefault(); 
                 return false;
             }
         });
     </script>
-    <style>
-        /* Дополнительные служебные стили для анимаций внутри JS */
-        @keyframes spin { to { transform: rotate(360deg); } }
-        iframe::-webkit-scrollbar { width: 6px; }
-        iframe::-webkit-scrollbar-track { background: #040406; }
-        iframe::-webkit-scrollbar-thumb { background: rgba(157, 78, 221, 0.3); border-radius: 3px; }
-    </style>
 </body>
 </html>
